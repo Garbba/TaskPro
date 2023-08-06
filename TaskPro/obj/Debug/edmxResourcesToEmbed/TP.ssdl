@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="attachment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datefile" Type="date" Nullable="false" />
+    <Property Name="attachmentFilename" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="attachmentLink" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="commentUser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datecomment" Type="date" Nullable="false" />
+    <Property Name="commentUser" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="list">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="listName" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listacess">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="accesstype" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="list_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="memberlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tagName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="list_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="task">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="taskdescription" Type="varchar" MaxLength="500" />
+    <Property Name="taskStatus" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="isfavorite" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="isonmyday" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+    <Property Name="taskPriority" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="list_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tasktag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tag_id" Type="int" Nullable="false" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="timetrack">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="starttime" Type="date" Nullable="false" />
+    <Property Name="endtime" Type="date" Nullable="false" />
+    <Property Name="isfinished" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="task_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nickname" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="lastname" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="userpassword" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__attachmen__task___4BAC3F29">
+    <End Role="task" Type="Self.task" Multiplicity="1" />
+    <End Role="attachment" Type="Self.attachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="attachment">
+        <PropertyRef Name="task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__attachmen__user___4AB81AF0">
+    <End Role="userlist" Type="Self.userlist" Multiplicity="1" />
+    <End Role="attachment" Type="Self.attachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="attachment">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__commentUs__task___4F7CD00D">
+    <End Role="task" Type="Self.task" Multiplicity="1" />
+    <End Role="commentUser" Type="Self.commentUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="commentUser">
+        <PropertyRef Name="task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__commentUs__user___4E88ABD4">
+    <End Role="userlist" Type="Self.userlist" Multiplicity="1" />
+    <End Role="commentUser" Type="Self.commentUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="commentUser">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__listacess__list___3E52440B">
+    <End Role="list" Type="Self.list" Multiplicity="1" />
+    <End Role="listacess" Type="Self.listacess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="list">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="listacess">
+        <PropertyRef Name="list_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__listacess__user___3D5E1FD2">
+    <End Role="userlist" Type="Self.userlist" Multiplicity="1" />
+    <End Role="listacess" Type="Self.listacess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="listacess">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__memberlis__task___534D60F1">
+    <End Role="task" Type="Self.task" Multiplicity="1" />
+    <End Role="memberlist" Type="Self.memberlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="memberlist">
+        <PropertyRef Name="task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__memberlis__user___52593CB8">
+    <End Role="userlist" Type="Self.userlist" Multiplicity="1" />
+    <End Role="memberlist" Type="Self.memberlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="memberlist">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tag__list_id__440B1D61">
+    <End Role="list" Type="Self.list" Multiplicity="1" />
+    <End Role="tag" Type="Self.tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="list">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tag">
+        <PropertyRef Name="list_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__task__list_id__412EB0B6">
+    <End Role="list" Type="Self.list" Multiplicity="1" />
+    <End Role="task" Type="Self.task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="list">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="task">
+        <PropertyRef Name="list_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tasktag__tag_id__46E78A0C">
+    <End Role="tag" Type="Self.tag" Multiplicity="1" />
+    <End Role="tasktag" Type="Self.tasktag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tag">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tasktag">
+        <PropertyRef Name="tag_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tasktag__task_id__47DBAE45">
+    <End Role="task" Type="Self.task" Multiplicity="1" />
+    <End Role="tasktag" Type="Self.tasktag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tasktag">
+        <PropertyRef Name="task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__timetrack__task___571DF1D5">
+    <End Role="task" Type="Self.task" Multiplicity="1" />
+    <End Role="timetrack" Type="Self.timetrack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="timetrack">
+        <PropertyRef Name="task_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__timetrack__user___5629CD9C">
+    <End Role="userlist" Type="Self.userlist" Multiplicity="1" />
+    <End Role="timetrack" Type="Self.timetrack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="timetrack">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TPModelStoreContainer">
+    <EntitySet Name="attachment" EntityType="Self.attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="commentUser" EntityType="Self.commentUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="list" EntityType="Self.list" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listacess" EntityType="Self.listacess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="memberlist" EntityType="Self.memberlist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tag" EntityType="Self.tag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tasktag" EntityType="Self.tasktag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="timetrack" EntityType="Self.timetrack" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userlist" EntityType="Self.userlist" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__attachmen__task___4BAC3F29" Association="Self.FK__attachmen__task___4BAC3F29">
+      <End Role="task" EntitySet="task" />
+      <End Role="attachment" EntitySet="attachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__attachmen__user___4AB81AF0" Association="Self.FK__attachmen__user___4AB81AF0">
+      <End Role="userlist" EntitySet="userlist" />
+      <End Role="attachment" EntitySet="attachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__commentUs__task___4F7CD00D" Association="Self.FK__commentUs__task___4F7CD00D">
+      <End Role="task" EntitySet="task" />
+      <End Role="commentUser" EntitySet="commentUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__commentUs__user___4E88ABD4" Association="Self.FK__commentUs__user___4E88ABD4">
+      <End Role="userlist" EntitySet="userlist" />
+      <End Role="commentUser" EntitySet="commentUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__listacess__list___3E52440B" Association="Self.FK__listacess__list___3E52440B">
+      <End Role="list" EntitySet="list" />
+      <End Role="listacess" EntitySet="listacess" />
+    </AssociationSet>
+    <AssociationSet Name="FK__listacess__user___3D5E1FD2" Association="Self.FK__listacess__user___3D5E1FD2">
+      <End Role="userlist" EntitySet="userlist" />
+      <End Role="listacess" EntitySet="listacess" />
+    </AssociationSet>
+    <AssociationSet Name="FK__memberlis__task___534D60F1" Association="Self.FK__memberlis__task___534D60F1">
+      <End Role="task" EntitySet="task" />
+      <End Role="memberlist" EntitySet="memberlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__memberlis__user___52593CB8" Association="Self.FK__memberlis__user___52593CB8">
+      <End Role="userlist" EntitySet="userlist" />
+      <End Role="memberlist" EntitySet="memberlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tag__list_id__440B1D61" Association="Self.FK__tag__list_id__440B1D61">
+      <End Role="list" EntitySet="list" />
+      <End Role="tag" EntitySet="tag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__task__list_id__412EB0B6" Association="Self.FK__task__list_id__412EB0B6">
+      <End Role="list" EntitySet="list" />
+      <End Role="task" EntitySet="task" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tasktag__tag_id__46E78A0C" Association="Self.FK__tasktag__tag_id__46E78A0C">
+      <End Role="tag" EntitySet="tag" />
+      <End Role="tasktag" EntitySet="tasktag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tasktag__task_id__47DBAE45" Association="Self.FK__tasktag__task_id__47DBAE45">
+      <End Role="task" EntitySet="task" />
+      <End Role="tasktag" EntitySet="tasktag" />
+    </AssociationSet>
+    <AssociationSet Name="FK__timetrack__task___571DF1D5" Association="Self.FK__timetrack__task___571DF1D5">
+      <End Role="task" EntitySet="task" />
+      <End Role="timetrack" EntitySet="timetrack" />
+    </AssociationSet>
+    <AssociationSet Name="FK__timetrack__user___5629CD9C" Association="Self.FK__timetrack__user___5629CD9C">
+      <End Role="userlist" EntitySet="userlist" />
+      <End Role="timetrack" EntitySet="timetrack" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

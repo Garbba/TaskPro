@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TPModelStoreContainer" CdmEntityContainer="TPEntities">
+    <EntitySetMapping Name="attachments">
+      <EntityTypeMapping TypeName="TPModel.attachment">
+        <MappingFragment StoreEntitySet="attachment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="datefile" ColumnName="datefile" />
+          <ScalarProperty Name="attachmentFilename" ColumnName="attachmentFilename" />
+          <ScalarProperty Name="attachmentLink" ColumnName="attachmentLink" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commentUsers">
+      <EntityTypeMapping TypeName="TPModel.commentUser">
+        <MappingFragment StoreEntitySet="commentUser">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="datecomment" ColumnName="datecomment" />
+          <ScalarProperty Name="commentUser1" ColumnName="commentUser" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lists">
+      <EntityTypeMapping TypeName="TPModel.list">
+        <MappingFragment StoreEntitySet="list">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="listName" ColumnName="listName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listacesses">
+      <EntityTypeMapping TypeName="TPModel.listacess">
+        <MappingFragment StoreEntitySet="listacess">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="accesstype" ColumnName="accesstype" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="list_id" ColumnName="list_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="memberlists">
+      <EntityTypeMapping TypeName="TPModel.memberlist">
+        <MappingFragment StoreEntitySet="memberlist">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tags">
+      <EntityTypeMapping TypeName="TPModel.tag">
+        <MappingFragment StoreEntitySet="tag">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tagName" ColumnName="tagName" />
+          <ScalarProperty Name="list_id" ColumnName="list_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="TPModel.task">
+        <MappingFragment StoreEntitySet="task">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="taskdescription" ColumnName="taskdescription" />
+          <ScalarProperty Name="taskStatus" ColumnName="taskStatus" />
+          <ScalarProperty Name="isfavorite" ColumnName="isfavorite" />
+          <ScalarProperty Name="isonmyday" ColumnName="isonmyday" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="taskPriority" ColumnName="taskPriority" />
+          <ScalarProperty Name="list_id" ColumnName="list_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasktags">
+      <EntityTypeMapping TypeName="TPModel.tasktag">
+        <MappingFragment StoreEntitySet="tasktag">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tag_id" ColumnName="tag_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetracks">
+      <EntityTypeMapping TypeName="TPModel.timetrack">
+        <MappingFragment StoreEntitySet="timetrack">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="starttime" ColumnName="starttime" />
+          <ScalarProperty Name="endtime" ColumnName="endtime" />
+          <ScalarProperty Name="isfinished" ColumnName="isfinished" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userlists">
+      <EntityTypeMapping TypeName="TPModel.userlist">
+        <MappingFragment StoreEntitySet="userlist">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="userpassword" ColumnName="userpassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

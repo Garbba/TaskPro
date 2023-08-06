@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd826c3b352646a08977274433bdd464" Name="Diagram1">
+        <EntityTypeShape EntityType="TPModel.attachment" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.commentUser" Width="1.5" PointX="8.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.list" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.listacess" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.memberlist" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tag" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.task" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tasktag" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.timetrack" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.userlist" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="TPModel.FK__attachmen__task___4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__attachmen__user___4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__commentUs__task___4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__commentUs__user___4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__listacess__list___3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tag__list_id__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__task__list_id__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__listacess__user___3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__memberlis__task___534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__memberlis__user___52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tasktag__tag_id__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tasktag__task_id__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__timetrack__task___571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__timetrack__user___5629CD9C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -78,7 +78,7 @@ namespace TaskPro
         public SqlConnection conexiondb()
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=.;Initial Catalog=TaskPro;Integrated Security=True";
+            cn.ConnectionString = "Data Source=.;Initial Catalog=TP;Integrated Security=True";
             return cn;
         }
 
@@ -114,11 +114,11 @@ namespace TaskPro
             if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == "")) 
             {
                 return "Valide los campos, alguno se encuentra incompleto";
-            } else if (dsNickname.Tables.Count != 0)
+            } else if (dsNickname != null)
             {
-                return "El Nickname ya está en uso, intente de nuevo";
+                return "El Nickname ya está en uso, intente de nuevo"; //no funciona
             }
-            else if (dsEmail.Tables.Count != 0 || validEmail )
+            else if (dsEmail != null)
             {
                 return "El email ya está en uso o tiene el formato incorrecto, intente de nuevo";
             }

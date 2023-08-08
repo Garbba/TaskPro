@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.DynamicData;
@@ -116,6 +117,20 @@ namespace TaskPro
             return validEmail;
         }
 
+        public userlist ConvertRowToUsuario(DataRow row)
+        {
+            userlist usuario = new userlist
+            {
+                id = int.Parse(row["id"].ToString()),
+                nickname = row["nickname"].ToString(),
+                username = row["username"].ToString(),
+                lastname = row["lastname"].ToString(),
+                email = row["email"].ToString(),
+                userpassword = row["userpassword"].ToString()
+            };
+            return usuario;
+        }
+
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -151,36 +166,58 @@ namespace TaskPro
         [WebMethod]
         public DataSet userReadByNickname(string nickname)
         {
-            DataSet ds = selectTP("userlist", "*", $"id = '{nickname}'");
+            DataSet ds = selectTP("userlist", "*", $"nickname = '{nickname}'");
             return ds;
         }
         [WebMethod]
-        public userlist userReadByEmail(string email)
+        public DataSet userReadByEmail(string email)
         {
-            DataSet ds = selectTP("userlist", "*", $"id = '{email}'");
-            userlist u = ConvertRowToUsuario(ds.Tables[0].Rows[0]);
+            DataSet ds = selectTP("userlist", "*", $"email = '{email}'");
 
-            return u;
+            return ds;
         }
-
-        public userlist ConvertRowToUsuario(DataRow row)
-        {
-            userlist usuario = new userlist
-            {
-                id = int.Parse(row["id"].ToString()),
-                nickname = row["nickname"].ToString(),
-                username = row["username"].ToString(),
-                lastname = row["lastname"].ToString(),
-                email = row["email"].ToString(),
-                userpassword = row["userpassword"].ToString()
-            };
-            return usuario;
-        }
-
-
-
         [WebMethod]
-        public string deleteUser(int id)
+        public string userUpdate(int id, string nickname, string username, string lastname, string email, string userpassword)
+        {
+
+            DataSet dsUser = userReadById(id);
+            DataSet dsEmail = selectTP("userlist", "*", $"email = '{email}'");
+            userlist u = ConvertRowToUsuario(dsUser.Tables[0].Rows[0]);
+
+            if (dsUser.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no existe";
+            } else if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
+            {
+                return "Valide los campos, alguno se encuentra incompleto";
+            } else if (userReadByNickname(nickname).Tables[0].Rows.Count != 0 && nickname != u.nickname)
+            {
+                return "El usuario ya existe, debes cambiarlo.";
+            } else if ((userReadByEmail(email).Tables[0].Rows.Count != 0 && email != u.email) || !emailValidation(email))
+            {
+                return "El correo ya existe o no tiene el formato correcto, debes cambiarlo.";
+                
+            } else
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    u.nickname = nickname;
+                    u.username = username;
+                    u.lastname = lastname;
+                    u.email = email;
+                    u.userpassword = userpassword;
+
+                    tp.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+                    return "Usuario actualizado correctamente";
+                }
+
+            }  
+        }
+        
+        
+        [WebMethod]
+        public string userDelete(int id)
         {
             using (TPEntities tp = new TPEntities())
             {
@@ -198,8 +235,6 @@ namespace TaskPro
                 return "Usuario eliminado correctamente";
             }
         }
-
-
 
     }
 }

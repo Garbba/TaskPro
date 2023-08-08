@@ -48,8 +48,8 @@ CREATE TABLE list (
 CREATE TABLE listacess (
     id          INTEGER PRIMARY KEY IDENTITY,
     accesstype  VARCHAR(30) NOT NULL CHECK (accesstype IN ('OWNER', 'ADMIN', 'MEMBER')),
-    user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
-    list_id     INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
+    user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
+    list_id     INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id ) ON DELETE CASCADE
 );
 
 
@@ -80,8 +80,8 @@ CREATE TABLE tag (
 
 CREATE TABLE tasktag (
     id       INTEGER PRIMARY KEY IDENTITY,
-    tag_id   INTEGER NOT NULL FOREIGN KEY ( tag_id ) REFERENCES tag ( id ),
-    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id)
+    tag_id   INTEGER NOT NULL FOREIGN KEY ( tag_id ) REFERENCES tag ( id ) ON DELETE CASCADE,
+    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE
 );
 
 
@@ -91,8 +91,8 @@ CREATE TABLE attachment (
     datefile				DATE NOT NULL,
     attachmentFilename		VARCHAR(50) NOT NULL,
     attachmentLink			VARCHAR(300) NOT NULL,
-    user_id					INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
-    task_id					INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task (id )
+    user_id					INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
+    task_id					INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task (id ) ON DELETE CASCADE
 );
 
 
@@ -101,15 +101,15 @@ CREATE TABLE commentUser (
     id           INTEGER PRIMARY KEY IDENTITY,
     datecomment  DATE NOT NULL,
     commentUser  VARCHAR(300) NOT NULL,
-    user_id      INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
-    task_id      INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id )
+    user_id      INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
+    task_id      INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id ) ON DELETE CASCADE
 );
 
 
 CREATE TABLE memberlist (
     id       INTEGER PRIMARY KEY IDENTITY,
-    user_id  INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
-    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id)
+    user_id  INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
+    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE
 );
 
 
@@ -119,6 +119,6 @@ CREATE TABLE timetrack (
     starttime   DATE NOT NULL,
     endtime     DATE NOT NULL,
     isfinished  CHAR(1) NOT NULL,
-    user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
-    task_id     INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task (id)
+    user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
+    task_id     INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task (id) ON DELETE CASCADE
 );

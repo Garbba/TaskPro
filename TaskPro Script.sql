@@ -47,7 +47,7 @@ CREATE TABLE list (
 
 CREATE TABLE listacess (
     id          INTEGER PRIMARY KEY IDENTITY,
-    accesstype  VARCHAR(30) NOT NULL,
+    accesstype  VARCHAR(30) NOT NULL CHECK (accesstype IN ('OWNER', 'ADMIN', 'MEMBER')),
     user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ),
     list_id     INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
 );

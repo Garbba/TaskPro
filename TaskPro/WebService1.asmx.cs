@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.Services;
 
 namespace TaskPro
@@ -35,6 +36,7 @@ namespace TaskPro
 
             READ/RETRIEVE EXAMPLE
 
+            string us;
              using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
                 { us = db.usuario.Find(u.cedula); }      
 
@@ -88,19 +90,10 @@ namespace TaskPro
             return ds;
         }
 
-        [WebMethod]
-        public bool emailValidation(string email)
+        public string userValidation (string nickname, string username, string lastname, string email, string userpassword)
         {
-            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
-            return validEmail;
-        }
-
-        [WebMethod]
-        public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
-        {
-
-            DataSet dsNickname = selectTP("userlist", "*", "nickname = '" + nickname + "'");
-            DataSet dsEmail = selectTP("userlist", "*", "email = '" + email + "'" );
+            DataSet dsNickname = selectTP("userlist", "*", $"nickname = '{nickname}'");
+            DataSet dsEmail = selectTP("userlist", "*", $"email = '{email}'");
 
             if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
             {
@@ -111,8 +104,26 @@ namespace TaskPro
             } else if (dsEmail.Tables[0].Rows.Count == 1 || !emailValidation(email))
             {
                 return "El correo ya existe o no tiene el formato correcto, debes cambiarlo.";
+            } else {
+                return null;
+
             }
-            else
+        }
+
+        public bool emailValidation(string email)
+        {
+            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
+            return validEmail;
+        }
+
+        [WebMethod]
+        public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
+        {
+            string validation = userValidation(nickname, username, lastname, email, userpassword);
+            if (validation != null)
+            {
+                return validation;
+            } else
             {
                 using (TPEntities tp = new TPEntities()){
                     var usuario = new userlist();
@@ -130,7 +141,64 @@ namespace TaskPro
                 }
             }
         }
-        
+
+        [WebMethod]
+        public DataSet userReadById(int id)
+        {
+            DataSet ds = selectTP("userlist", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet userReadByNickname(string nickname)
+        {
+            DataSet ds = selectTP("userlist", "*", $"id = '{nickname}'");
+            return ds;
+        }
+        [WebMethod]
+        public userlist userReadByEmail(string email)
+        {
+            DataSet ds = selectTP("userlist", "*", $"id = '{email}'");
+            userlist u = ConvertRowToUsuario(ds.Tables[0].Rows[0]);
+
+            return u;
+        }
+
+        public userlist ConvertRowToUsuario(DataRow row)
+        {
+            userlist usuario = new userlist
+            {
+                id = int.Parse(row["id"].ToString()),
+                nickname = row["nickname"].ToString(),
+                username = row["username"].ToString(),
+                lastname = row["lastname"].ToString(),
+                email = row["email"].ToString(),
+                userpassword = row["userpassword"].ToString()
+            };
+            return usuario;
+        }
+
+
+
+        [WebMethod]
+        public string deleteUser(int id)
+        {
+            using (TPEntities tp = new TPEntities())
+            {
+                userlist deleteUser = tp.userlist.Find(id);
+
+                if (deleteUser == null)
+                {
+                    return "El usuario no existe";
+                }
+                else
+                {
+                    tp.userlist.Remove(deleteUser);
+                    tp.SaveChanges();
+                }
+                return "Usuario eliminado correctamente";
+            }
+        }
+
 
 
     }

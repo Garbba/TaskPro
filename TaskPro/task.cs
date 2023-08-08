@@ -17,11 +17,11 @@ namespace TaskPro
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public task()
         {
-            this.attachments = new HashSet<attachment>();
-            this.commentUsers = new HashSet<commentUser>();
-            this.memberlists = new HashSet<memberlist>();
-            this.tasktags = new HashSet<tasktag>();
-            this.timetracks = new HashSet<timetrack>();
+            this.attachment = new HashSet<attachment>();
+            this.commentUser = new HashSet<commentUser>();
+            this.memberlist = new HashSet<memberlist>();
+            this.tasktag = new HashSet<tasktag>();
+            this.timetrack = new HashSet<timetrack>();
         }
     
         public int id { get; set; }
@@ -36,15 +36,15 @@ namespace TaskPro
         public int list_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<attachment> attachments { get; set; }
+        public virtual ICollection<attachment> attachment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<commentUser> commentUsers { get; set; }
+        public virtual ICollection<commentUser> commentUser { get; set; }
         public virtual list list { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<memberlist> memberlists { get; set; }
+        public virtual ICollection<memberlist> memberlist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tasktag> tasktags { get; set; }
+        public virtual ICollection<tasktag> tasktag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timetrack> timetracks { get; set; }
+        public virtual ICollection<timetrack> timetrack { get; set; }
     }
 }

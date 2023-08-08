@@ -25,16 +25,9 @@ namespace TaskPro
           using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
                         {
                             var usuario = new DAL.usuario();
+
                             usuario.nombreusuario = this.usuario;
                             usuario.clave = this.clave;
-                            usuario.nombre = this.nombre;
-                            usuario.apellido1 = this.apellido1;
-                            usuario.apellido2 = this.apellido2;
-                            usuario.direccion = txt_direction.Text;
-                            usuario.correo = txt_email.Text;
-                            usuario.rol = "C";
-                            usuario.telefono = Convert.ToInt32(txt_phone.Text);
-                            usuario.cedula = Convert.ToInt32(this.cedula);
 
                             db.usuario.Add(usuario);
                             db.SaveChanges();
@@ -51,14 +44,9 @@ namespace TaskPro
              using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
                     {
                         DAL.usuario usuario = db.usuario.Find(this.usuario.cedula);
+
                         usuario.nombreusuario = nombreusuario;
                         usuario.clave = clave;
-                        usuario.nombre = nombre;
-                        usuario.apellido1 = apellido1;
-                        usuario.apellido2 = apellido2;
-                        usuario.direccion = direccion;
-                        usuario.correo = correo;
-                        usuario.telefono = Convert.ToInt32(telefono);
 
                         db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
@@ -100,51 +88,49 @@ namespace TaskPro
             return ds;
         }
 
-
-
+        [WebMethod]
+        public bool emailValidation(string email)
+        {
+            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
+            return validEmail;
+        }
 
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
         {
-            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
-            
-            DataSet dsNickname = selectTP("userlist", "*", "nickname = " + nickname);
-            DataSet dsEmail = selectTP("userlist", "*", "email = " + email);
-                      
-            if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == "")) 
+
+            DataSet dsNickname = selectTP("userlist", "*", "nickname = '" + nickname + "'");
+            DataSet dsEmail = selectTP("userlist", "*", "email = '" + email + "'" );
+
+            if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
             {
                 return "Valide los campos, alguno se encuentra incompleto";
-            } else if (dsNickname != null)
+            } else if (dsNickname.Tables[0].Rows.Count == 1)
             {
-                return "El Nickname ya está en uso, intente de nuevo"; //no funciona
-            }
-            else if (dsEmail != null)
+                return "El usuario ya existe, debes cambiarlo.";
+            } else if (dsEmail.Tables[0].Rows.Count == 1 || !emailValidation(email))
             {
-                return "El email ya está en uso o tiene el formato incorrecto, intente de nuevo";
+                return "El correo ya existe o no tiene el formato correcto, debes cambiarlo.";
             }
             else
             {
-                using (TPEntities tp = new TPEntities())
-                {
+                using (TPEntities tp = new TPEntities()){
                     var usuario = new userlist();
+
                     usuario.nickname = nickname;
                     usuario.username = username;
                     usuario.lastname = lastname;
                     usuario.email = email;
                     usuario.userpassword = userpassword;
 
-                    tp.userlists.Add(usuario);
+                    tp.userlist.Add(usuario);
                     tp.SaveChanges();
-                }
+
                     return "Usuario agregado correctamente";
+                }
             }
         }
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hola a todos";
-        }
+        
 
 
     }

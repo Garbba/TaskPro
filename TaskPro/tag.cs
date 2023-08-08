@@ -17,7 +17,7 @@ namespace TaskPro
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tag()
         {
-            this.tasktags = new HashSet<tasktag>();
+            this.tasktag = new HashSet<tasktag>();
         }
     
         public int id { get; set; }
@@ -26,6 +26,6 @@ namespace TaskPro
     
         public virtual list list { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tasktag> tasktags { get; set; }
+        public virtual ICollection<tasktag> tasktag { get; set; }
     }
 }

@@ -17,19 +17,19 @@ namespace TaskPro
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public list()
         {
-            this.listacesses = new HashSet<listacess>();
-            this.tags = new HashSet<tag>();
-            this.tasks = new HashSet<task>();
+            this.listacess = new HashSet<listacess>();
+            this.tag = new HashSet<tag>();
+            this.task = new HashSet<task>();
         }
     
         public int id { get; set; }
         public string listName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<listacess> listacesses { get; set; }
+        public virtual ICollection<listacess> listacess { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tag> tags { get; set; }
+        public virtual ICollection<tag> tag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<task> tasks { get; set; }
+        public virtual ICollection<task> task { get; set; }
     }
 }

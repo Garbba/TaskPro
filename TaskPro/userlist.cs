@@ -20,8 +20,8 @@ namespace TaskPro
             this.attachment = new HashSet<attachment>();
             this.commentUser = new HashSet<commentUser>();
             this.listacess = new HashSet<listacess>();
-            this.memberlist = new HashSet<memberlist>();
             this.timetrack = new HashSet<timetrack>();
+            this.task = new HashSet<task>();
         }
     
         public int id { get; set; }
@@ -38,8 +38,8 @@ namespace TaskPro
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<listacess> listacess { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<memberlist> memberlist { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<timetrack> timetrack { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<task> task { get; set; }
     }
 }

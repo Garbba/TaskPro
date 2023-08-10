@@ -14,7 +14,6 @@ namespace TaskPro
     
     public partial class listacess
     {
-        public int id { get; set; }
         public string accesstype { get; set; }
         public int user_id { get; set; }
         public int list_id { get; set; }

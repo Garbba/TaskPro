@@ -19,9 +19,9 @@ namespace TaskPro
         {
             this.attachment = new HashSet<attachment>();
             this.commentUser = new HashSet<commentUser>();
-            this.memberlist = new HashSet<memberlist>();
             this.tasktag = new HashSet<tasktag>();
             this.timetrack = new HashSet<timetrack>();
+            this.userlist = new HashSet<userlist>();
         }
     
         public int id { get; set; }
@@ -41,10 +41,10 @@ namespace TaskPro
         public virtual ICollection<commentUser> commentUser { get; set; }
         public virtual list list { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<memberlist> memberlist { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tasktag> tasktag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<timetrack> timetrack { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<userlist> userlist { get; set; }
     }
 }

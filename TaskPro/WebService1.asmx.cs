@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -140,6 +141,17 @@ namespace TaskPro
             };
             return list;
         }
+
+        public listacess ConvertRowToListAccess(DataRow row)
+        {
+            listacess listacess = new listacess
+            {
+                user_id = int.Parse(row["user_id"].ToString()),
+                list_id = int.Parse(row["list_id"].ToString()),
+            };
+            return listacess;
+        }
+
 
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
@@ -316,7 +328,7 @@ namespace TaskPro
 
         }
         [WebMethod]
-        public string lisDeletet(int id)
+        public string listDeletet(int id)
         {
 
             using (TPEntities tp = new TPEntities())
@@ -378,11 +390,16 @@ namespace TaskPro
             }
             else
             {
-                //update
-                return null;
+                listacess la = ConvertRowToListAccess(listacess.Tables[0].Rows[0]);
+                using (TPEntities tp = new TPEntities())
+                {
+                    la.accesstype = accessType;
+                    tp.Entry(la).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+                    return "Acceso de Usuario actualizado correctamente";
+                }
             }
         }
-
         [WebMethod]
         public DataSet listAccessReadById(int idUser, int idList)
         {
@@ -390,7 +407,25 @@ namespace TaskPro
             return ds;
         }
 
+        public string listAccessDelete(int idUser, int idList)
+        {
 
+            using (TPEntities tp = new TPEntities())
+            {
+                listacess deleteListacess = tp.listacess.Find(idUser, idList);
+
+                if (deleteListacess == null)
+                {
+                    return "El acceso a la lista usuario no existe o hay campos en blanco";
+                }
+                else
+                {
+                    tp.listacess.Remove(deleteListacess);
+                    tp.SaveChanges();
+                    return "El acceso a la lista usuario fue eliminado correctamente";
+                }
+            }
+        }
 
 
 

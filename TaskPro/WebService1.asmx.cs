@@ -422,6 +422,13 @@ namespace TaskPro
             return ds;
         }
 
+        [WebMethod]
+        public DataSet taskTagReadById(int id)
+        {
+            DataSet ds = selectTP("tasktag", "*", $"id = '{id}'");
+            return ds;
+        }
+
         public string listAccessDelete(int idUser, int idList)
         {
 
@@ -441,6 +448,17 @@ namespace TaskPro
                 }
             }
         }
+
+        //TASK
+
+        [WebMethod]
+        public DataSet taskReadById(int id)
+        {
+            DataSet ds = selectTP("task", "*", $"id = '{id}'");
+            return ds;
+        }
+
+        // FIN 
 
 
         //tag
@@ -527,7 +545,35 @@ namespace TaskPro
             }
         }
 
+        //tasktag   
 
+        public string taskTagCreate(int id, int tag_id, int task_id)
+        {
+            DataSet idtaskTag = taskTagReadById(id);
+            DataSet tag = tagReadById(tag_id);
+            DataSet task = taskReadById(task_id);
+
+
+            if (task == null || task.Tables[0].Rows.Count == 0)
+            {
+                return "Debe seleccionar una tarea valida para agregar el tag.";
+            }
+            else
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    var taskTag = new tasktag();
+
+                    taskTag. = idUsuario;
+      
+
+                    tp.listacess.Add(taskTag);
+                    tp.SaveChanges();
+
+                    return "Usuario agregado a la lista correctamente";
+                }
+            }
+        }
 
     }
 }

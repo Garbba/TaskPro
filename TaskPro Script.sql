@@ -108,17 +108,9 @@ CREATE TABLE commentUser (
 CREATE TABLE memberlist (
     user_id  INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
     task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE,
-    PRIMARY KEY (user_id, list_id)
+    PRIMARY KEY (user_id, task_id)
 );
 
-CREATE TABLE listacess (
-    accesstype  VARCHAR(30) NOT NULL CHECK (accesstype IN ('OWNER', 'ADMIN', 'MEMBER')),
-    user_id     INTEGER NOT NULL,
-    list_id     INTEGER NOT NULL,
-    PRIMARY KEY (user_id, list_id),
-    FOREIGN KEY (user_id) REFERENCES UserList (id) ON DELETE CASCADE,
-    FOREIGN KEY (list_id) REFERENCES list (id) ON DELETE CASCADE
-);
 
 CREATE TABLE timetrack (
     id          INTEGER PRIMARY KEY IDENTITY,

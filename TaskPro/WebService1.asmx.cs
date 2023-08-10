@@ -142,6 +142,18 @@ namespace TaskPro
             return list;
         }
 
+        public tag ConvertRowToTag(DataRow row)
+        {
+            tag tag = new tag
+            {
+                id = int.Parse(row["id"].ToString()),
+                tagName = row["tagName"].ToString(),
+                list_id = int.Parse(row["list_id"].ToString()),
+
+            };
+            return tag;
+        }
+
         public listacess ConvertRowToListAccess(DataRow row)
         {
             listacess listacess = new listacess
@@ -151,6 +163,8 @@ namespace TaskPro
             };
             return listacess;
         }
+
+
 
 
         [WebMethod]
@@ -328,7 +342,7 @@ namespace TaskPro
 
         }
         [WebMethod]
-        public string listDeletet(int id)
+        public string listDelete(int id)
         {
 
             using (TPEntities tp = new TPEntities())
@@ -390,6 +404,7 @@ namespace TaskPro
             }
             else
             {
+                //update
                 listacess la = ConvertRowToListAccess(listacess.Tables[0].Rows[0]);
                 using (TPEntities tp = new TPEntities())
                 {
@@ -428,6 +443,89 @@ namespace TaskPro
         }
 
 
+        //tag
+
+        [WebMethod]
+        public string TagCreate(string tagname, int idList)
+        {
+
+            if (tagname == null || tagname == "")
+            {
+                return "El tag debe tener un nombre, no debe estar en blanco.";
+            } else if (listReadById(idList).Tables[0].Rows.Count == 0)
+            {
+                return "No existe la lista la cual agregarle un tag";
+            }
+
+            else 
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    var tag = new tag();
+
+                    tag.tagName = tagname;
+                    tp.tag.Add(tag);
+                    tp.SaveChanges();
+
+                    return "Tag agregado correctamente";
+                }
+            }
+        }
+
+        [WebMethod]
+        public DataSet tagReadById(int id)
+        {
+            DataSet ds = selectTP("tag", "*", $"id = '{id}'");
+            return ds;
+        }
+
+        [WebMethod]
+        public string TagUpdate(int id, string tagname, int idList)
+        {
+            DataSet dsTag = tagReadById(id);
+
+            if (dsTag.Tables[0].Rows.Count == 0)
+            {
+                return "El tag no existe";
+            } else if(listReadById(idList).Tables[0].Rows.Count == 0)
+            {
+                return "No existe la lista la cual agregarle un tag";
+            }
+            else
+            {
+                tag t = ConvertRowToTag(dsTag.Tables[0].Rows[0]);
+                using (TPEntities tp = new TPEntities())
+                {
+                    t.id = id;
+                    t.tagName = tagname;
+                    t.list_id = idList;
+                    tp.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+                    return "Tag actualizado correctamente";
+                }
+            }
+
+        }
+        [WebMethod]
+        public string tagDelete(int id)
+        {
+
+            using (TPEntities tp = new TPEntities())
+            {
+                tag deleteTag = tp.tag.Find(id);
+
+                if (deleteTag == null)
+                {
+                    return "El tag no existe o campos en blanco";
+                }
+                else
+                {
+                    tp.tag.Remove(deleteTag);
+                    tp.SaveChanges();
+                    return "Tag eliminado correctamente";
+                }
+            }
+        }
 
 
 

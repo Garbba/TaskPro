@@ -156,7 +156,6 @@ namespace TaskPro
                 }
             }
         }
-
         [WebMethod]
         public DataSet userReadById(int id)
         {
@@ -214,8 +213,6 @@ namespace TaskPro
 
             }  
         }
-        
-        
         [WebMethod]
         public string userDelete(int id)
         {
@@ -235,6 +232,58 @@ namespace TaskPro
                 return "Usuario eliminado correctamente";
             }
         }
+        [WebMethod]
+        public DataSet userLogin(string nicknameOrEmail, string password)
+        {
+            DataSet email = userReadByEmail(nicknameOrEmail);
+            DataSet nickname = userReadByNickname(nicknameOrEmail);
+            if ((nicknameOrEmail == null) || (nicknameOrEmail == ""))
+            {
+                return null;
+            }
+            else if (email.Tables[0].Rows.Count != 0)
+            {
+                return email;
+            } 
+            else if (nickname.Tables[0].Rows.Count != 0)
+            {
+                return nickname;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        [WebMethod]
+        public string listCreate(string listname)
+        {
+            if (listname == null || listname == "")
+            {
+                return "La lista debe tener un nombre, no debe estar en blanco.";
+            }
+            else
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    var list = new list();
+
+                    list.listName = listname;
+
+                    tp.list.Add(list);
+                    tp.SaveChanges();
+
+                    return "Lista agregada correctamente";
+                }
+            }
+        }
+
+
+
+
+
+
+
+
 
     }
 }

@@ -164,9 +164,6 @@ namespace TaskPro
             return listacess;
         }
 
-
-
-
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -549,14 +546,16 @@ namespace TaskPro
 
         public string taskTagCreate(int id, int tag_id, int task_id)
         {
-            DataSet idtaskTag = taskTagReadById(id);
             DataSet tag = tagReadById(tag_id);
             DataSet task = taskReadById(task_id);
 
 
             if (task == null || task.Tables[0].Rows.Count == 0)
             {
-                return "Debe seleccionar una tarea valida para agregar el tag.";
+                return "No existe la tarea, por lo cual no se le puede agregar un taskTag";
+            } else if (tagReadById(tag_id).Tables[0].Rows.Count == 0 )
+            {
+                return "No existe un tag, primero agreguelo para crear un tasktag ";
             }
             else
             {
@@ -564,10 +563,11 @@ namespace TaskPro
                 {
                     var taskTag = new tasktag();
 
-                    taskTag. = idUsuario;
-      
-
-                    tp.listacess.Add(taskTag);
+                    taskTag.id = id;
+                    taskTag.tag_id = tag_id;
+                    taskTag.task_id = task_id;
+                    
+                    tp.tasktag.Add(taskTag);
                     tp.SaveChanges();
 
                     return "Usuario agregado a la lista correctamente";

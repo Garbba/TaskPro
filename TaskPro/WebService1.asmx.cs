@@ -283,7 +283,26 @@ namespace TaskPro
             return ds;
         }
 
+        [WebMethod]
+        public string DeleteList(int id)
+        {
 
+            using (TPEntities tp = new TPEntities())
+            {
+                list deleteList = tp.list.Find(id);
+
+                if (deleteList == null)
+                {
+                    return "La lista no existe o campos en blanco";
+                }
+                else
+                {
+                    tp.list.Remove(deleteList);
+                    tp.SaveChanges();
+                    return "Lista eliminada correctamente";
+                }
+            }
+        }
         [WebMethod]
         public string listAccessCreate(int idUsuario, int idLista, string accessType)
         {

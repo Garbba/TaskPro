@@ -276,9 +276,54 @@ namespace TaskPro
                 }
             }
         }
+        [WebMethod]
+        public DataSet listReadById(int id)
+        {
+            DataSet ds = selectTP("list", "*", $"id = '{id}'");
+            return ds;
+        }
 
 
+        [WebMethod]
+        public string listAccessCreate(int idUsuario, int idLista, string accessType)
+        {
+            DataSet user = userReadById(idUsuario);
+            DataSet list = listReadById(idLista);
 
+
+            if (idUsuario == null || idLista == null)
+            {
+                return "Debe seleccioniar el usuario y la lista para agregar el acceso.";
+            } 
+            else if (!(accessType == "OWNER" || accessType == "ADMIN" || accessType == "MEMBER"))
+            {
+                return "El usuario solo puede ser OWNER, ADMIN O MEMBER";
+            } 
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "Usa un usuario valido.";
+            }
+            else if (list.Tables[0].Rows.Count == 0)
+            {
+                return "Usa una lista valida.";
+            }
+            else
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    var listacess = new listacess();
+
+                    listacess.user_id = idUsuario;
+                    listacess.list_id = idLista;
+                    listacess.accesstype = accessType;
+
+                    tp.listacess.Add(listacess);
+                    tp.SaveChanges();
+
+                    return "Usuario agregado a la lista correctamente";
+                }
+            }
+        }
 
 
 

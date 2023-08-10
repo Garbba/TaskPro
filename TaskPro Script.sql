@@ -46,13 +46,13 @@ CREATE TABLE list (
 );
 
 CREATE TABLE listacess (
-    id          INTEGER PRIMARY KEY IDENTITY,
     accesstype  VARCHAR(30) NOT NULL CHECK (accesstype IN ('OWNER', 'ADMIN', 'MEMBER')),
-    user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
-    list_id     INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id ) ON DELETE CASCADE
+    user_id     INTEGER NOT NULL,
+    list_id     INTEGER NOT NULL,
+    PRIMARY KEY (user_id, list_id),
+    FOREIGN KEY (user_id) REFERENCES UserList (id) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES list (id) ON DELETE CASCADE
 );
-
-
 
 
 CREATE TABLE task (
@@ -105,14 +105,20 @@ CREATE TABLE commentUser (
     task_id      INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id ) ON DELETE CASCADE
 );
 
-
 CREATE TABLE memberlist (
-    id       INTEGER PRIMARY KEY IDENTITY,
     user_id  INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
-    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE
+    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, list_id)
 );
 
-
+CREATE TABLE listacess (
+    accesstype  VARCHAR(30) NOT NULL CHECK (accesstype IN ('OWNER', 'ADMIN', 'MEMBER')),
+    user_id     INTEGER NOT NULL,
+    list_id     INTEGER NOT NULL,
+    PRIMARY KEY (user_id, list_id),
+    FOREIGN KEY (user_id) REFERENCES UserList (id) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES list (id) ON DELETE CASCADE
+);
 
 CREATE TABLE timetrack (
     id          INTEGER PRIMARY KEY IDENTITY,

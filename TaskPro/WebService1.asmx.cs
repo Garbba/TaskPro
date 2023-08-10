@@ -131,6 +131,16 @@ namespace TaskPro
             return usuario;
         }
 
+        public list ConvertRowToList(DataRow row)
+        {
+            list list = new list
+            {
+                id = int.Parse(row["id"].ToString()),
+                listName = row["listName"].ToString(),
+            };
+            return list;
+        }
+
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -282,9 +292,31 @@ namespace TaskPro
             DataSet ds = selectTP("list", "*", $"id = '{id}'");
             return ds;
         }
-
         [WebMethod]
-        public string DeleteList(int id)
+        public string listUpdate(int id, string listname)
+        {
+            DataSet dsList = listReadById(id);
+
+            if (dsList.Tables[0].Rows.Count == 0)
+            {
+                return "La lista no existe";
+            }
+            else
+            {
+                list u = ConvertRowToList(dsList.Tables[0].Rows[0]);
+                using (TPEntities tp = new TPEntities())
+                {
+                    u.id = id;
+                    u.listName = listname;
+                    tp.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+                    return "Lista actualizado correctamente";
+                }
+            }
+
+        }
+        [WebMethod]
+        public string lisDeletet(int id)
         {
 
             using (TPEntities tp = new TPEntities())
@@ -304,10 +336,11 @@ namespace TaskPro
             }
         }
         [WebMethod]
-        public string listAccessCreate(int idUsuario, int idLista, string accessType)
+        public string listAccessCreateUpdate(int idUsuario, int idLista, string accessType)
         {
             DataSet user = userReadById(idUsuario);
             DataSet list = listReadById(idLista);
+            DataSet listacess = listAccessReadById(idUsuario, idLista);
 
 
             if (idUsuario == null || idLista == null)
@@ -326,23 +359,37 @@ namespace TaskPro
             {
                 return "Usa una lista valida.";
             }
-            else
+            else if (listacess.Tables[0].Rows.Count == 0)
             {
+                //create
                 using (TPEntities tp = new TPEntities())
                 {
-                    var listacess = new listacess();
+                    var la = new listacess();
 
-                    listacess.user_id = idUsuario;
-                    listacess.list_id = idLista;
-                    listacess.accesstype = accessType;
+                    la.user_id = idUsuario;
+                    la.list_id = idLista;
+                    la.accesstype = accessType;
 
-                    tp.listacess.Add(listacess);
+                    tp.listacess.Add(la);
                     tp.SaveChanges();
 
                     return "Usuario agregado a la lista correctamente";
                 }
             }
+            else
+            {
+                //update
+                return null;
+            }
         }
+
+        [WebMethod]
+        public DataSet listAccessReadById(int idUser, int idList)
+        {
+            DataSet ds = selectTP("listacess", "*", $"user_id = '{idUser}' and list_id = '{idList}'");
+            return ds;
+        }
+
 
 
 

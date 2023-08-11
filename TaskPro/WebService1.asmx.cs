@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -107,6 +108,26 @@ namespace TaskPro
 
             };
             return tag;
+        }
+
+        public task ConvertRowToTask(DataRow row)
+        {
+            task task = new task
+            {
+                // title, taskdescription, taskStatus, isfavorite, isonmyday, startdate, enddate, taskPriority, list_id
+
+                id = int.Parse(row["id"].ToString()),
+                title = row["title"].ToString(),
+                taskStatus = row["taskStatus"].ToString(),
+                isfavorite = byte.Parse(row["isfavorite"].ToString()),
+                isonmyday = byte.Parse(row["isonmyday"].ToString()),
+                startdate = row["startdate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["startdate"]),
+                enddate = row["enddate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["enddate"]),
+                taskPriority = row["taskPriority"].ToString(),
+                list_id = int.Parse(row["list_id"].ToString()),
+
+            };
+            return task;
         }
 
         public listacess ConvertRowToListAccess(DataRow row)
@@ -225,18 +246,23 @@ namespace TaskPro
         {
             DataSet email = userReadByEmail(nicknameOrEmail);
             DataSet nickname = userReadByNickname(nicknameOrEmail);
-            if ((nicknameOrEmail == null) || (nicknameOrEmail == ""))
+            DataSet user = null;
+            if (((nicknameOrEmail ?? password) == null) || ((nicknameOrEmail ?? password) == ""))
             {
                 return null;
             }
-            else if (email.Tables[0].Rows.Count != 0)
+            else if (email.Tables[0].Rows.Count == 0 && nickname.Tables[0].Rows.Count == 0)
+            {
+                return null;
+            }
+            else if (email.Tables[0].Rows.Count != 0 && ConvertRowToUsuario(email.Tables[0].Rows[0]).userpassword == password)
             {
                 return email;
             } 
-            else if (nickname.Tables[0].Rows.Count != 0)
+            else if (nickname.Tables[0].Rows.Count != 0 && ConvertRowToUsuario(nickname.Tables[0].Rows[0]).userpassword == password)
             {
                 return nickname;
-            }
+            } 
             else
             {
                 return null;
@@ -399,51 +425,127 @@ namespace TaskPro
                 }
             }
         }
+        [WebMethod]
+        public string taskCreate(string title, string taskdescription, string taskStatus, bool isfavorite, bool isonmyday, Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate, string taskPriority, int list_id)
+        {
+            
 
-        //TASK
+            DataSet list = listReadById(list_id);
+            byte isfav = 0;
+            byte isomd = 0;
+
+            if (isfavorite) isfav = 1;
+            if (isonmyday) isomd = 1;
 
 
-        //public string taskCreate(string title, string usertaskdescriptionname, string taskStatus, string email, string userpassword)
-        //{
-        //    string validation = userValidation();
-        //    if (validation != null)
-        //    {
-        //        return validation;
-        //    }
-        //    else
-        //    {
-        //        using (TPEntities tp = new TPEntities())
-        //        {
-        //            var usuario = new userlist();
+            if ((title ?? taskStatus ?? taskPriority) == null || (title ?? taskStatus ?? taskPriority) == "" || list_id == null || isfavorite == null ||  isonmyday == null)
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            } 
+            else if (list.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no se pudo asignar a la lista, revisa que la lista exista.";
+            } 
+            else if (!(taskStatus == "NOT STARTED" || taskStatus == "IN PROGRESS" || taskStatus == "COMPLETED"))
+            {
+                return "El status de la tarea solo puede ser NOT STARTED, IN PROGRESS o COMPLETED.";
+            }
+            else if (!(taskPriority == "LOW" || taskPriority == "MEDIUM" || taskPriority == "IMPORTANT" || taskPriority == "URGENT"))
+            {
+                return "La prioridad de la tarea solo puede ser LOW, MEDIUM, IMPORTANT, URGENT";
+            }
+            else
+            {
+                using (TPEntities tp = new TPEntities())
+                {
+                    var t = new task();
 
-        //            usuario.nickname = nickname;
-        //            usuario.username = username;
-        //            usuario.lastname = lastname;
-        //            usuario.email = email;
-        //            usuario.userpassword = userpassword;
+                    t.title = title;
+                    t.taskdescription = taskdescription;
+                    t.taskStatus = taskStatus;
+                    t.isfavorite = isfav;
+                    t.isonmyday = isomd;
+                    t.startdate = startdate;
+                    t.enddate = enddate;
+                    t.taskPriority = taskPriority;
+                    t.list_id = list_id;
+                    
 
-        //            tp.userlist.Add(usuario);
-        //            tp.SaveChanges();
+                    tp.task.Add(t);
+                    tp.SaveChanges();
 
-        //            return "Usuario agregado correctamente";
-        //        }
-        //    }
-        //}
-
+                    return "Tarea agregada correctamente";
+                }
+            }
+        }
         [WebMethod]
         public DataSet taskReadById(int id)
         {
             DataSet ds = selectTP("task", "*", $"id = '{id}'");
             return ds;
         }
-
-        // FIN 
-
-
-        //tag
-
         [WebMethod]
-        public string TagCreate(string tagname, int idList)
+        public string taskUpdate(int id, string title, string taskdescription, string taskStatus, bool isfavorite, bool isonmyday, Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate, string taskPriority, int list_id)
+        {
+            DataSet dsTask = taskReadById(id);
+
+            if (dsTask.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no existe.";
+            }
+            else if (listReadById(list_id).Tables[0].Rows.Count == 0)
+            {
+                return "No existe la lista la cual agregarle una tarea.";
+            }
+            else
+            {
+                task t = ConvertRowToTask(dsTask.Tables[0].Rows[0]);
+                byte isfav = 0;
+                byte isomd = 0;
+
+                if (isfavorite) isfav = 1;
+                if (isonmyday) isomd = 1;
+                using (TPEntities tp = new TPEntities())
+                {
+                    t.id = id;
+                    t.title = title;
+                    t.taskdescription = taskdescription;
+                    t.taskStatus = taskStatus;
+                    t.isfavorite = isfav;
+                    t.isonmyday = isomd;
+                    t.startdate = startdate;
+                    t.enddate = enddate;
+                    t.taskPriority = taskPriority;
+                    t.list_id = list_id;
+
+                    tp.Entry(t).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+                    return "Tag actualizado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public string taskDelete(int id)
+        {
+
+            using (TPEntities tp = new TPEntities())
+            {
+                task deleteTask = tp.task.Find(id);
+
+                if (deleteTask == null)
+                {
+                    return "La tarea no existe o campos en blanco";
+                }
+                else
+                {
+                    tp.task.Remove(deleteTask);
+                    tp.SaveChanges();
+                    return "La tarea se elimino correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public string tagCreate(string tagname, int idList)
         {
 
             if (tagname == null || tagname == "")
@@ -475,7 +577,7 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
-        public string TagUpdate(int id, string tagname, int idList)
+        public string tagUpdate(int id, string tagname, int idList)
         {
             DataSet dsTag = tagReadById(id);
 

@@ -59,11 +59,11 @@ CREATE TABLE task (
     id				 INTEGER PRIMARY KEY IDENTITY,
     title			 VARCHAR(100) NOT NULL,
     taskdescription  VARCHAR(500),
-    taskStatus       VARCHAR(15) NOT NULL,
-    isfavorite		CHAR(1) NOT NULL,
-    isonmyday		CHAR(1) NOT NULL,
+    taskStatus       VARCHAR(15) NOT NULL CHECK (taskStatus IN ('NOT STARTED', 'IN PROGRESS', 'COMPLETED')),
+    isfavorite       TINYINT NOT NULL CHECK (isfavorite IN (0, 1)),
+    isonmyday        TINYINT NOT NULL CHECK (isonmyday IN (0, 1)),
     startdate		DATE,
-    enddate			DATE,
+    enddate		DATE,
     taskPriority     VARCHAR(15) NOT NULL,
     list_id			INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
 );

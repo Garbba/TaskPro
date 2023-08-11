@@ -23,13 +23,13 @@ namespace TaskPro
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
+        //DB connection
         public SqlConnection conexiondb()
         {
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=.;Initial Catalog=TP;Integrated Security=True";
             return cn;
         }
-
         public DataSet selectTP(string table, string showColumns ,string where ) 
         {
             SqlDataAdapter da = null;
@@ -47,8 +47,8 @@ namespace TaskPro
             da.Fill(ds);
             return ds;
         }
-
-        public string userValidation (string nickname, string username, string lastname, string email, string userpassword)
+        //User
+        public string userValidation(string nickname, string username, string lastname, string email, string userpassword)
         {
             DataSet dsNickname = selectTP("userlist", "*", $"nickname = '{nickname}'");
             DataSet dsEmail = selectTP("userlist", "*", $"email = '{email}'");
@@ -56,24 +56,26 @@ namespace TaskPro
             if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
             {
                 return "Valide los campos, alguno se encuentra incompleto";
-            } else if (dsNickname.Tables[0].Rows.Count == 1)
+            }
+            else if (dsNickname.Tables[0].Rows.Count == 1)
             {
                 return "El usuario ya existe, debes cambiarlo.";
-            } else if (dsEmail.Tables[0].Rows.Count == 1 || !emailValidation(email))
+            }
+            else if (dsEmail.Tables[0].Rows.Count == 1 || !emailValidation(email))
             {
                 return "El correo ya existe o no tiene el formato correcto, debes cambiarlo.";
-            } else {
+            }
+            else
+            {
                 return null;
 
             }
         }
-
         public bool emailValidation(string email)
         {
             bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
             return validEmail;
         }
-
         public userlist ConvertRowToUsuario(DataRow row)
         {
             userlist usuario = new userlist
@@ -87,59 +89,6 @@ namespace TaskPro
             };
             return usuario;
         }
-
-        public list ConvertRowToList(DataRow row)
-        {
-            list list = new list
-            {
-                id = int.Parse(row["id"].ToString()),
-                listName = row["listName"].ToString(),
-            };
-            return list;
-        }
-
-        public tag ConvertRowToTag(DataRow row)
-        {
-            tag tag = new tag
-            {
-                id = int.Parse(row["id"].ToString()),
-                tagName = row["tagName"].ToString(),
-                list_id = int.Parse(row["list_id"].ToString()),
-
-            };
-            return tag;
-        }
-
-        public task ConvertRowToTask(DataRow row)
-        {
-            task task = new task
-            {
-                // title, taskdescription, taskStatus, isfavorite, isonmyday, startdate, enddate, taskPriority, list_id
-
-                id = int.Parse(row["id"].ToString()),
-                title = row["title"].ToString(),
-                taskStatus = row["taskStatus"].ToString(),
-                isfavorite = byte.Parse(row["isfavorite"].ToString()),
-                isonmyday = byte.Parse(row["isonmyday"].ToString()),
-                startdate = row["startdate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["startdate"]),
-                enddate = row["enddate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["enddate"]),
-                taskPriority = row["taskPriority"].ToString(),
-                list_id = int.Parse(row["list_id"].ToString()),
-
-            };
-            return task;
-        }
-
-        public listacess ConvertRowToListAccess(DataRow row)
-        {
-            listacess listacess = new listacess
-            {
-                user_id = int.Parse(row["user_id"].ToString()),
-                list_id = int.Parse(row["list_id"].ToString()),
-            };
-            return listacess;
-        }
-
         [WebMethod]
         public string userCreate(string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -279,6 +228,16 @@ namespace TaskPro
                 return null;
             }
         }
+        //List
+        public list ConvertRowToList(DataRow row)
+        {
+            list list = new list
+            {
+                id = int.Parse(row["id"].ToString()),
+                listName = row["listName"].ToString(),
+            };
+            return list;
+        }
         [WebMethod]
         public string listCreate(string listname)
         {
@@ -350,6 +309,16 @@ namespace TaskPro
                 }
             }
         }
+        //List Access
+        public listacess ConvertRowToListAccess(DataRow row)
+        {
+            listacess listacess = new listacess
+            {
+                user_id = int.Parse(row["user_id"].ToString()),
+                list_id = int.Parse(row["list_id"].ToString()),
+            };
+            return listacess;
+        }
         [WebMethod]
         public string listAccessCreateUpdate(int idUsuario, int idLista, string accessType)
         {
@@ -411,12 +380,6 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
-        public DataSet taskTagReadById(int id)
-        {
-            DataSet ds = selectTP("tasktag", "*", $"id = '{id}'");
-            return ds;
-        }
-        [WebMethod]
         public string listAccessDelete(int idUser, int idList)
         {
 
@@ -435,6 +398,26 @@ namespace TaskPro
                     return "El acceso a la lista usuario fue eliminado correctamente";
                 }
             }
+        }
+        //Task
+        public task ConvertRowToTask(DataRow row)
+        {
+            task task = new task
+            {
+                // title, taskdescription, taskStatus, isfavorite, isonmyday, startdate, enddate, taskPriority, list_id
+
+                id = int.Parse(row["id"].ToString()),
+                title = row["title"].ToString(),
+                taskStatus = row["taskStatus"].ToString(),
+                isfavorite = byte.Parse(row["isfavorite"].ToString()),
+                isonmyday = byte.Parse(row["isonmyday"].ToString()),
+                startdate = row["startdate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["startdate"]),
+                enddate = row["enddate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["enddate"]),
+                taskPriority = row["taskPriority"].ToString(),
+                list_id = int.Parse(row["list_id"].ToString()),
+
+            };
+            return task;
         }
         [WebMethod]
         public string taskCreate(string title, string taskdescription, string taskStatus, bool isfavorite, bool isonmyday, Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate, string taskPriority, int list_id)
@@ -555,6 +538,18 @@ namespace TaskPro
                 }
             }
         }
+        //Tag
+        public tag ConvertRowToTag(DataRow row)
+        {
+            tag tag = new tag
+            {
+                id = int.Parse(row["id"].ToString()),
+                tagName = row["tagName"].ToString(),
+                list_id = int.Parse(row["list_id"].ToString()),
+
+            };
+            return tag;
+        }
         [WebMethod]
         public string tagCreate(string tagname, int idList)
         {
@@ -634,9 +629,7 @@ namespace TaskPro
                 }
             }
         }
-
-        //tasktag   
-
+        //tasktag
         public string taskTagCreate(int id, int tag_id, int task_id)
         {
             DataSet tag = tagReadById(tag_id);
@@ -666,6 +659,12 @@ namespace TaskPro
                     return "Usuario agregado a la lista correctamente";
                 }
             }
+        }
+        [WebMethod]
+        public DataSet taskTagReadById(int id)
+        {
+            DataSet ds = selectTP("tasktag", "*", $"id = '{id}'");
+            return ds;
         }
 
     }

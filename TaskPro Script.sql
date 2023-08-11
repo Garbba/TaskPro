@@ -64,7 +64,7 @@ CREATE TABLE task (
     isonmyday        TINYINT NOT NULL CHECK (isonmyday IN (0, 1)),
     startdate		DATE,
     enddate		DATE,
-    taskPriority     VARCHAR(15) NOT NULL,
+    taskPriority     VARCHAR(15) NOT NULL CHECK (taskPriority IN ('LOW', 'MEDIUM', 'IMPORTANT', 'URGENT')),
     list_id			INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
 );
 

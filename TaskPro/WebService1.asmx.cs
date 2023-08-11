@@ -47,7 +47,8 @@ namespace TaskPro
             da.Fill(ds);
             return ds;
         }
-        //User
+        
+        //User testing ok
         public string userValidation(string nickname, string username, string lastname, string email, string userpassword)
         {
             DataSet dsNickname = selectTP("userlist", "*", $"nickname = '{nickname}'");
@@ -228,7 +229,8 @@ namespace TaskPro
                 return null;
             }
         }
-        //List
+        
+        //List testing ok
         public list ConvertRowToList(DataRow row)
         {
             list list = new list
@@ -270,8 +272,11 @@ namespace TaskPro
         public string listUpdate(int id, string listname)
         {
             DataSet dsList = listReadById(id);
-
-            if (dsList.Tables[0].Rows.Count == 0)
+            if (listname == null || listname == "")
+            {
+                return "La lista debe tener un nombre";
+            } 
+            else if (dsList.Tables[0].Rows.Count == 0)
             {
                 return "La lista no existe";
             }
@@ -309,6 +314,7 @@ namespace TaskPro
                 }
             }
         }
+        
         //List Access
         public listacess ConvertRowToListAccess(DataRow row)
         {
@@ -399,6 +405,7 @@ namespace TaskPro
                 }
             }
         }
+        
         //Task
         public task ConvertRowToTask(DataRow row)
         {
@@ -538,6 +545,7 @@ namespace TaskPro
                 }
             }
         }
+        
         //Tag
         public tag ConvertRowToTag(DataRow row)
         {
@@ -629,6 +637,7 @@ namespace TaskPro
                 }
             }
         }
+        
         //tasktag
         public string taskTagCreate(int id, int tag_id, int task_id)
         {

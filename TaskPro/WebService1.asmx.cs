@@ -190,12 +190,24 @@ namespace TaskPro
 
             DataSet dsUser = userReadById(id);
             DataSet dsEmail = selectTP("userlist", "*", $"email = '{email}'");
-            userlist u = ConvertRowToUsuario(dsUser.Tables[0].Rows[0]);
+
+            bool isnotnullorblank = false;
+
+            foreach (string i in new string[] { nickname, username, lastname, email, userpassword })
+            {
+                if (i == null || i == "")
+                {
+                    isnotnullorblank = true;
+                }
+            }
 
             if (dsUser.Tables[0].Rows.Count == 0)
             {
                 return "El usuario no existe";
-            } else if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
+            }
+            userlist u = ConvertRowToUsuario(dsUser.Tables[0].Rows[0]);
+
+            if (isnotnullorblank)
             {
                 return "Valide los campos, alguno se encuentra incompleto";
             } else if (userReadByNickname(nickname).Tables[0].Rows.Count != 0 && nickname != u.nickname)
@@ -246,7 +258,6 @@ namespace TaskPro
         {
             DataSet email = userReadByEmail(nicknameOrEmail);
             DataSet nickname = userReadByNickname(nicknameOrEmail);
-            DataSet user = null;
             if (((nicknameOrEmail ?? password) == null) || ((nicknameOrEmail ?? password) == ""))
             {
                 return null;

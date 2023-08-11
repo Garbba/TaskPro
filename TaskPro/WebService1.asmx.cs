@@ -22,51 +22,6 @@ namespace TaskPro
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-
-        /* CREATE EXAMPLE
-          
-          using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
-                        {
-                            var usuario = new DAL.usuario();
-
-                            usuario.nombreusuario = this.usuario;
-                            usuario.clave = this.clave;
-
-                            db.usuario.Add(usuario);
-                            db.SaveChanges();
-                        }
-
-            READ/RETRIEVE EXAMPLE
-
-            string us;
-             using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
-                { us = db.usuario.Find(u.cedula); }      
-
-            
-            UPDATE EXAMPLE
-            
-             using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
-                    {
-                        DAL.usuario usuario = db.usuario.Find(this.usuario.cedula);
-
-                        usuario.nombreusuario = nombreusuario;
-                        usuario.clave = clave;
-
-                        db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
-                     }
-
-             DELETE EXAMPLE
-
-            using (DAL.dbshopadealEntities db = new DAL.dbshopadealEntities())
-                {
-                    var user = db.usuario.Find(this.usuario.cedula);
-                    db.usuario.Remove(user);
-                    db.SaveChanges();
-                }
-         
-         */
-
         public SqlConnection conexiondb()
         {
             SqlConnection cn = new SqlConnection();
@@ -418,14 +373,13 @@ namespace TaskPro
             DataSet ds = selectTP("listacess", "*", $"user_id = '{idUser}' and list_id = '{idList}'");
             return ds;
         }
-
         [WebMethod]
         public DataSet taskTagReadById(int id)
         {
             DataSet ds = selectTP("tasktag", "*", $"id = '{id}'");
             return ds;
         }
-
+        [WebMethod]
         public string listAccessDelete(int idUser, int idList)
         {
 
@@ -447,6 +401,34 @@ namespace TaskPro
         }
 
         //TASK
+
+
+        //public string taskCreate(string title, string usertaskdescriptionname, string taskStatus, string email, string userpassword)
+        //{
+        //    string validation = userValidation();
+        //    if (validation != null)
+        //    {
+        //        return validation;
+        //    }
+        //    else
+        //    {
+        //        using (TPEntities tp = new TPEntities())
+        //        {
+        //            var usuario = new userlist();
+
+        //            usuario.nickname = nickname;
+        //            usuario.username = username;
+        //            usuario.lastname = lastname;
+        //            usuario.email = email;
+        //            usuario.userpassword = userpassword;
+
+        //            tp.userlist.Add(usuario);
+        //            tp.SaveChanges();
+
+        //            return "Usuario agregado correctamente";
+        //        }
+        //    }
+        //}
 
         [WebMethod]
         public DataSet taskReadById(int id)
@@ -486,14 +468,12 @@ namespace TaskPro
                 }
             }
         }
-
         [WebMethod]
         public DataSet tagReadById(int id)
         {
             DataSet ds = selectTP("tag", "*", $"id = '{id}'");
             return ds;
         }
-
         [WebMethod]
         public string TagUpdate(int id, string tagname, int idList)
         {

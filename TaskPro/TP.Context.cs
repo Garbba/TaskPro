@@ -29,6 +29,7 @@ namespace TaskPro
         public virtual DbSet<commentUser> commentUser { get; set; }
         public virtual DbSet<list> list { get; set; }
         public virtual DbSet<listacess> listacess { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tag> tag { get; set; }
         public virtual DbSet<task> task { get; set; }
         public virtual DbSet<tasktag> tasktag { get; set; }

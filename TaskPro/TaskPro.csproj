@@ -102,6 +102,9 @@
       <DependentUpon>TP.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>TP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tag.cs">
       <DependentUpon>TP.tt</DependentUpon>
     </Compile>

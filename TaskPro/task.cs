@@ -28,8 +28,8 @@ namespace TaskPro
         public string title { get; set; }
         public string taskdescription { get; set; }
         public string taskStatus { get; set; }
-        public string isfavorite { get; set; }
-        public string isonmyday { get; set; }
+        public byte isfavorite { get; set; }
+        public byte isonmyday { get; set; }
         public Nullable<System.DateTime> startdate { get; set; }
         public Nullable<System.DateTime> enddate { get; set; }
         public string taskPriority { get; set; }

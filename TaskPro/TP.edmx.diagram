@@ -4,28 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="37ed0ed48c734bb3b622a3ebfec33b0a" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="TPModel.attachment" Width="1.5" PointX="4.875" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.commentUser" Width="1.5" PointX="3.125" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.list" Width="1.5" PointX="8.125" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.listacess" Width="1.5" PointX="4.625" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.tag" Width="1.5" PointX="10.625" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.task" Width="1.5" PointX="8.125" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.tasktag" Width="1.5" PointX="10.375" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.timetrack" Width="1.5" PointX="1.375" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.userlist" Width="1.5" PointX="1.25" PointY="7.875" IsExpanded="true" />
-        <AssociationConnector Association="TPModel.FK__attachmen__task___6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__attachmen__user___628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__commentUs__task___6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__commentUs__user___66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__listacess__list___04E4BC85" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__tag__list_id__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__task__list_id__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__listacess__user___03F0984C" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__tasktag__tag_id__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__tasktag__task_id__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__timetrack__task___6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__timetrack__user___6E01572D" ManuallyRouted="false" />
+      <Diagram DiagramId="089b642f95ff4ec7984c9939f5b0398a" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="TPModel.attachment" Width="1.5" PointX="11.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.commentUser" Width="1.5" PointX="6.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.list" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.listacess" Width="1.5" PointX="4.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.sysdiagrams" Width="1.5" PointX="15.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tag" Width="1.5" PointX="0.625" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.task" Width="1.5" PointX="0.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tasktag" Width="1.5" PointX="2.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.timetrack" Width="1.5" PointX="8.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.userlist" Width="1.5" PointX="13.875" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="TPModel.FK__attachmen__task___28ED12D1" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__attachmen__user___27F8EE98" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__commentUs__task___2CBDA3B5" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__commentUs__user___2BC97F7C" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__listacess__list___18B6AB08" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tag__list_id__214BF109" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__task__list_id__1E6F845E" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__listacess__user___17C286CF" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tasktag__tag_id__24285DB4" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__tasktag__task_id__251C81ED" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__timetrack__task___345EC57D" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__timetrack__user___336AA144" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.memberlist" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

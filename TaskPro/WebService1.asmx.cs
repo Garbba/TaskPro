@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -423,8 +424,8 @@ namespace TaskPro
                 }
             }
         }
-        
-        //Task
+
+        //Task testing ok
         public task ConvertRowToTask(DataRow row)
         {
             task task = new task
@@ -621,8 +622,8 @@ namespace TaskPro
                 }
             }
         }
-        
-        //Tag
+
+        //Tag testing ok
         public tag ConvertRowToTag(DataRow row)
         {
             tag tag = new tag
@@ -724,20 +725,34 @@ namespace TaskPro
                 }
             }
         }
-        
-        //tasktag
-        public string taskTagCreate(int id, int tag_id, int task_id)
+
+        //TaskTag testing ok
+        public tasktag ConvertRowToTaskTag(DataRow row)
         {
-            DataSet tag = tagReadById(tag_id);
-            DataSet task = taskReadById(task_id);
-
-
-            if (task == null || task.Tables[0].Rows.Count == 0)
+            tasktag tasktag = new tasktag
             {
-                return "No existe la tarea, por lo cual no se le puede agregar un taskTag";
-            } else if (tagReadById(tag_id).Tables[0].Rows.Count == 0 )
+                id = int.Parse(row["id"].ToString()),
+                task_id = int.Parse(row["task_id"].ToString()),
+                tag_id = int.Parse(row["tag_id"].ToString())
+
+            };
+            return tasktag;
+        }
+        [WebMethod]
+        public string taskTagCreate(int tag_id, int task_id)
+        {
+
+            if (taskReadById(task_id).Tables[0].Rows.Count == 0)
             {
-                return "No existe un tag, primero agreguelo para crear un tasktag ";
+                return "No existe la tarea.";
+            } 
+            else if (tagReadById(tag_id).Tables[0].Rows.Count == 0 )
+            {
+                return "No existe un tag.";
+            } 
+            else if (taskTagReadById(tag_id, task_id).Tables[0].Rows.Count != 0)
+            {
+                return "El tag ya esta agregado a la tarea.";
             }
             else
             {
@@ -745,22 +760,47 @@ namespace TaskPro
                 {
                     var taskTag = new tasktag();
 
-                    taskTag.id = id;
                     taskTag.tag_id = tag_id;
                     taskTag.task_id = task_id;
                     
                     tp.tasktag.Add(taskTag);
                     tp.SaveChanges();
 
-                    return "Usuario agregado a la lista correctamente";
+                    return "Tag agregado a la tarea correctamente";
                 }
             }
         }
         [WebMethod]
-        public DataSet taskTagReadById(int id)
+        public DataSet taskTagReadById(int tag_id, int task_id)
         {
-            DataSet ds = selectTP("tasktag", "*", $"id = '{id}'");
+            DataSet ds = selectTP("tasktag", "*", $"tag_id = '{tag_id}' and task_id = '{task_id}'");
             return ds;
+        }
+        [WebMethod]
+        public DataSet taskTagReadAll()
+        {
+            DataSet ds = selectTP("tasktag", "*", null);
+            return ds;
+        }
+        [WebMethod]
+        public string taskTagDelete(int tag_id, int task_id)
+        {
+            
+            using (TPEntities tp = new TPEntities())
+            {
+                tasktag deletetasktag = tp.tasktag.Find(ConvertRowToTaskTag(taskTagReadById(tag_id, task_id).Tables[0].Rows[0]).id);
+
+                if (deletetasktag == null)
+                {
+                    return "El tag de la tarea no existe o hay campos en blanco";
+                }
+                else
+                {
+                    tp.tasktag.Remove(deletetasktag);
+                    tp.SaveChanges();
+                    return "El tag de la tarea fue eliminado correctamente";
+                }
+            }
         }
 
     }

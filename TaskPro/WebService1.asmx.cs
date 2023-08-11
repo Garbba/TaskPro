@@ -122,6 +122,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet userReadAll()
+        {
+            DataSet ds = selectTP("userlist", "*", null);
+            return ds;
+        }
+        [WebMethod]
         public DataSet userReadByNickname(string nickname)
         {
             DataSet ds = selectTP("userlist", "*", $"nickname = '{nickname}'");
@@ -269,6 +275,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet listReadAll()
+        {
+            DataSet ds = selectTP("list", "*", null);
+            return ds;
+        }
+        [WebMethod]
         public string listUpdate(int id, string listname)
         {
             DataSet dsList = listReadById(id);
@@ -386,6 +398,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet listAccessReadAll()
+        {
+            DataSet ds = selectTP("listacess", "*", null);
+            return ds;
+        }
+        [WebMethod]
         public string listAccessDelete(int idUser, int idList)
         {
 
@@ -426,18 +444,42 @@ namespace TaskPro
             };
             return task;
         }
-        [WebMethod]
-        public string taskCreate(string title, string taskdescription, string taskStatus, bool isfavorite, bool isonmyday, Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate, string taskPriority, int list_id)
+        public bool validDate(string date)
         {
-            
+            try
+            {
+                DateTime stdate = DateTime.ParseExact(date, "dd/MM/yyyy", null);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        [WebMethod]
+        public string taskCreate(string title, string taskdescription, string taskStatus, string isfavorite, string isonmyday, string startdate, string enddate, string taskPriority, int list_id)
+        {
+            if (!(isfavorite == "Y" || isfavorite == "N") || !(isonmyday == "Y" || isonmyday == "N") || isfavorite == "" || isonmyday == "")
+            {
+                return "isfavorite y isonmyday deben ser Y o N";
+            } 
+            else if (((startdate != "") && !validDate(startdate)) || ((enddate != "") && !validDate(enddate)))
+            {
+                return "La fecha de inicio o fin deben tener el formato dd/mm/yyyy";
+            }
 
-            DataSet list = listReadById(list_id);
             byte isfav = 0;
             byte isomd = 0;
 
-            if (isfavorite) isfav = 1;
-            if (isonmyday) isomd = 1;
+            if (isfavorite == "Y") isfav = 1;
+            if (isonmyday == "Y") isomd = 1;
 
+            DateTime? stdate = null;
+            DateTime? eddate = null;
+            if (startdate != "") stdate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
+            if (enddate != "") eddate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
+
+            DataSet list = listReadById(list_id);
 
             if ((title ?? taskStatus ?? taskPriority) == null || (title ?? taskStatus ?? taskPriority) == "" || list_id == null || isfavorite == null ||  isonmyday == null)
             {
@@ -466,11 +508,10 @@ namespace TaskPro
                     t.taskStatus = taskStatus;
                     t.isfavorite = isfav;
                     t.isonmyday = isomd;
-                    t.startdate = startdate;
-                    t.enddate = enddate;
+                    t.startdate = stdate;
+                    t.enddate = eddate;
                     t.taskPriority = taskPriority;
                     t.list_id = list_id;
-                    
 
                     tp.task.Add(t);
                     tp.SaveChanges();
@@ -486,26 +527,58 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
-        public string taskUpdate(int id, string title, string taskdescription, string taskStatus, bool isfavorite, bool isonmyday, Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate, string taskPriority, int list_id)
+        public DataSet taskReadAll()
         {
-            DataSet dsTask = taskReadById(id);
-
-            if (dsTask.Tables[0].Rows.Count == 0)
+            DataSet ds = selectTP("task", "*", null);
+            return ds;
+        }
+        [WebMethod]
+        public string taskUpdate(int id, string title, string taskdescription, string taskStatus, string isfavorite, string isonmyday, string startdate, string enddate, string taskPriority, int list_id)
+        {
+            if (taskReadById(id).Tables[0].Rows.Count == 0)
             {
                 return "La tarea no existe.";
-            }
+            } 
             else if (listReadById(list_id).Tables[0].Rows.Count == 0)
             {
                 return "No existe la lista la cual agregarle una tarea.";
             }
+            else if (!(isfavorite == "Y" || isfavorite == "N") || !(isonmyday == "Y" || isonmyday == "N") || isfavorite == "" || isonmyday == "")
+            {
+                return "isfavorite y isonmyday deben ser Y o N";
+            }
+            else if (((startdate != "") && !validDate(startdate)) || ((enddate != "") && !validDate(enddate)))
+            {
+                return "La fecha de inicio o fin deben tener el formato dd/mm/yyyy";
+            }
+
+            byte isfav = 0;
+            byte isomd = 0;
+
+            if (isfavorite == "Y") isfav = 1;
+            if (isonmyday == "Y") isomd = 1;
+
+            DateTime? stdate = null;
+            DateTime? eddate = null;
+            if (startdate != "") stdate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
+            if (enddate != "") eddate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
+
+            if ((title ?? taskStatus ?? taskPriority) == null || (title ?? taskStatus ?? taskPriority) == "" || list_id == null || isfavorite == null || isonmyday == null)
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (!(taskStatus == "NOT STARTED" || taskStatus == "IN PROGRESS" || taskStatus == "COMPLETED"))
+            {
+                return "El status de la tarea solo puede ser NOT STARTED, IN PROGRESS o COMPLETED.";
+            }
+            else if (!(taskPriority == "LOW" || taskPriority == "MEDIUM" || taskPriority == "IMPORTANT" || taskPriority == "URGENT"))
+            {
+                return "La prioridad de la tarea solo puede ser LOW, MEDIUM, IMPORTANT, URGENT";
+            }
             else
             {
-                task t = ConvertRowToTask(dsTask.Tables[0].Rows[0]);
-                byte isfav = 0;
-                byte isomd = 0;
+                task t = ConvertRowToTask(taskReadById(id).Tables[0].Rows[0]);
 
-                if (isfavorite) isfav = 1;
-                if (isonmyday) isomd = 1;
                 using (TPEntities tp = new TPEntities())
                 {
                     t.id = id;
@@ -514,16 +587,19 @@ namespace TaskPro
                     t.taskStatus = taskStatus;
                     t.isfavorite = isfav;
                     t.isonmyday = isomd;
-                    t.startdate = startdate;
-                    t.enddate = enddate;
+                    t.startdate = stdate;
+                    t.enddate = eddate;
                     t.taskPriority = taskPriority;
                     t.list_id = list_id;
 
                     tp.Entry(t).State = System.Data.Entity.EntityState.Modified;
                     tp.SaveChanges();
-                    return "Tag actualizado correctamente";
+                    return "Tarea actualizada correctamente";
                 }
             }
+
+                
+            
         }
         [WebMethod]
         public string taskDelete(int id)
@@ -577,6 +653,7 @@ namespace TaskPro
                     var tag = new tag();
 
                     tag.tagName = tagname;
+                    tag.list_id = idList;
                     tp.tag.Add(tag);
                     tp.SaveChanges();
 
@@ -588,6 +665,12 @@ namespace TaskPro
         public DataSet tagReadById(int id)
         {
             DataSet ds = selectTP("tag", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet tagReadAll()
+        {
+            DataSet ds = selectTP("tag", "*", null);
             return ds;
         }
         [WebMethod]

@@ -577,6 +577,7 @@ namespace TaskPro
                     var tag = new tag();
 
                     tag.tagName = tagname;
+                    tag.list_id = idList;
                     tp.tag.Add(tag);
                     tp.SaveChanges();
 
@@ -595,7 +596,11 @@ namespace TaskPro
         {
             DataSet dsTag = tagReadById(id);
 
-            if (dsTag.Tables[0].Rows.Count == 0)
+            if (tagname == null || tagname == "")
+            {
+                return "El tag debe tener un nombre";
+            }
+            else if (dsTag.Tables[0].Rows.Count == 0)
             {
                 return "El tag no existe";
             } else if(listReadById(idList).Tables[0].Rows.Count == 0)

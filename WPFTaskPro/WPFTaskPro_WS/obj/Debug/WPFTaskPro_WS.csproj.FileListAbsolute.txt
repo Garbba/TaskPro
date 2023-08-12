@@ -1,0 +1,16 @@
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\bin\Debug\WPFTaskPro_WS.exe.config
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\bin\Debug\WPFTaskPro_WS.exe
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\bin\Debug\WPFTaskPro_WS.pdb
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.AssemblyReference.cache
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.SuggestedBindingRedirects.cache
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\MainWindow.g.cs
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\App.g.cs
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS_MarkupCompile.cache
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS_MarkupCompile.lref
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\MainWindow.baml
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.g.resources
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.Properties.Resources.resources
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.GenerateResource.cache
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.CoreCompileInputs.cache
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.exe
+C:\Users\mafeg\OneDrive\Documents\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.pdb

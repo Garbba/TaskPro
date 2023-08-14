@@ -141,6 +141,7 @@ namespace TaskPro
 
             return ds;
         }
+
         [WebMethod]
         public string userUpdate(int id, string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -273,6 +274,12 @@ namespace TaskPro
         public DataSet listReadById(int id)
         {
             DataSet ds = selectTP("list", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet listReadByUserID(int id)
+        {
+            DataSet ds = selectTP("listacess la JOIN list l ON l.id = la.list_id", "list_id,accesstype,listName", $"user_id = '{id}'");
             return ds;
         }
         [WebMethod]
@@ -528,6 +535,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet taskReadByListId(int id)
+        {
+            DataSet ds = selectTP("task", "*", $"list_id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
         public DataSet taskReadAll()
         {
             DataSet ds = selectTP("task", "*", null);
@@ -666,6 +679,18 @@ namespace TaskPro
         public DataSet tagReadById(int id)
         {
             DataSet ds = selectTP("tag", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet tagReadByListId(int id)
+        {
+            DataSet ds = selectTP("tag", "*", $"list_id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet tagReadByTaskId(int id)
+        {
+            DataSet ds = selectTP("tag t JOIN tasktag tt ON tt.tag_id = t.id", "t.id, t.tagName,tt.task_id", $"task_id= '{id}'");
             return ds;
         }
         [WebMethod]

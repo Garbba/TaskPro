@@ -116,7 +116,7 @@ CREATE TABLE timetrack (
     id          INTEGER PRIMARY KEY IDENTITY,
     starttime   DATE NOT NULL,
     endtime     DATE NOT NULL,
-    isfinished  CHAR(1) NOT NULL,
+    isfinished  TINYINT NOT NULL CHECK (isfavorite IN (0, 1)),
     user_id     INTEGER NOT NULL FOREIGN KEY ( user_id ) REFERENCES UserList ( id ) ON DELETE CASCADE,
     task_id     INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task (id) ON DELETE CASCADE
 );

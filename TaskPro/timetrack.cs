@@ -17,7 +17,7 @@ namespace TaskPro
         public int id { get; set; }
         public System.DateTime starttime { get; set; }
         public System.DateTime endtime { get; set; }
-        public string isfinished { get; set; }
+        public byte isfinished { get; set; }
         public int user_id { get; set; }
         public int task_id { get; set; }
     

@@ -65,7 +65,7 @@ namespace TaskPro
                 return false;
             }
         }
-        public bool ValidDateTime(string date)
+        public bool validDateTime(string date)
         {
             if (DateTime.TryParseExact(date, "dd/MM/yyyy HH:mm:ss", null, DateTimeStyles.None, out DateTime parsedDate))
             {
@@ -852,11 +852,11 @@ namespace TaskPro
             attachment attachment = new attachment
             {
                 id = int.Parse(row["id"].ToString()),
-                datefile = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy", null),
+                datefile = System.DateTime.ParseExact(row["datefile"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
                 attachmentFilename = row["attachmentFilename"].ToString(),
                 attachmentLink = row["attachmentLink"].ToString(),
                 user_id = int.Parse(row["user_id"].ToString()),
-                task_id = int.Parse(row["list_id"].ToString()),
+                task_id = int.Parse(row["task_id"].ToString()),
             };
             return attachment;
         }
@@ -908,7 +908,7 @@ namespace TaskPro
         [WebMethod]
         public DataSet attachmentReadById(int id)
         {
-            DataSet ds = selectTP("task", "*", $"id = '{id}'");
+            DataSet ds = selectTP("attachment", "*", $"id = '{id}'");
             return ds;
         }
         [WebMethod]
@@ -953,9 +953,10 @@ namespace TaskPro
             else
             {
                 DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                attachment a = ConvertRowToAttachment(attachmentReadById(id).Tables[0].Rows[0]);
+
                 using (TPEntities tp = new TPEntities())
                 {
-                    var a = new attachment();
                     a.datefile = dtfile;
                     a.attachmentFilename = attachmentFilename;
                     a.attachmentLink = attachmentLink;
@@ -1068,31 +1069,33 @@ namespace TaskPro
             timetrack timetrack = new timetrack
             {
                 id = int.Parse(row["id"].ToString()),
-                starttime = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy HH:mm:ss", null),
-                endtime = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy HH:mm:ss", null),
-                attachmentFilename = row["attachmentFilename"].ToString(),
-                attachmentLink = row["attachmentLink"].ToString(),
+                starttime = System.DateTime.ParseExact(row["starttime"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
+                endtime = System.DateTime.ParseExact(row["endtime"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
+                isfinished = byte.Parse(row["isfinished"].ToString()),
                 user_id = int.Parse(row["user_id"].ToString()),
-                task_id = int.Parse(row["list_id"].ToString()),
+                task_id = int.Parse(row["task_id"].ToString()),
             };
             return timetrack;
         }
         [WebMethod]
-        public string attachmentCreate(string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        public string timeTrackCreate(string startTime, string endTime,string isFinished,int user_id, int task_id)
         {
-            if (((datefile == "") || !validDate(datefile)))
+            if (((startTime == "") || !validDateTime(startTime)) || ((endTime == "") || !validDateTime(endTime)))
             {
-                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+                return "La fecha y hora debe tener el formato dd/MM/yyyy HH:mm:ss";
+            } else if (!(isFinished == "Y" || isFinished == "N") || isFinished == "")
+            {
+                return "isFinished debe ser Y o N";
             }
+
+            byte isFin = 0;
+
+            if (isFinished == "Y") isFin = 1;
 
             DataSet user = userReadById(user_id);
             DataSet task = taskReadById(task_id);
 
-            if (attachmentFilename == "" || attachmentLink == "")
-            {
-                return "Revisa que los campos obligatorios tengan informacion";
-            }
-            else if (user.Tables[0].Rows.Count == 0)
+            if (user.Tables[0].Rows.Count == 0)
             {
                 return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
             }
@@ -1100,62 +1103,67 @@ namespace TaskPro
             {
                 return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
             }
-            else if (linkValidation(attachmentLink))
-            {
-                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
-            }
             else
             {
-                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                DateTime dt1 = DateTime.ParseExact(startTime, "dd/MM/yyyy HH:mm:ss", null);
+                DateTime dt2 = DateTime.ParseExact(endTime, "dd/MM/yyyy HH:mm:ss", null);
                 using (TPEntities tp = new TPEntities())
                 {
-                    var a = new attachment();
-                    a.datefile = dtfile;
-                    a.attachmentFilename = attachmentFilename;
-                    a.attachmentLink = attachmentLink;
-                    a.user_id = user_id;
-                    a.task_id = task_id;
-                    tp.attachment.Add(a);
+                    var tt = new timetrack();
+                    tt.starttime = dt1;
+                    tt.endtime = dt2;
+                    tt.isfinished = isFin;
+                    tt.user_id = user_id;
+                    tt.task_id = task_id;
+                    tp.timetrack.Add(tt);
                     tp.SaveChanges();
 
-                    return "Archivo adjuntado correctamente";
+                    return "Tiempo agregado correctamente";
                 }
             }
         }
         [WebMethod]
-        public DataSet attachmentReadById(int id)
+        public DataSet timeTrackReadById(int id)
         {
-            DataSet ds = selectTP("task", "*", $"id = '{id}'");
+            DataSet ds = selectTP("timeTrack", "*", $"id = '{id}'");
             return ds;
         }
         [WebMethod]
-        public DataSet attachmentReadByTaskId(int id)
+        public DataSet timeTrackReadByTaskId(int id)
         {
-            DataSet ds = selectTP("attachment", "*", $"task_id = '{id}'");
+            DataSet ds = selectTP("timeTrack", "*", $"task_id = '{id}'");
             return ds;
         }
         [WebMethod]
-        public DataSet attachmentReadAll()
+        public DataSet timeTrackReadAll()
         {
-            DataSet ds = selectTP("attachment", "*", null);
+            DataSet ds = selectTP("timeTrack", "*", null);
             return ds;
         }
         [WebMethod]
-        public string attachmentUpdate(int id, string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        public string timeTrackUpdate(int id, string startTime, string endTime, string isFinished, int user_id, int task_id)
         {
-            if (((datefile == "") || !validDate(datefile)))
+            if (timeTrackReadById(id).Tables[0].Rows.Count == 0)
             {
-                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+                return "El TimeTrack no existe.";
             }
+            else if (((startTime == "") || !validDateTime(startTime)) || ((endTime == "") || !validDateTime(endTime)))
+            {
+                return "La fecha y hora debe tener el formato dd/MM/yyyy HH:mm:ss";
+            }
+            else if (!(isFinished == "Y" || isFinished == "N") || isFinished == "")
+            {
+                return "isFinished debe ser Y o N";
+            }
+
+            byte isFin = 0;
+
+            if (isFinished == "Y") isFin = 1;
 
             DataSet user = userReadById(user_id);
             DataSet task = taskReadById(task_id);
 
-            if (attachmentFilename == "" || attachmentLink == "")
-            {
-                return "Revisa que los campos obligatorios tengan informacion";
-            }
-            else if (user.Tables[0].Rows.Count == 0)
+            if (user.Tables[0].Rows.Count == 0)
             {
                 return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
             }
@@ -1163,49 +1171,46 @@ namespace TaskPro
             {
                 return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
             }
-            else if (linkValidation(attachmentLink))
-            {
-                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
-            }
             else
             {
-                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                DateTime dt1 = DateTime.ParseExact(startTime, "dd/MM/yyyy HH:mm:ss", null);
+                DateTime dt2 = DateTime.ParseExact(endTime, "dd/MM/yyyy HH:mm:ss", null);
+                timetrack tt = ConvertRowToTimeTrack(timeTrackReadById(id).Tables[0].Rows[0]);
+
                 using (TPEntities tp = new TPEntities())
                 {
-                    var a = new attachment();
-                    a.datefile = dtfile;
-                    a.attachmentFilename = attachmentFilename;
-                    a.attachmentLink = attachmentLink;
-                    a.user_id = user_id;
-                    a.task_id = task_id;
-                    tp.Entry(a).State = System.Data.Entity.EntityState.Modified;
+                    tt.starttime = dt1;
+                    tt.endtime = dt2;
+                    tt.isfinished = isFin;
+                    tt.user_id = user_id;
+                    tt.task_id = task_id;
+                    tp.Entry(tt).State = System.Data.Entity.EntityState.Modified;
                     tp.SaveChanges();
 
-                    return "Archivo actualizado correctamente";
+                    return "Tiempo agregado correctamente";
                 }
             }
         }
         [WebMethod]
-        public string attachmentDelete(int id)
+        public string timeTrackDelete(int id)
         {
 
             using (TPEntities tp = new TPEntities())
             {
-                attachment attachment = tp.attachment.Find(id);
+                timetrack timetrack = tp.timetrack.Find(id);
 
-                if (attachment == null)
+                if (timetrack == null)
                 {
-                    return "El archivo no existe";
+                    return "El TimeTrack no existe";
                 }
                 else
                 {
-                    tp.attachment.Remove(attachment);
+                    tp.timetrack.Remove(timetrack);
                     tp.SaveChanges();
-                    return "El archivo se eliminó correctamente";
+                    return "El TimeTrack se eliminó correctamente";
                 }
             }
         }
-
         #endregion
     }
 }

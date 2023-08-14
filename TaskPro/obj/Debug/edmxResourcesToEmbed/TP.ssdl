@@ -45,16 +45,6 @@
     <Property Name="user_id" Type="int" Nullable="false" />
     <Property Name="task_id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="tag">
     <Key>
       <PropertyRef Name="id" />
@@ -93,7 +83,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="starttime" Type="date" Nullable="false" />
     <Property Name="endtime" Type="date" Nullable="false" />
-    <Property Name="isfinished" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="isfinished" Type="tinyint" Nullable="false" />
     <Property Name="user_id" Type="int" Nullable="false" />
     <Property Name="task_id" Type="int" Nullable="false" />
   </EntityType>
@@ -108,7 +98,7 @@
     <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="userpassword" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
-  <Association Name="FK__attachmen__task___28ED12D1">
+  <Association Name="FK__attachmen__task___41EDCAC5">
     <End Role="task" Type="Self.task" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -122,7 +112,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__attachmen__user___27F8EE98">
+  <Association Name="FK__attachmen__user___40F9A68C">
     <End Role="userlist" Type="Self.userlist" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -136,7 +126,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__commentUs__task___2CBDA3B5">
+  <Association Name="FK__commentUs__task___45BE5BA9">
     <End Role="task" Type="Self.task" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -150,7 +140,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__commentUs__user___2BC97F7C">
+  <Association Name="FK__commentUs__user___44CA3770">
     <End Role="userlist" Type="Self.userlist" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -164,7 +154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__listacess__list___18B6AB08">
+  <Association Name="FK__listacess__list___30C33EC3">
     <End Role="list" Type="Self.list" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -178,7 +168,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__listacess__user___17C286CF">
+  <Association Name="FK__listacess__user___2FCF1A8A">
     <End Role="userlist" Type="Self.userlist" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -192,7 +182,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__memberlis__task___308E3499">
+  <Association Name="FK__memberlis__task___498EEC8D">
     <End Role="task" Type="Self.task" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -206,7 +196,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__memberlis__user___2F9A1060">
+  <Association Name="FK__memberlis__user___489AC854">
     <End Role="userlist" Type="Self.userlist" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -220,7 +210,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tag__list_id__214BF109">
+  <Association Name="FK__tag__list_id__3A4CA8FD">
     <End Role="list" Type="Self.list" Multiplicity="1" />
     <End Role="tag" Type="Self.tag" Multiplicity="*" />
     <ReferentialConstraint>
@@ -232,7 +222,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__task__list_id__1E6F845E">
+  <Association Name="FK__task__list_id__37703C52">
     <End Role="list" Type="Self.list" Multiplicity="1" />
     <End Role="task" Type="Self.task" Multiplicity="*" />
     <ReferentialConstraint>
@@ -244,7 +234,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tasktag__tag_id__24285DB4">
+  <Association Name="FK__tasktag__tag_id__3D2915A8">
     <End Role="tag" Type="Self.tag" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -258,7 +248,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tasktag__task_id__251C81ED">
+  <Association Name="FK__tasktag__task_id__3E1D39E1">
     <End Role="task" Type="Self.task" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -272,7 +262,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__timetrack__task___345EC57D">
+  <Association Name="FK__timetrack__task___6442E2C9">
     <End Role="task" Type="Self.task" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -286,7 +276,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__timetrack__user___336AA144">
+  <Association Name="FK__timetrack__user___634EBE90">
     <End Role="userlist" Type="Self.userlist" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -306,65 +296,64 @@
     <EntitySet Name="list" EntityType="Self.list" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="listacess" EntityType="Self.listacess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="memberlist" EntityType="Self.memberlist" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tag" EntityType="Self.tag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tasktag" EntityType="Self.tasktag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="timetrack" EntityType="Self.timetrack" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userlist" EntityType="Self.userlist" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__attachmen__task___28ED12D1" Association="Self.FK__attachmen__task___28ED12D1">
+    <AssociationSet Name="FK__attachmen__task___41EDCAC5" Association="Self.FK__attachmen__task___41EDCAC5">
       <End Role="task" EntitySet="task" />
       <End Role="attachment" EntitySet="attachment" />
     </AssociationSet>
-    <AssociationSet Name="FK__attachmen__user___27F8EE98" Association="Self.FK__attachmen__user___27F8EE98">
+    <AssociationSet Name="FK__attachmen__user___40F9A68C" Association="Self.FK__attachmen__user___40F9A68C">
       <End Role="userlist" EntitySet="userlist" />
       <End Role="attachment" EntitySet="attachment" />
     </AssociationSet>
-    <AssociationSet Name="FK__commentUs__task___2CBDA3B5" Association="Self.FK__commentUs__task___2CBDA3B5">
+    <AssociationSet Name="FK__commentUs__task___45BE5BA9" Association="Self.FK__commentUs__task___45BE5BA9">
       <End Role="task" EntitySet="task" />
       <End Role="commentUser" EntitySet="commentUser" />
     </AssociationSet>
-    <AssociationSet Name="FK__commentUs__user___2BC97F7C" Association="Self.FK__commentUs__user___2BC97F7C">
+    <AssociationSet Name="FK__commentUs__user___44CA3770" Association="Self.FK__commentUs__user___44CA3770">
       <End Role="userlist" EntitySet="userlist" />
       <End Role="commentUser" EntitySet="commentUser" />
     </AssociationSet>
-    <AssociationSet Name="FK__listacess__list___18B6AB08" Association="Self.FK__listacess__list___18B6AB08">
+    <AssociationSet Name="FK__listacess__list___30C33EC3" Association="Self.FK__listacess__list___30C33EC3">
       <End Role="list" EntitySet="list" />
       <End Role="listacess" EntitySet="listacess" />
     </AssociationSet>
-    <AssociationSet Name="FK__listacess__user___17C286CF" Association="Self.FK__listacess__user___17C286CF">
+    <AssociationSet Name="FK__listacess__user___2FCF1A8A" Association="Self.FK__listacess__user___2FCF1A8A">
       <End Role="userlist" EntitySet="userlist" />
       <End Role="listacess" EntitySet="listacess" />
     </AssociationSet>
-    <AssociationSet Name="FK__memberlis__task___308E3499" Association="Self.FK__memberlis__task___308E3499">
+    <AssociationSet Name="FK__memberlis__task___498EEC8D" Association="Self.FK__memberlis__task___498EEC8D">
       <End Role="task" EntitySet="task" />
       <End Role="memberlist" EntitySet="memberlist" />
     </AssociationSet>
-    <AssociationSet Name="FK__memberlis__user___2F9A1060" Association="Self.FK__memberlis__user___2F9A1060">
+    <AssociationSet Name="FK__memberlis__user___489AC854" Association="Self.FK__memberlis__user___489AC854">
       <End Role="userlist" EntitySet="userlist" />
       <End Role="memberlist" EntitySet="memberlist" />
     </AssociationSet>
-    <AssociationSet Name="FK__tag__list_id__214BF109" Association="Self.FK__tag__list_id__214BF109">
+    <AssociationSet Name="FK__tag__list_id__3A4CA8FD" Association="Self.FK__tag__list_id__3A4CA8FD">
       <End Role="list" EntitySet="list" />
       <End Role="tag" EntitySet="tag" />
     </AssociationSet>
-    <AssociationSet Name="FK__task__list_id__1E6F845E" Association="Self.FK__task__list_id__1E6F845E">
+    <AssociationSet Name="FK__task__list_id__37703C52" Association="Self.FK__task__list_id__37703C52">
       <End Role="list" EntitySet="list" />
       <End Role="task" EntitySet="task" />
     </AssociationSet>
-    <AssociationSet Name="FK__tasktag__tag_id__24285DB4" Association="Self.FK__tasktag__tag_id__24285DB4">
+    <AssociationSet Name="FK__tasktag__tag_id__3D2915A8" Association="Self.FK__tasktag__tag_id__3D2915A8">
       <End Role="tag" EntitySet="tag" />
       <End Role="tasktag" EntitySet="tasktag" />
     </AssociationSet>
-    <AssociationSet Name="FK__tasktag__task_id__251C81ED" Association="Self.FK__tasktag__task_id__251C81ED">
+    <AssociationSet Name="FK__tasktag__task_id__3E1D39E1" Association="Self.FK__tasktag__task_id__3E1D39E1">
       <End Role="task" EntitySet="task" />
       <End Role="tasktag" EntitySet="tasktag" />
     </AssociationSet>
-    <AssociationSet Name="FK__timetrack__task___345EC57D" Association="Self.FK__timetrack__task___345EC57D">
+    <AssociationSet Name="FK__timetrack__task___6442E2C9" Association="Self.FK__timetrack__task___6442E2C9">
       <End Role="task" EntitySet="task" />
       <End Role="timetrack" EntitySet="timetrack" />
     </AssociationSet>
-    <AssociationSet Name="FK__timetrack__user___336AA144" Association="Self.FK__timetrack__user___336AA144">
+    <AssociationSet Name="FK__timetrack__user___634EBE90" Association="Self.FK__timetrack__user___634EBE90">
       <End Role="userlist" EntitySet="userlist" />
       <End Role="timetrack" EntitySet="timetrack" />
     </AssociationSet>

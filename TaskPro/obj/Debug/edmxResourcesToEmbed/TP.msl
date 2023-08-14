@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="TPModelStoreContainer" CdmEntityContainer="TPEntities">
-    <EntitySetMapping Name="attachment">
+    <EntitySetMapping Name="attachments">
       <EntityTypeMapping TypeName="TPModel.attachment">
         <MappingFragment StoreEntitySet="attachment">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -13,7 +13,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="commentUser">
+    <EntitySetMapping Name="commentUsers">
       <EntityTypeMapping TypeName="TPModel.commentUser">
         <MappingFragment StoreEntitySet="commentUser">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -24,7 +24,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="list">
+    <EntitySetMapping Name="lists">
       <EntityTypeMapping TypeName="TPModel.list">
         <MappingFragment StoreEntitySet="list">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -32,7 +32,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="listacess">
+    <EntitySetMapping Name="listacesses">
       <EntityTypeMapping TypeName="TPModel.listacess">
         <MappingFragment StoreEntitySet="listacess">
           <ScalarProperty Name="accesstype" ColumnName="accesstype" />
@@ -41,18 +41,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="TPModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tag">
+    <EntitySetMapping Name="tags">
       <EntityTypeMapping TypeName="TPModel.tag">
         <MappingFragment StoreEntitySet="tag">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -61,7 +50,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="task">
+    <EntitySetMapping Name="tasks">
       <EntityTypeMapping TypeName="TPModel.task">
         <MappingFragment StoreEntitySet="task">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -77,7 +66,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tasktag">
+    <EntitySetMapping Name="tasktags">
       <EntityTypeMapping TypeName="TPModel.tasktag">
         <MappingFragment StoreEntitySet="tasktag">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -86,7 +75,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="timetrack">
+    <EntitySetMapping Name="timetracks">
       <EntityTypeMapping TypeName="TPModel.timetrack">
         <MappingFragment StoreEntitySet="timetrack">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -98,7 +87,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="userlist">
+    <EntitySetMapping Name="userlists">
       <EntityTypeMapping TypeName="TPModel.userlist">
         <MappingFragment StoreEntitySet="userlist">
           <ScalarProperty Name="id" ColumnName="id" />

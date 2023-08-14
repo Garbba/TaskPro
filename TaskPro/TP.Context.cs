@@ -25,14 +25,14 @@ namespace TaskPro
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<attachment> attachments { get; set; }
-        public virtual DbSet<commentUser> commentUsers { get; set; }
-        public virtual DbSet<list> lists { get; set; }
-        public virtual DbSet<listacess> listacesses { get; set; }
-        public virtual DbSet<tag> tags { get; set; }
-        public virtual DbSet<task> tasks { get; set; }
-        public virtual DbSet<tasktag> tasktags { get; set; }
-        public virtual DbSet<timetrack> timetracks { get; set; }
-        public virtual DbSet<userlist> userlists { get; set; }
+        public virtual DbSet<attachment> attachment { get; set; }
+        public virtual DbSet<commentUser> commentUser { get; set; }
+        public virtual DbSet<list> list { get; set; }
+        public virtual DbSet<listacess> listacess { get; set; }
+        public virtual DbSet<tag> tag { get; set; }
+        public virtual DbSet<task> task { get; set; }
+        public virtual DbSet<tasktag> tasktag { get; set; }
+        public virtual DbSet<timetrack> timetrack { get; set; }
+        public virtual DbSet<userlist> userlist { get; set; }
     }
 }

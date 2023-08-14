@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
@@ -24,13 +26,14 @@ namespace TaskPro
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-        //DB connection
+        #region DBconnection
         public SqlConnection conexiondb()
         {
             SqlConnection cn = new SqlConnection();
             cn.ConnectionString = "Data Source=.;Initial Catalog=TP;Integrated Security=True";
             return cn;
         }
+
         public DataSet selectTP(string table, string showColumns ,string where ) 
         {
             SqlDataAdapter da = null;
@@ -48,14 +51,48 @@ namespace TaskPro
             da.Fill(ds);
             return ds;
         }
-        
-        //User testing ok
+        #endregion DBconnection
+        #region Validations
+        public bool validDate(string date)
+        {
+            try
+            {
+                DateTime stdate = DateTime.ParseExact(date, "dd/MM/yyyy", null);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool ValidDateTime(string date)
+        {
+            if (DateTime.TryParseExact(date, "dd/MM/yyyy HH:mm:ss", null, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                return parsedDate.TimeOfDay.TotalSeconds >= 0 && parsedDate.TimeOfDay.TotalSeconds < 86400;
+            }
+            return false;
+        }
+        public bool emailValidation(string email)
+        {
+            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
+            return validEmail;
+        }
+        public bool linkValidation(string input)
+        {
+            // Expresión regular para validar el formato de un enlace (URL)
+            string pattern = @"^(http|https|ftp)://[a-zA-Z0-9-.]+.[a-zA-Z]{2,3}(/[^/]*)*$";
+
+            return Regex.IsMatch(input, pattern);
+        }
+        #endregion Validations
+        #region User
         public string userValidation(string nickname, string username, string lastname, string email, string userpassword)
         {
             DataSet dsNickname = selectTP("userlist", "*", $"nickname = '{nickname}'");
             DataSet dsEmail = selectTP("userlist", "*", $"email = '{email}'");
 
-            if (((nickname ?? username ?? lastname ?? email ?? userpassword) == null) || ((nickname ?? username ?? lastname ?? email ?? userpassword) == ""))
+            if (nickname == "" || username == "" || lastname == "" || userpassword == "")
             {
                 return "Valide los campos, alguno se encuentra incompleto";
             }
@@ -72,11 +109,6 @@ namespace TaskPro
                 return null;
 
             }
-        }
-        public bool emailValidation(string email)
-        {
-            bool validEmail = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", RegexOptions.IgnoreCase);
-            return validEmail;
         }
         public userlist ConvertRowToUsuario(DataRow row)
         {
@@ -237,8 +269,8 @@ namespace TaskPro
                 return null;
             }
         }
-        
-        //List testing ok
+        #endregion User
+        #region List
         public list ConvertRowToList(DataRow row)
         {
             list list = new list
@@ -334,8 +366,8 @@ namespace TaskPro
                 }
             }
         }
-
-        //List Access testing ok
+        #endregion list
+        #region ListAccess
         public listacess ConvertRowToListAccess(DataRow row)
         {
             listacess listacess = new listacess
@@ -431,14 +463,12 @@ namespace TaskPro
                 }
             }
         }
-
-        //Task testing ok
+        #endregion ListAccess
+        #region Task
         public task ConvertRowToTask(DataRow row)
         {
             task task = new task
             {
-                // title, taskdescription, taskStatus, isfavorite, isonmyday, startdate, enddate, taskPriority, list_id
-
                 id = int.Parse(row["id"].ToString()),
                 title = row["title"].ToString(),
                 taskStatus = row["taskStatus"].ToString(),
@@ -451,18 +481,6 @@ namespace TaskPro
 
             };
             return task;
-        }
-        public bool validDate(string date)
-        {
-            try
-            {
-                DateTime stdate = DateTime.ParseExact(date, "dd/MM/yyyy", null);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
         [WebMethod]
         public string taskCreate(string title, string taskdescription, string taskStatus, string isfavorite, string isonmyday, string startdate, string enddate, string taskPriority, int list_id)
@@ -489,7 +507,7 @@ namespace TaskPro
 
             DataSet list = listReadById(list_id);
 
-            if ((title ?? taskStatus ?? taskPriority) == null || (title ?? taskStatus ?? taskPriority) == "" || list_id == null || isfavorite == null ||  isonmyday == null)
+            if (title == "" || taskStatus == "" || taskPriority == "")
             {
                 return "Revisa que los campos obligatorios tengan informacion";
             } 
@@ -577,7 +595,7 @@ namespace TaskPro
             if (startdate != "") stdate = DateTime.ParseExact(startdate, "dd/MM/yyyy", null);
             if (enddate != "") eddate = DateTime.ParseExact(enddate, "dd/MM/yyyy", null);
 
-            if ((title ?? taskStatus ?? taskPriority) == null || (title ?? taskStatus ?? taskPriority) == "" || list_id == null || isfavorite == null || isonmyday == null)
+            if (title == "" || taskStatus == "" || taskPriority == "")
             {
                 return "Revisa que los campos obligatorios tengan informacion";
             }
@@ -635,8 +653,8 @@ namespace TaskPro
                 }
             }
         }
-
-        //Tag testing ok
+        #endregion
+        #region Tag
         public tag ConvertRowToTag(DataRow row)
         {
             tag tag = new tag
@@ -750,8 +768,8 @@ namespace TaskPro
                 }
             }
         }
-
-        //TaskTag testing ok
+        #endregion
+        #region TaskTag
         public tasktag ConvertRowToTaskTag(DataRow row)
         {
             tasktag tasktag = new tasktag
@@ -827,6 +845,367 @@ namespace TaskPro
                 }
             }
         }
+        #endregion
+        #region Attachment
+        public attachment ConvertRowToAttachment(DataRow row)
+        {
+            attachment attachment = new attachment
+            {
+                id = int.Parse(row["id"].ToString()),
+                datefile = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy", null),
+                attachmentFilename = row["attachmentFilename"].ToString(),
+                attachmentLink = row["attachmentLink"].ToString(),
+                user_id = int.Parse(row["user_id"].ToString()),
+                task_id = int.Parse(row["list_id"].ToString()),
+            };
+            return attachment;
+        }
+        [WebMethod]
+        public string attachmentCreate(string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        {
+             if (((datefile == "") || !validDate(datefile)))
+            {
+                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+            }
 
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+            if (attachmentFilename == "" || attachmentLink == "")
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
+            }
+            else if (linkValidation(attachmentLink))
+            {
+                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
+            }
+            else
+            {
+                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                using (TPEntities tp = new TPEntities())
+                {
+                    var a = new attachment();
+                    a.datefile = dtfile;
+                    a.attachmentFilename = attachmentFilename;
+                    a.attachmentLink = attachmentLink;
+                    a.user_id = user_id;
+                    a.task_id = task_id;
+                    tp.attachment.Add(a);
+                    tp.SaveChanges();
+
+                    return "Archivo adjuntado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public DataSet attachmentReadById(int id)
+        {
+            DataSet ds = selectTP("task", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet attachmentReadByTaskId(int id)
+        {
+            DataSet ds = selectTP("attachment", "*", $"task_id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet attachmentReadAll()
+        {
+            DataSet ds = selectTP("attachment", "*", null);
+            return ds;
+        }
+        [WebMethod]
+        public string attachmentUpdate(int id, string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        {
+            if (((datefile == "") || !validDate(datefile)))
+            {
+                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+            }
+
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+            if (attachmentFilename == "" || attachmentLink == "")
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
+            }
+            else if (linkValidation(attachmentLink))
+            {
+                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
+            }
+            else
+            {
+                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                using (TPEntities tp = new TPEntities())
+                {
+                    var a = new attachment();
+                    a.datefile = dtfile;
+                    a.attachmentFilename = attachmentFilename;
+                    a.attachmentLink = attachmentLink;
+                    a.user_id = user_id;
+                    a.task_id = task_id;
+                    tp.Entry(a).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+
+                    return "Archivo actualizado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public string attachmentDelete(int id)
+        {
+
+            using (TPEntities tp = new TPEntities())
+            {
+                attachment attachment = tp.attachment.Find(id);
+
+                if (attachment == null)
+                {
+                    return "El archivo no existe";
+                }
+                else
+                {
+                    tp.attachment.Remove(attachment);
+                    tp.SaveChanges();
+                    return "El archivo se eliminó correctamente";
+                }
+            }
+        }
+        #endregion
+        #region Comments
+        public commentUser ConvertRowToCommentUser(DataRow row)
+        {
+            commentUser commentUser = new commentUser
+            {
+                id = int.Parse(row["id"].ToString()),
+                datecomment = DateTime.ParseExact(row["datecomment"].ToString(), "dd/MM/yyyy", null),
+                commentUser1 = row["commentUser"].ToString(),
+                user_id = int.Parse(row["user_id"].ToString()),
+                task_id = int.Parse(row["list_id"].ToString()),
+            };
+            return commentUser;
+        }
+        [WebMethod]
+        public string commentCreate(string dateComment, string commentUser, int user_id, int task_id)
+        {
+            if (((dateComment == "") || !validDate(dateComment)))
+            {
+                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+            }
+
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+            if (commentUser == "")
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el comentario, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el comentario, revisa que la tarea exista.";
+            }
+            else
+            {
+                DateTime dtfile = DateTime.ParseExact(dateComment, "dd/MM/yyyy", null);
+                using (TPEntities tp = new TPEntities())
+                {
+                    var c = new commentUser();
+                    c.datecomment = dtfile;
+                    c.commentUser1 = commentUser;
+                    c.user_id = user_id;
+                    c.task_id = task_id;
+                    tp.commentUser.Add(c);
+                    tp.SaveChanges();
+
+                    return "Comentario agregado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public DataSet commentReadById(int id)
+        {
+            DataSet ds = selectTP("commentUser", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet commentReadByTaskId(int id)
+        {
+            DataSet ds = selectTP("commentUser", "*", $"task_id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet commentReadAll()
+        {
+            DataSet ds = selectTP("commentUser", "*", null);
+            return ds;
+        }
+
+        #endregion
+        #region TimeTrack
+        public timetrack ConvertRowToTimeTrack(DataRow row)
+        {
+            timetrack timetrack = new timetrack
+            {
+                id = int.Parse(row["id"].ToString()),
+                starttime = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy HH:mm:ss", null),
+                endtime = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy HH:mm:ss", null),
+                attachmentFilename = row["attachmentFilename"].ToString(),
+                attachmentLink = row["attachmentLink"].ToString(),
+                user_id = int.Parse(row["user_id"].ToString()),
+                task_id = int.Parse(row["list_id"].ToString()),
+            };
+            return timetrack;
+        }
+        [WebMethod]
+        public string attachmentCreate(string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        {
+            if (((datefile == "") || !validDate(datefile)))
+            {
+                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+            }
+
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+            if (attachmentFilename == "" || attachmentLink == "")
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
+            }
+            else if (linkValidation(attachmentLink))
+            {
+                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
+            }
+            else
+            {
+                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                using (TPEntities tp = new TPEntities())
+                {
+                    var a = new attachment();
+                    a.datefile = dtfile;
+                    a.attachmentFilename = attachmentFilename;
+                    a.attachmentLink = attachmentLink;
+                    a.user_id = user_id;
+                    a.task_id = task_id;
+                    tp.attachment.Add(a);
+                    tp.SaveChanges();
+
+                    return "Archivo adjuntado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public DataSet attachmentReadById(int id)
+        {
+            DataSet ds = selectTP("task", "*", $"id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet attachmentReadByTaskId(int id)
+        {
+            DataSet ds = selectTP("attachment", "*", $"task_id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet attachmentReadAll()
+        {
+            DataSet ds = selectTP("attachment", "*", null);
+            return ds;
+        }
+        [WebMethod]
+        public string attachmentUpdate(int id, string datefile, string attachmentFilename, string attachmentLink, int user_id, int task_id)
+        {
+            if (((datefile == "") || !validDate(datefile)))
+            {
+                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+            }
+
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+            if (attachmentFilename == "" || attachmentLink == "")
+            {
+                return "Revisa que los campos obligatorios tengan informacion";
+            }
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el archivo, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
+            }
+            else if (linkValidation(attachmentLink))
+            {
+                return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
+            }
+            else
+            {
+                DateTime dtfile = DateTime.ParseExact(datefile, "dd/MM/yyyy", null);
+                using (TPEntities tp = new TPEntities())
+                {
+                    var a = new attachment();
+                    a.datefile = dtfile;
+                    a.attachmentFilename = attachmentFilename;
+                    a.attachmentLink = attachmentLink;
+                    a.user_id = user_id;
+                    a.task_id = task_id;
+                    tp.Entry(a).State = System.Data.Entity.EntityState.Modified;
+                    tp.SaveChanges();
+
+                    return "Archivo actualizado correctamente";
+                }
+            }
+        }
+        [WebMethod]
+        public string attachmentDelete(int id)
+        {
+
+            using (TPEntities tp = new TPEntities())
+            {
+                attachment attachment = tp.attachment.Find(id);
+
+                if (attachment == null)
+                {
+                    return "El archivo no existe";
+                }
+                else
+                {
+                    tp.attachment.Remove(attachment);
+                    tp.SaveChanges();
+                    return "El archivo se eliminó correctamente";
+                }
+            }
+        }
+
+        #endregion
     }
 }

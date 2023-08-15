@@ -852,7 +852,8 @@ namespace TaskPro
             attachment attachment = new attachment
             {
                 id = int.Parse(row["id"].ToString()),
-                datefile = System.DateTime.ParseExact(row["datefile"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
+                //datefile = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy", null),
+                datefile = Convert.ToDateTime(row["datefile"]),
                 attachmentFilename = row["attachmentFilename"].ToString(),
                 attachmentLink = row["attachmentLink"].ToString(),
                 user_id = int.Parse(row["user_id"].ToString()),
@@ -865,7 +866,7 @@ namespace TaskPro
         {
              if (((datefile == "") || !validDate(datefile)))
             {
-                return "La fecha para subir un archivo debe tener el formato dd/mm/yyyy";
+                return "La fecha para subir un archivo debe tener el formato dd/MM/yyyy";
             }
 
             DataSet user = userReadById(user_id);

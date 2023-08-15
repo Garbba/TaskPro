@@ -65,7 +65,7 @@ CREATE TABLE task (
     startdate		DATE,
     enddate		DATE,
     taskPriority     VARCHAR(15) NOT NULL CHECK (taskPriority IN ('LOW', 'MEDIUM', 'IMPORTANT', 'URGENT')),
-    list_id			INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
+    list_id			INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id ) ON DELETE CASCADE
 );
 
 
@@ -73,7 +73,7 @@ CREATE TABLE task (
 CREATE TABLE tag (
     id       INTEGER PRIMARY KEY IDENTITY,
     tagName     VARCHAR(30) NOT NULL,
-    list_id  INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id )
+    list_id  INTEGER NOT NULL FOREIGN KEY ( list_id ) REFERENCES list ( id ) ON DELETE CASCADE
 );
 
 

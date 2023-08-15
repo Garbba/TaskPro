@@ -80,10 +80,11 @@ CREATE TABLE tag (
 
 CREATE TABLE tasktag (
     id       INTEGER PRIMARY KEY IDENTITY,
-    tag_id   INTEGER NOT NULL FOREIGN KEY ( tag_id ) REFERENCES tag ( id ) ON DELETE CASCADE,
-    task_id  INTEGER NOT NULL FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE
+    tag_id   INTEGER NOT NULL,
+    task_id  INTEGER NOT NULL ,
+    FOREIGN KEY ( tag_id ) REFERENCES tag ( id ),
+    FOREIGN KEY ( task_id ) REFERENCES task ( id) ON DELETE CASCADE
 );
-
 
 
 CREATE TABLE attachment (

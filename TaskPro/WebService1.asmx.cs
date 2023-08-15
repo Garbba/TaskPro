@@ -51,6 +51,69 @@ namespace TaskPro
             da.Fill(ds);
             return ds;
         }
+        public bool insertTP(string table, string insertColumns, string insertValues)
+        {
+            try
+            {
+                using (SqlConnection connection = conexiondb())
+                {
+                    string insertQuery = $"INSERT INTO {table} ({insertColumns}) VALUES ({insertValues})";
+
+                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool updateTP(string table, string updateColumnsAndValues, string condition)
+        {
+            try { 
+                using (SqlConnection connection = conexiondb())
+                {
+                    string updateQuery = $"UPDATE {table} SET {updateColumnsAndValues} WHERE {condition}";
+
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool deleteTP(string table, string condition)
+        {
+            try { 
+                using (SqlConnection connection = conexiondb())
+                {
+                    string deleteQuery = $"DELETE FROM {table} WHERE {condition}";
+
+                    using (SqlCommand command = new SqlCommand(deleteQuery, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         #endregion DBconnection
         #region Validations
         public bool validDate(string date)
@@ -1210,6 +1273,72 @@ namespace TaskPro
                     tp.SaveChanges();
                     return "El TimeTrack se eliminó correctamente";
                 }
+            }
+        }
+        #endregion
+        #region Member
+        [WebMethod]
+        public string memberCreate(int user_id, int task_id)
+        {
+            DataSet user = userReadById(user_id);
+            DataSet task = taskReadById(task_id);
+
+
+            if (memberReadById(user_id, task_id).Tables[0].Rows.Count != 0)
+            {
+                return "El miembro ya se encuentra en la tarea, valida los datos.";
+            } 
+            else if (user.Tables[0].Rows.Count == 0)
+            {
+                return "El usuario no fue encontrado para agregar el miembro, revisa que el usuario exista.";
+            }
+            else if (task.Tables[0].Rows.Count == 0)
+            {
+                return "La tarea no fue encontrada para agregar el miembro, revisa que la tarea exista.";
+            }
+            else
+            { if(insertTP("memberlist", "user_id, task_id", $"{user_id}, {task_id}"))
+                {
+                    return "Miembro agregado a la tarea con exito.";
+                }
+                else
+                {
+                    return "Hubo un error al intentar agregar un miembro a la tarea, vuelva a intentar.";
+                }
+            }
+        }
+        [WebMethod]
+        public DataSet memberReadById(int user_id, int task_id)
+        {
+            DataSet ds = selectTP("memberlist", "*", $"user_id, task_id = {user_id}, {task_id}");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet memberrReadByTaskId(int task_id)
+        {
+            DataSet ds = selectTP("memberlist", "*", $"task_id = '{task_id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet memberReadAll()
+        {
+            DataSet ds = selectTP("memberlist", "*", null);
+            return ds;
+        }
+        [WebMethod]
+        public string memberDelete(int user_id, int task_id)
+        {
+            if (memberReadById(user_id, task_id).Tables[0].Rows.Count == 0)
+            {
+                return "El miembro no existe en la tarea.";
+            }
+            else if (deleteTP("memberlist", $"user_id = {user_id} AND task_id = {task_id}"))
+            {
+                return "El miembro fue eliminado correctamente de la tarea.";
+            }
+            else
+            {
+                return "El miembro NO fue eliminado, intente de nuevo.";
             }
         }
         #endregion

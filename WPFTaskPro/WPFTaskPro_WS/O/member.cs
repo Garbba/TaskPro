@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFTaskPro_WS.O
 {
-    public class members
+    public class member
     {
         public int user_id { get; set; }
         public int task_id { get; set; }

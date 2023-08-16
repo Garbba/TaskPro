@@ -109,7 +109,7 @@ namespace TaskPro
             }
         }
 
-        #endregion DBconnection
+        #endregion
         #region Validations
         public bool validDate(string date)
         {
@@ -1308,7 +1308,7 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
-        public DataSet memberrReadByTaskId(int task_id)
+        public DataSet memberReadByTaskId(int task_id)
         {
             DataSet ds = selectTP("memberlist", "*", $"task_id = '{task_id}'");
             return ds;

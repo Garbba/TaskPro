@@ -37,7 +37,7 @@ namespace WPFTaskPro_WS
             
             if (ds != null)
             {
-                new Landing(new convertto().touser(ds.Tables[0].Rows[0])).Show();
+                new Landing(new ConvertRow().user(ds)).Show();
                 this.Close();
 
 

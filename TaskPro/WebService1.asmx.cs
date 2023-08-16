@@ -16,14 +16,10 @@ using System.Web.Services;
 
 namespace TaskPro
 {
-    /// <summary>
-    /// Descripción breve de WebService1
-    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
-    // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
-    // [System.Web.Script.Services.ScriptService]
+    
     public class WebService1 : System.Web.Services.WebService
     {
         #region DBconnection
@@ -33,7 +29,6 @@ namespace TaskPro
             cn.ConnectionString = "Data Source=.;Initial Catalog=TP;Integrated Security=True";
             return cn;
         }
-
         public DataSet selectTP(string table, string showColumns ,string where ) 
         {
             SqlDataAdapter da = null;
@@ -236,7 +231,6 @@ namespace TaskPro
 
             return ds;
         }
-
         [WebMethod]
         public string userUpdate(int id, string nickname, string username, string lastname, string email, string userpassword)
         {
@@ -404,7 +398,7 @@ namespace TaskPro
                     u.listName = listname;
                     tp.Entry(u).State = System.Data.Entity.EntityState.Modified;
                     tp.SaveChanges();
-                    return "Lista actualizado correctamente";
+                    return "Lista actualizada correctamente";
                 }
             }
 
@@ -1133,8 +1127,8 @@ namespace TaskPro
             timetrack timetrack = new timetrack
             {
                 id = int.Parse(row["id"].ToString()),
-                starttime = System.DateTime.ParseExact(row["starttime"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
-                endtime = System.DateTime.ParseExact(row["endtime"].ToString(), "MM/dd/yyyy hh:mm:ss tt", null),
+                starttime = Convert.ToDateTime(row["starttime"]),
+                endtime = Convert.ToDateTime(row["endtime"]),
                 isfinished = byte.Parse(row["isfinished"].ToString()),
                 user_id = int.Parse(row["user_id"].ToString()),
                 task_id = int.Parse(row["task_id"].ToString()),
@@ -1237,8 +1231,8 @@ namespace TaskPro
             }
             else
             {
-                DateTime dt1 = DateTime.ParseExact(startTime, "dd/MM/yyyy HH:mm:ss", null);
-                DateTime dt2 = DateTime.ParseExact(endTime, "dd/MM/yyyy HH:mm:ss", null);
+                DateTime dt1 = Convert.ToDateTime(startTime);
+                DateTime dt2 = Convert.ToDateTime(endTime);
                 timetrack tt = ConvertRowToTimeTrack(timeTrackReadById(id).Tables[0].Rows[0]);
 
                 using (TPEntities tp = new TPEntities())
@@ -1310,7 +1304,7 @@ namespace TaskPro
         [WebMethod]
         public DataSet memberReadById(int user_id, int task_id)
         {
-            DataSet ds = selectTP("memberlist", "*", $"user_id, task_id = {user_id}, {task_id}");
+            DataSet ds = selectTP("memberlist", "*", $"user_id = '{user_id}' and task_id = '{task_id}'");
             return ds;
         }
         [WebMethod]

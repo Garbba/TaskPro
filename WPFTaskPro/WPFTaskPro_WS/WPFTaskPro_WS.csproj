@@ -76,6 +76,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="O\attachment.cs" />
+    <Compile Include="O\comment.cs" />
+    <Compile Include="O\list.cs" />
+    <Compile Include="O\listaccess.cs" />
+    <Compile Include="O\members.cs" />
+    <Compile Include="O\tag.cs" />
+    <Compile Include="O\task.cs" />
+    <Compile Include="O\tasktag.cs" />
+    <Compile Include="O\timetrack.cs" />
+    <Compile Include="O\user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

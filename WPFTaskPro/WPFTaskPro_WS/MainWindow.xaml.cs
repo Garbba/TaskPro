@@ -26,6 +26,10 @@ namespace WPFTaskPro_WS
         }
 
         SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
-        
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -85,10 +85,10 @@
   <ItemGroup>
     <Compile Include="O\attachment.cs" />
     <Compile Include="O\comment.cs" />
-    <Compile Include="O\convertto.cs" />
+    <Compile Include="O\ConvertRow.cs" />
     <Compile Include="O\list.cs" />
     <Compile Include="O\listaccess.cs" />
-    <Compile Include="O\members.cs" />
+    <Compile Include="O\member.cs" />
     <Compile Include="O\tag.cs" />
     <Compile Include="O\task.cs" />
     <Compile Include="O\tasktag.cs" />

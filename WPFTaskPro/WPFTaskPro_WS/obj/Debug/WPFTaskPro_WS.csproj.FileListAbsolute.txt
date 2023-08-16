@@ -30,3 +30,5 @@ C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.g.resources
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.Properties.Resources.resources
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.GenerateResource.cache
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\WPFTaskPro_WS.csproj.CoreCompileInputs.cache
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\Landing.g.cs
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\Landing.baml

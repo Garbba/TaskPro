@@ -1,0 +1,33 @@
+﻿<Window x:Class="WPFTaskPro_WS.Landing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTaskPro_WS"
+        mc:Ignorable="d"
+        Title="Landing" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Cuadro con TextBox y Botón de Menú -->
+        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
+            <TextBox x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5"/>
+            <Button Content="..." Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Editar usuario"/>
+                        <MenuItem Header="Cerrar sesión"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+        </StackPanel>
+
+        <!-- Contenido principal (puedes agregar tus elementos aquí) -->
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0 1 1 1">
+            <!-- Coloca tus elementos aquí -->
+        </Border>
+    </Grid>
+</Window>

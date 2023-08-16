@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFTaskPro_WS.O;
 
 namespace WPFTaskPro_WS
 {
@@ -29,6 +31,21 @@ namespace WPFTaskPro_WS
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            string user = txtuser.Text;
+            string pass = txtpass.Password;
+            DataSet ds = sw.userLogin(user, pass);
+            
+            if (ds != null)
+            {
+                new Landing(new convertto().touser(ds.Tables[0].Rows[0])).Show();
+                this.Close();
+
+
+            }
+            else
+            {
+                MessageBox.Show("no");
+            }
 
         }
     }

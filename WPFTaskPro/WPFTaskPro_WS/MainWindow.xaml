@@ -27,27 +27,10 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Usuario o correo electronico" 
-                   Grid.Row="0"
-                   Margin="0,15"
-                   HorizontalAlignment="Left"/>
-                    <TextBox  Grid.Column="1"
-                  Grid.Row="1"
-                  Padding="0,5"
-                  Width="255"
-                  BorderThickness="0,0,0,1"
-                  HorizontalAlignment="Left"
-                  Text="Usuario"/>
-                    <TextBlock Text="Contraseña" 
-                   Grid.Row="2"
-                   Margin="0,15"
-                   HorizontalAlignment="Left"/>
-                    <PasswordBox Grid.Row="3"
-                      Password="Contraseña"
-                      Padding="0,5"                           
-                      Width="255"
-                      BorderThickness="0,0,0,1"
-                      HorizontalAlignment="Left"/>
+                    <TextBlock Text="Usuario o correo electronico" Grid.Row="0" Margin="0,15" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="txtuser"  Grid.Column="1" Grid.Row="1" Padding="0,5" Width="255" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Text="Usuario" />
+                    <TextBlock Text="Contraseña" Grid.Row="2" Margin="0,15" HorizontalAlignment="Left"/>
+                    <PasswordBox x:Name="txtpass" Grid.Row="3" Password="Contraseña" Padding="0,5" Width="255" BorderThickness="0,0,0,1" />
                 </Grid>
 
                 <Button x:Name="LoginBtn" 

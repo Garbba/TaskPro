@@ -4,23 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d63ad05c12c4a3d8bda050894545922" Name="Diagram1">
-        <EntityTypeShape EntityType="TPModel.attachment" Width="1.5" PointX="7.5" PointY="20.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.commentUser" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.list" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.listacess" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.tag" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.task" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.tasktag" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.timetrack" Width="1.5" PointX="10.5" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TPModel.userlist" Width="1.5" PointX="5.25" PointY="23.125" IsExpanded="true" />
+      <Diagram DiagramId="5d63ad05c12c4a3d8bda050894545922" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="TPModel.attachment" Width="1.5" PointX="2.125" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.commentUser" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.list" Width="1.5" PointX="6.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.listacess" Width="1.5" PointX="3.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tag" Width="1.5" PointX="9.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.task" Width="1.5" PointX="6.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.tasktag" Width="1.5" PointX="10" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.timetrack" Width="1.5" PointX="0.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPModel.userlist" Width="1.5" PointX="1.125" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="TPModel.FK__attachmen__task___41EDCAC5" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__attachmen__user___40F9A68C" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__commentUs__task___45BE5BA9" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__commentUs__user___44CA3770" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__listacess__list___30C33EC3" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__tag__list_id__3A4CA8FD" ManuallyRouted="false" />
-        <AssociationConnector Association="TPModel.FK__task__list_id__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="TPModel.FK__task__list_id__37703C52" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="TPModel.FK__listacess__user___2FCF1A8A" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__tasktag__tag_id__3D2915A8" ManuallyRouted="false" />
         <AssociationConnector Association="TPModel.FK__tasktag__task_id__3E1D39E1" ManuallyRouted="false" />

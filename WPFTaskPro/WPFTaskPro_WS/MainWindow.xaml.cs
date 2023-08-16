@@ -24,5 +24,8 @@ namespace WPFTaskPro_WS
         {
             InitializeComponent();
         }
+
+        SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
+        
     }
 }

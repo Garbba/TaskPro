@@ -1,0 +1,2614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="userCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nickname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userpassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="userReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadByNickname">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nickname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadByNicknameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userReadByNicknameResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadByEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userReadByEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userReadByEmailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nickname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userpassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nicknameOrEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="userLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userLoginResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listReadByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listReadByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listReadByUserIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="listReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="listname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessCreateUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idLista" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="accessType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessCreateUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listAccessCreateUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUser" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idList" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listAccessReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="listAccessReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listAccessReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUser" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idList" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listAccessDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskdescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isfavorite" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isonmyday" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enddate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskPriority" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="list_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByListId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByListIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadByListIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="taskReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskdescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isfavorite" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isonmyday" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enddate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskPriority" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="list_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idList" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadByListId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadByListIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagReadByListIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="tagReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="tagname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idList" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="tagDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tagDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tag_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskTagCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tag_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskTagReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="taskTagReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskTagReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tag_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskTagDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="datefile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentFilename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentLink" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="attachmentReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="datefile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentFilename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentLink" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="attachmentDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="attachmentDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dateComment" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="commentUser" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="commentCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="commentReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="commentReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="commentReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="commentReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="commentReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="startTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isFinished" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="timeTrackReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="startTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="isFinished" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="timeTrackDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timeTrackDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberCreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberReadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberReadByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberReadByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberrReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberrReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberrReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberReadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="memberReadAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberReadAllResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="memberDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="userCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:userCreate" />
+  </wsdl:message>
+  <wsdl:message name="userCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:userCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="userReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:userReadById" />
+  </wsdl:message>
+  <wsdl:message name="userReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:userReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="userReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:userReadAll" />
+  </wsdl:message>
+  <wsdl:message name="userReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:userReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="userReadByNicknameSoapIn">
+    <wsdl:part name="parameters" element="tns:userReadByNickname" />
+  </wsdl:message>
+  <wsdl:message name="userReadByNicknameSoapOut">
+    <wsdl:part name="parameters" element="tns:userReadByNicknameResponse" />
+  </wsdl:message>
+  <wsdl:message name="userReadByEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:userReadByEmail" />
+  </wsdl:message>
+  <wsdl:message name="userReadByEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:userReadByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="userUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:userUpdate" />
+  </wsdl:message>
+  <wsdl:message name="userUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:userUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="userDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:userDelete" />
+  </wsdl:message>
+  <wsdl:message name="userDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:userDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="userLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:userLogin" />
+  </wsdl:message>
+  <wsdl:message name="userLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:userLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="listCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:listCreate" />
+  </wsdl:message>
+  <wsdl:message name="listCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:listCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="listReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:listReadById" />
+  </wsdl:message>
+  <wsdl:message name="listReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:listReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="listReadByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:listReadByUserID" />
+  </wsdl:message>
+  <wsdl:message name="listReadByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:listReadByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="listReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:listReadAll" />
+  </wsdl:message>
+  <wsdl:message name="listReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:listReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="listUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:listUpdate" />
+  </wsdl:message>
+  <wsdl:message name="listUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:listUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="listDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:listDelete" />
+  </wsdl:message>
+  <wsdl:message name="listDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:listDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="listAccessCreateUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:listAccessCreateUpdate" />
+  </wsdl:message>
+  <wsdl:message name="listAccessCreateUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:listAccessCreateUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="listAccessReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:listAccessReadById" />
+  </wsdl:message>
+  <wsdl:message name="listAccessReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:listAccessReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="listAccessReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:listAccessReadAll" />
+  </wsdl:message>
+  <wsdl:message name="listAccessReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:listAccessReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="listAccessDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:listAccessDelete" />
+  </wsdl:message>
+  <wsdl:message name="listAccessDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:listAccessDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:taskCreate" />
+  </wsdl:message>
+  <wsdl:message name="taskCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:taskCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadById" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByListIdSoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadByListId" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByListIdSoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadByListIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadAll" />
+  </wsdl:message>
+  <wsdl:message name="taskReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:taskUpdate" />
+  </wsdl:message>
+  <wsdl:message name="taskUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:taskUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:taskDelete" />
+  </wsdl:message>
+  <wsdl:message name="taskDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:taskDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:tagCreate" />
+  </wsdl:message>
+  <wsdl:message name="tagCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:tagCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:tagReadById" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:tagReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByListIdSoapIn">
+    <wsdl:part name="parameters" element="tns:tagReadByListId" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByListIdSoapOut">
+    <wsdl:part name="parameters" element="tns:tagReadByListIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:tagReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="tagReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:tagReadByTaskIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:tagReadAll" />
+  </wsdl:message>
+  <wsdl:message name="tagReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:tagReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:tagUpdate" />
+  </wsdl:message>
+  <wsdl:message name="tagUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:tagUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="tagDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:tagDelete" />
+  </wsdl:message>
+  <wsdl:message name="tagDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:tagDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskTagCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:taskTagCreate" />
+  </wsdl:message>
+  <wsdl:message name="taskTagCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:taskTagCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskTagReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:taskTagReadById" />
+  </wsdl:message>
+  <wsdl:message name="taskTagReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:taskTagReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskTagReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:taskTagReadAll" />
+  </wsdl:message>
+  <wsdl:message name="taskTagReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:taskTagReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskTagDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:taskTagDelete" />
+  </wsdl:message>
+  <wsdl:message name="taskTagDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:taskTagDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentCreate" />
+  </wsdl:message>
+  <wsdl:message name="attachmentCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentReadById" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentReadByTaskIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentReadAll" />
+  </wsdl:message>
+  <wsdl:message name="attachmentReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentUpdate" />
+  </wsdl:message>
+  <wsdl:message name="attachmentUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="attachmentDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:attachmentDelete" />
+  </wsdl:message>
+  <wsdl:message name="attachmentDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:attachmentDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="commentCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:commentCreate" />
+  </wsdl:message>
+  <wsdl:message name="commentCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:commentCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="commentReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:commentReadById" />
+  </wsdl:message>
+  <wsdl:message name="commentReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:commentReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="commentReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:commentReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="commentReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:commentReadByTaskIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="commentReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:commentReadAll" />
+  </wsdl:message>
+  <wsdl:message name="commentReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:commentReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackCreate" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackReadById" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackReadByTaskIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackReadAll" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackUpdate" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:timeTrackDelete" />
+  </wsdl:message>
+  <wsdl:message name="timeTrackDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:timeTrackDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="memberCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:memberCreate" />
+  </wsdl:message>
+  <wsdl:message name="memberCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:memberCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="memberReadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:memberReadById" />
+  </wsdl:message>
+  <wsdl:message name="memberReadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:memberReadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="memberrReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:memberrReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="memberrReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:memberrReadByTaskIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="memberReadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:memberReadAll" />
+  </wsdl:message>
+  <wsdl:message name="memberReadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:memberReadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="memberDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:memberDelete" />
+  </wsdl:message>
+  <wsdl:message name="memberDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:memberDeleteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="userCreate">
+      <wsdl:input message="tns:userCreateSoapIn" />
+      <wsdl:output message="tns:userCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userReadById">
+      <wsdl:input message="tns:userReadByIdSoapIn" />
+      <wsdl:output message="tns:userReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userReadAll">
+      <wsdl:input message="tns:userReadAllSoapIn" />
+      <wsdl:output message="tns:userReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userReadByNickname">
+      <wsdl:input message="tns:userReadByNicknameSoapIn" />
+      <wsdl:output message="tns:userReadByNicknameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userReadByEmail">
+      <wsdl:input message="tns:userReadByEmailSoapIn" />
+      <wsdl:output message="tns:userReadByEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userUpdate">
+      <wsdl:input message="tns:userUpdateSoapIn" />
+      <wsdl:output message="tns:userUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userDelete">
+      <wsdl:input message="tns:userDeleteSoapIn" />
+      <wsdl:output message="tns:userDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <wsdl:input message="tns:userLoginSoapIn" />
+      <wsdl:output message="tns:userLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listCreate">
+      <wsdl:input message="tns:listCreateSoapIn" />
+      <wsdl:output message="tns:listCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listReadById">
+      <wsdl:input message="tns:listReadByIdSoapIn" />
+      <wsdl:output message="tns:listReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listReadByUserID">
+      <wsdl:input message="tns:listReadByUserIDSoapIn" />
+      <wsdl:output message="tns:listReadByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listReadAll">
+      <wsdl:input message="tns:listReadAllSoapIn" />
+      <wsdl:output message="tns:listReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listUpdate">
+      <wsdl:input message="tns:listUpdateSoapIn" />
+      <wsdl:output message="tns:listUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listDelete">
+      <wsdl:input message="tns:listDeleteSoapIn" />
+      <wsdl:output message="tns:listDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listAccessCreateUpdate">
+      <wsdl:input message="tns:listAccessCreateUpdateSoapIn" />
+      <wsdl:output message="tns:listAccessCreateUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadById">
+      <wsdl:input message="tns:listAccessReadByIdSoapIn" />
+      <wsdl:output message="tns:listAccessReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadAll">
+      <wsdl:input message="tns:listAccessReadAllSoapIn" />
+      <wsdl:output message="tns:listAccessReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="listAccessDelete">
+      <wsdl:input message="tns:listAccessDeleteSoapIn" />
+      <wsdl:output message="tns:listAccessDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskCreate">
+      <wsdl:input message="tns:taskCreateSoapIn" />
+      <wsdl:output message="tns:taskCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadById">
+      <wsdl:input message="tns:taskReadByIdSoapIn" />
+      <wsdl:output message="tns:taskReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByListId">
+      <wsdl:input message="tns:taskReadByListIdSoapIn" />
+      <wsdl:output message="tns:taskReadByListIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadAll">
+      <wsdl:input message="tns:taskReadAllSoapIn" />
+      <wsdl:output message="tns:taskReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskUpdate">
+      <wsdl:input message="tns:taskUpdateSoapIn" />
+      <wsdl:output message="tns:taskUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskDelete">
+      <wsdl:input message="tns:taskDeleteSoapIn" />
+      <wsdl:output message="tns:taskDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagCreate">
+      <wsdl:input message="tns:tagCreateSoapIn" />
+      <wsdl:output message="tns:tagCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagReadById">
+      <wsdl:input message="tns:tagReadByIdSoapIn" />
+      <wsdl:output message="tns:tagReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByListId">
+      <wsdl:input message="tns:tagReadByListIdSoapIn" />
+      <wsdl:output message="tns:tagReadByListIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByTaskId">
+      <wsdl:input message="tns:tagReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:tagReadByTaskIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagReadAll">
+      <wsdl:input message="tns:tagReadAllSoapIn" />
+      <wsdl:output message="tns:tagReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagUpdate">
+      <wsdl:input message="tns:tagUpdateSoapIn" />
+      <wsdl:output message="tns:tagUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="tagDelete">
+      <wsdl:input message="tns:tagDeleteSoapIn" />
+      <wsdl:output message="tns:tagDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskTagCreate">
+      <wsdl:input message="tns:taskTagCreateSoapIn" />
+      <wsdl:output message="tns:taskTagCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadById">
+      <wsdl:input message="tns:taskTagReadByIdSoapIn" />
+      <wsdl:output message="tns:taskTagReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadAll">
+      <wsdl:input message="tns:taskTagReadAllSoapIn" />
+      <wsdl:output message="tns:taskTagReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskTagDelete">
+      <wsdl:input message="tns:taskTagDeleteSoapIn" />
+      <wsdl:output message="tns:taskTagDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentCreate">
+      <wsdl:input message="tns:attachmentCreateSoapIn" />
+      <wsdl:output message="tns:attachmentCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadById">
+      <wsdl:input message="tns:attachmentReadByIdSoapIn" />
+      <wsdl:output message="tns:attachmentReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadByTaskId">
+      <wsdl:input message="tns:attachmentReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:attachmentReadByTaskIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadAll">
+      <wsdl:input message="tns:attachmentReadAllSoapIn" />
+      <wsdl:output message="tns:attachmentReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentUpdate">
+      <wsdl:input message="tns:attachmentUpdateSoapIn" />
+      <wsdl:output message="tns:attachmentUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="attachmentDelete">
+      <wsdl:input message="tns:attachmentDeleteSoapIn" />
+      <wsdl:output message="tns:attachmentDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="commentCreate">
+      <wsdl:input message="tns:commentCreateSoapIn" />
+      <wsdl:output message="tns:commentCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="commentReadById">
+      <wsdl:input message="tns:commentReadByIdSoapIn" />
+      <wsdl:output message="tns:commentReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="commentReadByTaskId">
+      <wsdl:input message="tns:commentReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:commentReadByTaskIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="commentReadAll">
+      <wsdl:input message="tns:commentReadAllSoapIn" />
+      <wsdl:output message="tns:commentReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackCreate">
+      <wsdl:input message="tns:timeTrackCreateSoapIn" />
+      <wsdl:output message="tns:timeTrackCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadById">
+      <wsdl:input message="tns:timeTrackReadByIdSoapIn" />
+      <wsdl:output message="tns:timeTrackReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadByTaskId">
+      <wsdl:input message="tns:timeTrackReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:timeTrackReadByTaskIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadAll">
+      <wsdl:input message="tns:timeTrackReadAllSoapIn" />
+      <wsdl:output message="tns:timeTrackReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackUpdate">
+      <wsdl:input message="tns:timeTrackUpdateSoapIn" />
+      <wsdl:output message="tns:timeTrackUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackDelete">
+      <wsdl:input message="tns:timeTrackDeleteSoapIn" />
+      <wsdl:output message="tns:timeTrackDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="memberCreate">
+      <wsdl:input message="tns:memberCreateSoapIn" />
+      <wsdl:output message="tns:memberCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="memberReadById">
+      <wsdl:input message="tns:memberReadByIdSoapIn" />
+      <wsdl:output message="tns:memberReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="memberrReadByTaskId">
+      <wsdl:input message="tns:memberrReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:memberrReadByTaskIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="memberReadAll">
+      <wsdl:input message="tns:memberReadAllSoapIn" />
+      <wsdl:output message="tns:memberReadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="memberDelete">
+      <wsdl:input message="tns:memberDeleteSoapIn" />
+      <wsdl:output message="tns:memberDeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="userCreate">
+      <soap:operation soapAction="http://tempuri.org/userCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadById">
+      <soap:operation soapAction="http://tempuri.org/userReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadAll">
+      <soap:operation soapAction="http://tempuri.org/userReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadByNickname">
+      <soap:operation soapAction="http://tempuri.org/userReadByNickname" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadByEmail">
+      <soap:operation soapAction="http://tempuri.org/userReadByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userUpdate">
+      <soap:operation soapAction="http://tempuri.org/userUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userDelete">
+      <soap:operation soapAction="http://tempuri.org/userDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <soap:operation soapAction="http://tempuri.org/userLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listCreate">
+      <soap:operation soapAction="http://tempuri.org/listCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadById">
+      <soap:operation soapAction="http://tempuri.org/listReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadByUserID">
+      <soap:operation soapAction="http://tempuri.org/listReadByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadAll">
+      <soap:operation soapAction="http://tempuri.org/listReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listUpdate">
+      <soap:operation soapAction="http://tempuri.org/listUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listDelete">
+      <soap:operation soapAction="http://tempuri.org/listDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessCreateUpdate">
+      <soap:operation soapAction="http://tempuri.org/listAccessCreateUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadById">
+      <soap:operation soapAction="http://tempuri.org/listAccessReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadAll">
+      <soap:operation soapAction="http://tempuri.org/listAccessReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessDelete">
+      <soap:operation soapAction="http://tempuri.org/listAccessDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskCreate">
+      <soap:operation soapAction="http://tempuri.org/taskCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadById">
+      <soap:operation soapAction="http://tempuri.org/taskReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByListId">
+      <soap:operation soapAction="http://tempuri.org/taskReadByListId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadAll">
+      <soap:operation soapAction="http://tempuri.org/taskReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskUpdate">
+      <soap:operation soapAction="http://tempuri.org/taskUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskDelete">
+      <soap:operation soapAction="http://tempuri.org/taskDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagCreate">
+      <soap:operation soapAction="http://tempuri.org/tagCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadById">
+      <soap:operation soapAction="http://tempuri.org/tagReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByListId">
+      <soap:operation soapAction="http://tempuri.org/tagReadByListId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/tagReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadAll">
+      <soap:operation soapAction="http://tempuri.org/tagReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagUpdate">
+      <soap:operation soapAction="http://tempuri.org/tagUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagDelete">
+      <soap:operation soapAction="http://tempuri.org/tagDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagCreate">
+      <soap:operation soapAction="http://tempuri.org/taskTagCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadById">
+      <soap:operation soapAction="http://tempuri.org/taskTagReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadAll">
+      <soap:operation soapAction="http://tempuri.org/taskTagReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagDelete">
+      <soap:operation soapAction="http://tempuri.org/taskTagDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentCreate">
+      <soap:operation soapAction="http://tempuri.org/attachmentCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadById">
+      <soap:operation soapAction="http://tempuri.org/attachmentReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/attachmentReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadAll">
+      <soap:operation soapAction="http://tempuri.org/attachmentReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentUpdate">
+      <soap:operation soapAction="http://tempuri.org/attachmentUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentDelete">
+      <soap:operation soapAction="http://tempuri.org/attachmentDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentCreate">
+      <soap:operation soapAction="http://tempuri.org/commentCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadById">
+      <soap:operation soapAction="http://tempuri.org/commentReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/commentReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadAll">
+      <soap:operation soapAction="http://tempuri.org/commentReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackCreate">
+      <soap:operation soapAction="http://tempuri.org/timeTrackCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadById">
+      <soap:operation soapAction="http://tempuri.org/timeTrackReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/timeTrackReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadAll">
+      <soap:operation soapAction="http://tempuri.org/timeTrackReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackUpdate">
+      <soap:operation soapAction="http://tempuri.org/timeTrackUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackDelete">
+      <soap:operation soapAction="http://tempuri.org/timeTrackDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberCreate">
+      <soap:operation soapAction="http://tempuri.org/memberCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberReadById">
+      <soap:operation soapAction="http://tempuri.org/memberReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberrReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/memberrReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberReadAll">
+      <soap:operation soapAction="http://tempuri.org/memberReadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberDelete">
+      <soap:operation soapAction="http://tempuri.org/memberDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="userCreate">
+      <soap12:operation soapAction="http://tempuri.org/userCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadById">
+      <soap12:operation soapAction="http://tempuri.org/userReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadAll">
+      <soap12:operation soapAction="http://tempuri.org/userReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadByNickname">
+      <soap12:operation soapAction="http://tempuri.org/userReadByNickname" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userReadByEmail">
+      <soap12:operation soapAction="http://tempuri.org/userReadByEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userUpdate">
+      <soap12:operation soapAction="http://tempuri.org/userUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userDelete">
+      <soap12:operation soapAction="http://tempuri.org/userDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <soap12:operation soapAction="http://tempuri.org/userLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listCreate">
+      <soap12:operation soapAction="http://tempuri.org/listCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadById">
+      <soap12:operation soapAction="http://tempuri.org/listReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadByUserID">
+      <soap12:operation soapAction="http://tempuri.org/listReadByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReadAll">
+      <soap12:operation soapAction="http://tempuri.org/listReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listUpdate">
+      <soap12:operation soapAction="http://tempuri.org/listUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listDelete">
+      <soap12:operation soapAction="http://tempuri.org/listDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessCreateUpdate">
+      <soap12:operation soapAction="http://tempuri.org/listAccessCreateUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadById">
+      <soap12:operation soapAction="http://tempuri.org/listAccessReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadAll">
+      <soap12:operation soapAction="http://tempuri.org/listAccessReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessDelete">
+      <soap12:operation soapAction="http://tempuri.org/listAccessDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskCreate">
+      <soap12:operation soapAction="http://tempuri.org/taskCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadById">
+      <soap12:operation soapAction="http://tempuri.org/taskReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByListId">
+      <soap12:operation soapAction="http://tempuri.org/taskReadByListId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadAll">
+      <soap12:operation soapAction="http://tempuri.org/taskReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskUpdate">
+      <soap12:operation soapAction="http://tempuri.org/taskUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskDelete">
+      <soap12:operation soapAction="http://tempuri.org/taskDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagCreate">
+      <soap12:operation soapAction="http://tempuri.org/tagCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadById">
+      <soap12:operation soapAction="http://tempuri.org/tagReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByListId">
+      <soap12:operation soapAction="http://tempuri.org/tagReadByListId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/tagReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagReadAll">
+      <soap12:operation soapAction="http://tempuri.org/tagReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagUpdate">
+      <soap12:operation soapAction="http://tempuri.org/tagUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="tagDelete">
+      <soap12:operation soapAction="http://tempuri.org/tagDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagCreate">
+      <soap12:operation soapAction="http://tempuri.org/taskTagCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadById">
+      <soap12:operation soapAction="http://tempuri.org/taskTagReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadAll">
+      <soap12:operation soapAction="http://tempuri.org/taskTagReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagDelete">
+      <soap12:operation soapAction="http://tempuri.org/taskTagDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentCreate">
+      <soap12:operation soapAction="http://tempuri.org/attachmentCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadById">
+      <soap12:operation soapAction="http://tempuri.org/attachmentReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/attachmentReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentReadAll">
+      <soap12:operation soapAction="http://tempuri.org/attachmentReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentUpdate">
+      <soap12:operation soapAction="http://tempuri.org/attachmentUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="attachmentDelete">
+      <soap12:operation soapAction="http://tempuri.org/attachmentDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentCreate">
+      <soap12:operation soapAction="http://tempuri.org/commentCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadById">
+      <soap12:operation soapAction="http://tempuri.org/commentReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/commentReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commentReadAll">
+      <soap12:operation soapAction="http://tempuri.org/commentReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackCreate">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadById">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackReadAll">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackUpdate">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="timeTrackDelete">
+      <soap12:operation soapAction="http://tempuri.org/timeTrackDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberCreate">
+      <soap12:operation soapAction="http://tempuri.org/memberCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberReadById">
+      <soap12:operation soapAction="http://tempuri.org/memberReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberrReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/memberrReadByTaskId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberReadAll">
+      <soap12:operation soapAction="http://tempuri.org/memberReadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="memberDelete">
+      <soap12:operation soapAction="http://tempuri.org/memberDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="https://localhost:44306/WebService1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="https://localhost:44306/WebService1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

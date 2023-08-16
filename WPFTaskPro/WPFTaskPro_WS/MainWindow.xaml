@@ -56,7 +56,7 @@
                     Background="#B82487"
                     Margin="0,25"
                     Height="35"
-                    Width="250">
+                    Width="250" Click="LoginBtn_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">

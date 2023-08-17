@@ -145,7 +145,6 @@ namespace WPFTaskPro_WS
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            gridtarea.Visibility = Visibility.Visible;
             contentGrid.Visibility = Visibility.Collapsed;
             contentGrid.Width = 0;
         }

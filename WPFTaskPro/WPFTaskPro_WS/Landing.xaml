@@ -144,7 +144,7 @@
         </Grid>
         <Grid Grid.Column="3" x:Name="contentGrid" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed">
             <TextBlock Text="¡Hola, mundo!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Content="Cerrar" Click="CloseButton_Click"/>
+            <Button Content="Cerrar" Click="CloseButton_Click" Margin="0,30,0,0"/>
         </Grid>
 
     </Grid>

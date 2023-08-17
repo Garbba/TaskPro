@@ -139,6 +139,23 @@ namespace WPFTaskPro_WS.O
             return member;
         }
 
+        public List<list> listprecharged()
+        {
+            List<list> listtolist = new List<list>();
+            int i = 0;
+            foreach(string l in new string[]{ "On My day","Favorite", "Assigned to me" })
+            {
+                list li = new O.list();
+                li.id = i;
+                li.listName = l;
+                listtolist.Add(li);
+                i++;
+            }
+
+            return listtolist;
+        }
+
+
         public List<list> listtolist(DataSet ds)
         {
             if (ds.Tables[0].Rows.Count != 0)

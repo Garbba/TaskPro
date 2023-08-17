@@ -391,6 +391,69 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="taskReadByUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadByUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByUserFavorite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByUserFavoriteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadByUserFavoriteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByUserOnMyDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskReadByUserOnMyDayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskReadByUserOnMyDayResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="taskReadAll">
         <s:complexType />
       </s:element>
@@ -972,17 +1035,17 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="memberrReadByTaskId">
+      <s:element name="memberReadByTaskId">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="memberrReadByTaskIdResponse">
+      <s:element name="memberReadByTaskIdResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="memberrReadByTaskIdResult">
+            <s:element minOccurs="0" maxOccurs="1" name="memberReadByTaskIdResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -1152,6 +1215,24 @@
   </wsdl:message>
   <wsdl:message name="taskReadByListIdSoapOut">
     <wsdl:part name="parameters" element="tns:taskReadByListIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserSoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadByUser" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserSoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserFavoriteSoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadByUserFavorite" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserFavoriteSoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadByUserFavoriteResponse" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserOnMyDaySoapIn">
+    <wsdl:part name="parameters" element="tns:taskReadByUserOnMyDay" />
+  </wsdl:message>
+  <wsdl:message name="taskReadByUserOnMyDaySoapOut">
+    <wsdl:part name="parameters" element="tns:taskReadByUserOnMyDayResponse" />
   </wsdl:message>
   <wsdl:message name="taskReadAllSoapIn">
     <wsdl:part name="parameters" element="tns:taskReadAll" />
@@ -1345,11 +1426,11 @@
   <wsdl:message name="memberReadByIdSoapOut">
     <wsdl:part name="parameters" element="tns:memberReadByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="memberrReadByTaskIdSoapIn">
-    <wsdl:part name="parameters" element="tns:memberrReadByTaskId" />
+  <wsdl:message name="memberReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:memberReadByTaskId" />
   </wsdl:message>
-  <wsdl:message name="memberrReadByTaskIdSoapOut">
-    <wsdl:part name="parameters" element="tns:memberrReadByTaskIdResponse" />
+  <wsdl:message name="memberReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:memberReadByTaskIdResponse" />
   </wsdl:message>
   <wsdl:message name="memberReadAllSoapIn">
     <wsdl:part name="parameters" element="tns:memberReadAll" />
@@ -1447,6 +1528,18 @@
     <wsdl:operation name="taskReadByListId">
       <wsdl:input message="tns:taskReadByListIdSoapIn" />
       <wsdl:output message="tns:taskReadByListIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUser">
+      <wsdl:input message="tns:taskReadByUserSoapIn" />
+      <wsdl:output message="tns:taskReadByUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserFavorite">
+      <wsdl:input message="tns:taskReadByUserFavoriteSoapIn" />
+      <wsdl:output message="tns:taskReadByUserFavoriteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserOnMyDay">
+      <wsdl:input message="tns:taskReadByUserOnMyDaySoapIn" />
+      <wsdl:output message="tns:taskReadByUserOnMyDaySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="taskReadAll">
       <wsdl:input message="tns:taskReadAllSoapIn" />
@@ -1576,9 +1669,9 @@
       <wsdl:input message="tns:memberReadByIdSoapIn" />
       <wsdl:output message="tns:memberReadByIdSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="memberrReadByTaskId">
-      <wsdl:input message="tns:memberrReadByTaskIdSoapIn" />
-      <wsdl:output message="tns:memberrReadByTaskIdSoapOut" />
+    <wsdl:operation name="memberReadByTaskId">
+      <wsdl:input message="tns:memberReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:memberReadByTaskIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="memberReadAll">
       <wsdl:input message="tns:memberReadAllSoapIn" />
@@ -1773,6 +1866,33 @@
     </wsdl:operation>
     <wsdl:operation name="taskReadByListId">
       <soap:operation soapAction="http://tempuri.org/taskReadByListId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUser">
+      <soap:operation soapAction="http://tempuri.org/taskReadByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserFavorite">
+      <soap:operation soapAction="http://tempuri.org/taskReadByUserFavorite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserOnMyDay">
+      <soap:operation soapAction="http://tempuri.org/taskReadByUserOnMyDay" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2068,8 +2188,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="memberrReadByTaskId">
-      <soap:operation soapAction="http://tempuri.org/memberrReadByTaskId" style="document" />
+    <wsdl:operation name="memberReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/memberReadByTaskId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2280,6 +2400,33 @@
     </wsdl:operation>
     <wsdl:operation name="taskReadByListId">
       <soap12:operation soapAction="http://tempuri.org/taskReadByListId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUser">
+      <soap12:operation soapAction="http://tempuri.org/taskReadByUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserFavorite">
+      <soap12:operation soapAction="http://tempuri.org/taskReadByUserFavorite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskReadByUserOnMyDay">
+      <soap12:operation soapAction="http://tempuri.org/taskReadByUserOnMyDay" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2575,8 +2722,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="memberrReadByTaskId">
-      <soap12:operation soapAction="http://tempuri.org/memberrReadByTaskId" style="document" />
+    <wsdl:operation name="memberReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/memberReadByTaskId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

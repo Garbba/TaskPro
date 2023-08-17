@@ -163,6 +163,27 @@ namespace WPFTaskPro_WS.SWRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByListId", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> taskReadByListIdAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUser", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet taskReadByUser(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUserFavorite", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet taskReadByUserFavorite(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUserFavorite", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserFavoriteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUserOnMyDay", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet taskReadByUserOnMyDay(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadByUserOnMyDay", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserOnMyDayAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskReadAll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet taskReadAll();
@@ -387,12 +408,12 @@ namespace WPFTaskPro_WS.SWRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberReadById", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> memberReadByIdAsync(int user_id, int task_id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberrReadByTaskId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberReadByTaskId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet memberrReadByTaskId(int task_id);
+        System.Data.DataSet memberReadByTaskId(int task_id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberrReadByTaskId", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> memberrReadByTaskIdAsync(int task_id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberReadByTaskId", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> memberReadByTaskIdAsync(int task_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/memberReadAll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -602,6 +623,30 @@ namespace WPFTaskPro_WS.SWRef {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> taskReadByListIdAsync(int id) {
             return base.Channel.taskReadByListIdAsync(id);
+        }
+        
+        public System.Data.DataSet taskReadByUser(int id) {
+            return base.Channel.taskReadByUser(id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserAsync(int id) {
+            return base.Channel.taskReadByUserAsync(id);
+        }
+        
+        public System.Data.DataSet taskReadByUserFavorite(int id) {
+            return base.Channel.taskReadByUserFavorite(id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserFavoriteAsync(int id) {
+            return base.Channel.taskReadByUserFavoriteAsync(id);
+        }
+        
+        public System.Data.DataSet taskReadByUserOnMyDay(int id) {
+            return base.Channel.taskReadByUserOnMyDay(id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> taskReadByUserOnMyDayAsync(int id) {
+            return base.Channel.taskReadByUserOnMyDayAsync(id);
         }
         
         public System.Data.DataSet taskReadAll() {
@@ -860,12 +905,12 @@ namespace WPFTaskPro_WS.SWRef {
             return base.Channel.memberReadByIdAsync(user_id, task_id);
         }
         
-        public System.Data.DataSet memberrReadByTaskId(int task_id) {
-            return base.Channel.memberrReadByTaskId(task_id);
+        public System.Data.DataSet memberReadByTaskId(int task_id) {
+            return base.Channel.memberReadByTaskId(task_id);
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> memberrReadByTaskIdAsync(int task_id) {
-            return base.Channel.memberrReadByTaskIdAsync(task_id);
+        public System.Threading.Tasks.Task<System.Data.DataSet> memberReadByTaskIdAsync(int task_id) {
+            return base.Channel.memberReadByTaskIdAsync(task_id);
         }
         
         public System.Data.DataSet memberReadAll() {

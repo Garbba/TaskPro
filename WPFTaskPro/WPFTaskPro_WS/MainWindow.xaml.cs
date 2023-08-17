@@ -25,6 +25,8 @@ namespace WPFTaskPro_WS
         public MainWindow()
         {
             InitializeComponent();
+            txtuser.Text = "";
+            txtpass.Password = "";
         }
 
         SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
@@ -44,7 +46,9 @@ namespace WPFTaskPro_WS
             }
             else
             {
-                MessageBox.Show("no");
+                MessageBox.Show("Usuario o contrasena incorrecta");
+                txtuser.Text = "";
+                txtpass.Password = "";
             }
 
         }

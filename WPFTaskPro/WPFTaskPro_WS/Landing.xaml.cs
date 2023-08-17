@@ -25,5 +25,12 @@ namespace WPFTaskPro_WS
             InitializeComponent();
             tbuser.Text = u.username;
         }
+        SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string newlist = tb_newlist.Text;
+
+            sw.listCreate(newlist);
+        }
     }
 }

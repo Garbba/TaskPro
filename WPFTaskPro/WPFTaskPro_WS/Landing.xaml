@@ -12,22 +12,99 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Cuadro con TextBox y Botón de Menú -->
-        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
-            <TextBox x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5"/>
-            <Button Content="..." Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Button.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Editar usuario"/>
-                        <MenuItem Header="Cerrar sesión"/>
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
-        </StackPanel>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Contenido principal (puedes agregar tus elementos aquí) -->
-        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0 1 1 1">
-            <!-- Coloca tus elementos aquí -->
-        </Border>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5" Width="130"/>
+                <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Editar usuario"/>
+                            <MenuItem Header="Cerrar sesión"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5,0,5,0">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="Listas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" Margin="0,30,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Listas" Width="170">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Button  CommandParameter="{Binding idUsuario}" Click="btn_eliminarUsuario_Click" Style="{DynamicResource AgDelEdStyle}" x:Name="btn_lista" Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="#FFCC312A" BorderBrush="{x:Null}" Foreground="White"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
+                <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click" Margin="5,0,5,0">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Editar usuario"/>
+                            <MenuItem Header="Cerrar sesión"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <TextBox x:Name="tb_newlist" VerticalAlignment="Center" Margin="5" Width="130"/>
+                
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock Text="Tareas" VerticalAlignment="Center" Margin="5"/>
+                
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5,30,5,0" x:Name="mainGrid" >
+                <DataGrid Width="{Binding ElementName=mainGrid, Path=ActualWidth}" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="Tasks" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn  Width="{Binding ElementName=mainGrid, Path=ActualWidth}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Button  CommandParameter="{Binding idUsuario}" Click="btn_eliminarUsuario_Click" Style="{DynamicResource AgDelEdStyle}" x:Name="btn_Task" Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="#FFCC312A" BorderBrush="{x:Null}" Foreground="White"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+            <Grid Grid.Row="2" Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="1" x:Name="tb_newtask" VerticalAlignment="Center" Margin="5" />
+                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click" Margin="5,0,5,0">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Editar usuario"/>
+                            <MenuItem Header="Cerrar sesión"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </Grid>
+            
+        </Grid>
+
     </Grid>
 </Window>

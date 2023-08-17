@@ -368,7 +368,7 @@ namespace TaskPro
         [WebMethod]
         public DataSet listReadByUserID(int id)
         {
-            DataSet ds = selectTP("listacess la JOIN list l ON l.id = la.list_id", "list_id,accesstype,listName", $"user_id = '{id}'");
+            DataSet ds = selectTP("listacess la JOIN list l ON l.id = la.list_id", "list_id as id,listName", $"user_id = '{id}'");
             return ds;
         }
         [WebMethod]
@@ -618,22 +618,21 @@ namespace TaskPro
         [WebMethod]
         public DataSet taskReadByUser(int id)
         {
-            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}'");
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "t.id as id,t.title as title,t.taskdescription as taskdescription,t.taskStatus as taskStatus,t.isfavorite as isfavorite,t.isonmyday as isonmyday,t.startdate as startdate,t.enddate as enddate,t.taskPriority as taskPriority,t.list_id as list_id", $"u.id = '{id}'");
             return ds;
         }
         [WebMethod]
         public DataSet taskReadByUserFavorite(int id)
         {
-            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}' and t.isfavorite = 1");
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "t.id as id,t.title as title,t.taskdescription as taskdescription,t.taskStatus as taskStatus,t.isfavorite as isfavorite,t.isonmyday as isonmyday,t.startdate as startdate,t.enddate as enddate,t.taskPriority as taskPriority,t.list_id as list_id", $"u.id = '{id}' and t.isfavorite = 1");
             return ds;
         }
         [WebMethod]
         public DataSet taskReadByUserOnMyDay(int id)
         {
-            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}' and t.isonmyday = 1");
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "t.id as id,t.title as title,t.taskdescription as taskdescription,t.taskStatus as taskStatus,t.isfavorite as isfavorite,t.isonmyday as isonmyday,t.startdate as startdate,t.enddate as enddate,t.taskPriority as taskPriority,t.list_id as list_id", $"u.id = '{id}' and t.isonmyday = 1");
             return ds;
         }
-
         [WebMethod]
         public DataSet taskReadAll()
         {
@@ -784,7 +783,7 @@ namespace TaskPro
         [WebMethod]
         public DataSet tagReadByTaskId(int id)
         {
-            DataSet ds = selectTP("tag t JOIN tasktag tt ON tt.tag_id = t.id", "t.id, t.tagName,tt.task_id", $"task_id= '{id}'");
+            DataSet ds = selectTP("tag t JOIN tasktag tt ON tt.tag_id = t.id", "t.id as id, t.tagName as tagName,t.list_id as list_id", $"task_id= '{id}'");
             return ds;
         }
         [WebMethod]

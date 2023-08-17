@@ -31,13 +31,15 @@
                 </Button>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,0,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="Listas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" Margin="0,30,0,0" >
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" Margin="0,30,0,0" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Listas" Width="170">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <Button  CommandParameter="{Binding idUsuario}" Click="btn_eliminarUsuario_Click" Style="{DynamicResource AgDelEdStyle}" x:Name="btn_lista" Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="#FFCC312A" BorderBrush="{x:Null}" Foreground="White"/>
+                                        <Button  CommandParameter="{Binding id}" Click="btn_list_Click" x:Name="btn_lista" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                                            <TextBlock Text ="{Binding listName}"/>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -48,7 +50,7 @@
 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
-                <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click" Margin="5,0,5,0">
+                <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Editar usuario"/>
@@ -94,7 +96,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="1" x:Name="tb_newtask" VerticalAlignment="Center" Margin="5" />
-                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click" Margin="5,0,5,0">
+                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newtask" Margin="5,0,5,0" >
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Editar usuario"/>

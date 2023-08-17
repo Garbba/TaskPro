@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,7 +93,6 @@ namespace WPFTaskPro_WS.O
             attachment attachment = new attachment
             {
                 id = int.Parse(row["id"].ToString()),
-                //datefile = DateTime.ParseExact(row["datefile"].ToString(), "dd/MM/yyyy", null),
                 datefile = Convert.ToDateTime(row["datefile"]),
                 attachmentFilename = row["attachmentFilename"].ToString(),
                 attachmentLink = row["attachmentLink"].ToString(),
@@ -137,6 +137,225 @@ namespace WPFTaskPro_WS.O
                 task_id = int.Parse(row["task_id"].ToString()),
             };
             return member;
+        }
+
+        public List<list> listtolist(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<list> listtolist = new List<list>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    list l = new list();
+                    l.id = int.Parse(row["id"].ToString());
+                    l.listName = row["listName"].ToString();
+
+                    listtolist.Add(l);
+                }
+                return listtolist;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<listaccess> listtolistaccess(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<listaccess> listtolistaccess = new List<listaccess>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    listaccess la = new listaccess();
+                    la.user_id = int.Parse(row["user_id"].ToString());
+                    la.list_id = int.Parse(row["list_id"].ToString());
+
+                    listtolistaccess.Add(la);
+                }
+                return listtolistaccess;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<task> listtotask(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<task> listtotask = new List<task>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    task t = new task();
+                    t.id = int.Parse(row["id"].ToString());
+                    t.title = row["title"].ToString();
+                    t.taskStatus = row["taskStatus"].ToString();
+                    t.isfavorite = byte.Parse(row["isfavorite"].ToString());
+                    t.isonmyday = byte.Parse(row["isonmyday"].ToString());
+                    t.startdate = row["startdate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["startdate"]);
+                    t.enddate = row["enddate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["enddate"]);
+                    t.taskPriority = row["taskPriority"].ToString();
+                    t.list_id = int.Parse(row["list_id"].ToString());
+
+                    listtotask.Add(t);
+                }
+                return listtotask;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<tag> listtotag(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<tag> listtotag = new List<tag>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    tag t = new tag();
+                    t.id = int.Parse(row["id"].ToString());
+                    t.tagName = row["tagName"].ToString();
+                    t.list_id = int.Parse(row["list_id"].ToString());
+
+                    listtotag.Add(t);
+                }
+                return listtotag;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<tasktag> listtotasktag(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<tasktag> listtotasktag = new List<tasktag>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    tasktag tt = new tasktag();
+                    tt.id = int.Parse(row["id"].ToString());
+                    tt.task_id = int.Parse(row["task_id"].ToString());
+                    tt.tag_id = int.Parse(row["tag_id"].ToString());
+
+                    listtotasktag.Add(tt);
+                }
+                return listtotasktag;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<attachment> listtoattachment(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<attachment> listtoattachment = new List<attachment>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    attachment a = new attachment();
+                    a.id = int.Parse(row["id"].ToString());
+                    a.datefile = Convert.ToDateTime(row["datefile"]);
+                    a.attachmentFilename = row["attachmentFilename"].ToString();
+                    a.attachmentLink = row["attachmentLink"].ToString();
+                    a.user_id = int.Parse(row["user_id"].ToString());
+                    a.task_id = int.Parse(row["task_id"].ToString());
+
+                    listtoattachment.Add(a);
+                }
+                return listtoattachment;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<comment> listtocomment(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<comment> listtocomment = new List<comment>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    comment c = new comment();
+                    c.id = int.Parse(row["id"].ToString());
+                    c.datecomment = DateTime.ParseExact(row["datecomment"].ToString(), "dd/MM/yyyy", null);
+                    c.commentUser1 = row["commentUser"].ToString();
+                    c.user_id = int.Parse(row["user_id"].ToString());
+                    c.task_id = int.Parse(row["list_id"].ToString());
+
+                    listtocomment.Add(c);
+                }
+                return listtocomment;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<timetrack> listtotimetrack(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<timetrack> listtotimetrack = new List<timetrack>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    timetrack tt = new timetrack();
+                    tt.id = int.Parse(row["id"].ToString());
+                    tt.starttime = Convert.ToDateTime(row["starttime"]);
+                    tt.endtime = Convert.ToDateTime(row["endtime"]);
+                    tt.isfinished = byte.Parse(row["isfinished"].ToString());
+                    tt.user_id = int.Parse(row["user_id"].ToString());
+                    tt.task_id = int.Parse(row["task_id"].ToString());
+
+                    listtotimetrack.Add(tt);
+                }
+                return listtotimetrack;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<member> listtomember(DataSet ds)
+        {
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<member> listtomember = new List<member>();
+
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow row = ds.Tables[0].Rows[i];
+                    member m = new member();
+                    m.user_id = int.Parse(row["user_id"].ToString());
+                    m.task_id = int.Parse(row["task_id"].ToString());
+
+                    listtomember.Add(m);
+                }
+                return listtomember;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

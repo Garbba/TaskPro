@@ -27,17 +27,34 @@ namespace WPFTaskPro_WS
             tbuser.Text = u.username;
             listselected = null;
             this.user = u;
+            DGListPreCharge.ItemsSource = new ConvertRow().listprecharged();
+            tb_newtask.IsReadOnly = true;
+            btnewtask.IsEnabled = false;
             Refresh();
         }
         user user;
-        list listselected = new list();
+        list listselected;
 
 
         private void Refresh()
         {
+            
 
+            try
+            {
+                DGListas.ItemsSource = new ConvertRow().listtolist(sw.listReadByUserID(this.user.id));
+            }
+            catch
+            {
 
-            DGListas.ItemsSource = new ConvertRow().listtolist(sw.listReadByUserID(this.user.id));
+            }
+            if (listselected == null) {}
+            else
+            {
+                DGTasks.ItemsSource = new ConvertRow().listtotask(sw.taskReadByListId(this.listselected.id));
+                titulo_tareas.Text =  $"Tareas de la lista {this.listselected.listName}";
+            }
+            
         }
 
 
@@ -66,24 +83,72 @@ namespace WPFTaskPro_WS
         private void btn_newtask(object sender, RoutedEventArgs e)
         {
             string newtarea = tb_newtask.Text;
-            string commenttask = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", 1/*listselected.id*/);
+            string commenttask = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
 
             MessageBox.Show(commenttask);
 
             tb_newtask.Text = "";
+            Refresh();
+            btnewtask.IsEnabled = false;
         }
 
+        private void btn_list_Click(object sender, RoutedEventArgs e)
+        {
+            var id = (int)((Button)sender).CommandParameter;
+            listselected = new ConvertRow().list(sw.listReadById(id));
+            Refresh();
+            tb_newtask.IsReadOnly = false;
+            btnewtask.IsEnabled = true;
+
+        }
+        private void btn_editlist_Click(object sender, RoutedEventArgs e)
+        {
+            var idUsuario = (int)((Button)sender).CommandParameter;
+
+        }
         private void btn_eliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btn_listprecharged_Click(object sender, RoutedEventArgs e)
         {
-        }
-        private void btn_list_Click(object sender, RoutedEventArgs e)
-        {
-        }
+            listselected = null;
+            tb_newtask.IsReadOnly = true;
+            var id = (int)((Button)sender).CommandParameter;
+            switch (id)
+            {
+                case 0:
+                    //On My day
+                    DGTasks.ItemsSource = new ConvertRow().listtotask(sw.taskReadByUserOnMyDay(this.user.id));
+                    titulo_tareas.Text = $"Tareas de tu dia";
+                    break;
+                case 1:
+                    //Favorite
+                    DGTasks.ItemsSource = new ConvertRow().listtotask(sw.taskReadByUserFavorite(this.user.id));
+                    titulo_tareas.Text = $"Tareas favoritas";
+                    break;
+                case 2:
+                    //Assigned to me
+                    DGTasks.ItemsSource = new ConvertRow().listtotask(sw.taskReadByUser(this.user.id));
+                    titulo_tareas.Text = $"Tareas asignadas a ti";
+                    break;
 
+            }
+
+
+        }
+        private void btn_task_Click(object sender, RoutedEventArgs e)
+        {
+            contentGrid.Visibility = Visibility.Visible;
+            contentGrid.Width = 200;
+
+        }
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            gridtarea.Visibility = Visibility.Visible;
+            contentGrid.Visibility = Visibility.Collapsed;
+            contentGrid.Width = 0;
+        }
         
 
 

@@ -10,10 +10,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
@@ -30,26 +32,56 @@
                     </Button.ContextMenu>
                 </Button>
             </StackPanel>
-            <StackPanel Grid.Column="1" Margin="5,0,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" Margin="0,30,0,0" >
+            <StackPanel Grid.Column="1" Margin="5,30,5,0">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Listas" Width="170">
+                        <DataGridTemplateColumn Width="160">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <Button  CommandParameter="{Binding id}" Click="btn_list_Click" x:Name="btn_lista" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                                            <TextBlock Text ="{Binding listName}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="140"/>
+                                            <ColumnDefinition Width="20"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button CommandParameter="{Binding id}" Click="btn_listprecharged_Click" x:Name="btn_listprecharged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                            <TextBlock Text="{Binding listName}" TextAlignment="Left"/>
                                         </Button>
-                                    </StackPanel>
+
+                                        <Button CommandParameter="{Binding id}" Click="btn_editlist_Click" x:Name="btn_editlist" Content="···" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black"/>
+                                    </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
                 </DataGrid>
-
             </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
+            <StackPanel Grid.Column="2" Margin="5,100,5,0">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="160">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="140"/>
+                                            <ColumnDefinition Width="20"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button CommandParameter="{Binding id}" Click="btn_list_Click" x:Name="btn_lista" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                            <TextBlock Text="{Binding listName}" TextAlignment="Left"/>
+                                        </Button>
+
+                                        <Button CommandParameter="{Binding id}" Click="btn_editlist_Click" x:Name="btn_editlist" Content="···" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
                 <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0">
                     <Button.ContextMenu>
                         <ContextMenu>
@@ -63,32 +95,35 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" >
+        <Grid Grid.Column="1" x:Name="gridtarea" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
-                <TextBlock Text="Tareas" VerticalAlignment="Center" Margin="5"/>
+                <TextBlock Text="Tareas" VerticalAlignment="Center" Margin="5" x:Name="titulo_tareas"/>
                 
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,30,5,0" x:Name="mainGrid" >
-                <DataGrid Width="{Binding ElementName=mainGrid, Path=ActualWidth}" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="Tasks" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" >
+                <DataGrid Width="{Binding ElementName=mainGrid, Path=ActualWidth}" HorizontalAlignment="Center" Grid.Row="1" Name="DGTasks" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn  Width="{Binding ElementName=mainGrid, Path=ActualWidth}">
+                        <DataGridTemplateColumn Width="{Binding ElementName=mainGrid, Path=Width}" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <Button  CommandParameter="{Binding idUsuario}" Click="btn_eliminarUsuario_Click" Style="{DynamicResource AgDelEdStyle}" x:Name="btn_Task" Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="8" Background="#FFCC312A" BorderBrush="{x:Null}" Foreground="White"/>
-                                    </StackPanel>
+                                    <Button CommandParameter="{Binding id}" Click="btn_task_Click" x:Name="btn_Task" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                        <TextBlock Text="{Binding title}" TextAlignment="Left"/>
+                                    </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.RowStyle>
                 </DataGrid>
-
             </StackPanel>
             <Grid Grid.Row="2" Margin="0,0,0,5">
                 <Grid.ColumnDefinitions>
@@ -96,7 +131,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="1" x:Name="tb_newtask" VerticalAlignment="Center" Margin="5" />
-                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newtask" Margin="5,0,5,0" >
+                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newtask" Margin="5,0,5,0" x:Name="btnewtask">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Editar usuario"/>
@@ -106,6 +141,10 @@
                 </Button>
             </Grid>
             
+        </Grid>
+        <Grid Grid.Column="3" x:Name="contentGrid" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed">
+            <TextBlock Text="¡Hola, mundo!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="Cerrar" Click="CloseButton_Click"/>
         </Grid>
 
     </Grid>

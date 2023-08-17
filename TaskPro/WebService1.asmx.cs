@@ -616,6 +616,25 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet taskReadByUser(int id)
+        {
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}'");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet taskReadByUserFavorite(int id)
+        {
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}' and t.isfavorite = 1");
+            return ds;
+        }
+        [WebMethod]
+        public DataSet taskReadByUserOnMyDay(int id)
+        {
+            DataSet ds = selectTP("userlist u JOIN listacess la ON u.id = la.user_id JOIN list l ON la.list_id = l.id JOIN task t ON l.id = t.list_id", "u.id AS UserID, t.id AS TaskID, t.title as TaskTitle", $"u.id = '{id}' and t.isonmyday = 1");
+            return ds;
+        }
+
+        [WebMethod]
         public DataSet taskReadAll()
         {
             DataSet ds = selectTP("task", "*", null);

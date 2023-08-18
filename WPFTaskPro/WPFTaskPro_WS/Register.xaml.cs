@@ -23,10 +23,25 @@ namespace WPFTaskPro_WS
         {
             InitializeComponent();
         }
-
+        SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            string mess = sw.userCreate(txtNickname.Text,txtUsername.Text, txtLastname.Text, txtEmail.Text, txtPassword.Password) ;
+            MessageBox.Show(mess); 
+            
+            if ("Usuario agregado correctamente" == mess)
+            {
+                new MainWindow().Show();
+                this.Close();
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
         }
     }
 }

@@ -62,14 +62,10 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <TextBlock Text="No tienes cuenta?"
-                         Margin="0,5"
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"/>
-                <TextBlock Text="Registrate"
-                         Margin="0,10"
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"/>
+                <TextBlock Text="No tienes cuenta?" Margin="0,5" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                
+                <Button Content="Registrate" Margin="0,10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#FFEE9235" BorderBrush="#FFEE9235" Click="GoToRegister_Click"/>
+                
             </StackPanel>
         </Border>
 

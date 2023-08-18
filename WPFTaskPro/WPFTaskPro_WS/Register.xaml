@@ -8,51 +8,59 @@
         Title="Register" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.806,0.495" Background="#FFEE9235">
 
-        <Label Content="       Registro" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,23,0,0" FontSize="24" Background="Transparent" Width="197"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" >
+            <Label Content="Registro" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Background="Transparent" />
+            <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Nickname:" Width="100"/>
+                <TextBox x:Name="txtNickname" Width="200"/>
+            </StackPanel>
+            <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Username:" Width="100"/>
+                <TextBox x:Name="txtUsername" Width="200"/>
+            </StackPanel>
+            <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Lastname:" Width="100"/>
+                <TextBox x:Name="txtLastname" Width="200"/>
+            </StackPanel>
+            <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Email:" Width="100"/>
+                <TextBox x:Name="txtEmail" Width="200"/>
+            </StackPanel>
+            <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Password:" Width="100"/>
+                <PasswordBox x:Name="txtPassword" Width="200"/>
+            </StackPanel>
+            <StackPanel Margin="100,10">
+                <Button Height="30" x:Name="RegisterBtn" Content="Registrarse" Background="#B82487" Click="RegisterBtn_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="LoginBorder" Background="{TemplateBinding Background}"  CornerRadius="16">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="AliceBlue" TargetName="LoginBorder"/>
+                                                <Setter Property="TextBlock.Foreground" Value="Black"  TargetName="LoginBorder" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
 
-        <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,80,0,0"/>
-        <TextBox x:Name="txtNickname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,85,0,0" Width="200"/>
-
-        <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,110,0,0"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,115,0,0" Width="200"/>
-
-        <Label Content="Lastname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="249,140,0,0"/>
-        <TextBox x:Name="txtLastname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,145,0,0" Width="200"/>
-
-        <Label Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="261,170,0,0"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,175,0,0" Width="200"/>
-
-        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,200,0,0"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,205,0,0" Width="200"/>
-
-        <Button x:Name="RegisterBtn" 
-                    Content="Registrarse" 
-                    Background="#B82487"
-                    Margin="365,236,330,168" Click="RegisterBtn_Click">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="LoginBorder" Background="{TemplateBinding Background}"
-                                            CornerRadius="16">
-                                    <ContentPresenter HorizontalAlignment="Center" 
-                                                          VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="AliceBlue" TargetName="LoginBorder"  />
-                                        <Setter Property="TextBlock.Foreground" Value="Black"  TargetName="LoginBorder" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Label Content="                  ¿Ya tienes una cuenta?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="295,277,0,0" Width="235" Height="29"/>
-        <Button Content="Inicia Sesión" HorizontalAlignment="Left" Margin="382,303,0,0" VerticalAlignment="Top" Background="#FFEE9235" BorderBrush="#FFEE9235"/>
-
+            <Label Content="¿Ya tienes una cuenta?" HorizontalAlignment="Center" VerticalAlignment="Top" Height="29"/>
+            <Button Content="Inicia Sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFEE9235" BorderBrush="#FFEE9235" Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

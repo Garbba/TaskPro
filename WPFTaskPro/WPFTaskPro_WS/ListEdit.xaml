@@ -40,8 +40,9 @@
                     </TextBlock>
                 </Button>
             </Grid>
-
-            <Label x:Name="lblTipoAcceso" Content="Tipo de acceso" />
+            <Label Content="Usuario" />
+            <TextBox x:Name="txtMiembro" />
+            <Label Content="Tipo de acceso" />
             
             <ComboBox x:Name="cmbTipoAcceso" SelectedIndex="2" >
                 <ComboBoxItem>OWNER</ComboBoxItem>
@@ -55,9 +56,9 @@
             </Button>
             <Label Content="Eliminar miembro"/>
             <StackPanel Margin="0,0,0,10">
-                <DataGrid Width="300" HorizontalAlignment="Center" Grid.Row="1" Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid HorizontalAlignment="Center" Grid.Row="1" Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="295">
+                        <DataGridTemplateColumn Width="290">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>

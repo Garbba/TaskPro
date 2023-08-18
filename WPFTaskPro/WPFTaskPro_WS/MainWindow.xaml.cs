@@ -52,5 +52,11 @@ namespace WPFTaskPro_WS
             }
 
         }
+
+        private void GoToRegister_Click (object sender, RoutedEventArgs e)
+        {
+            new Register().Show();
+            this.Close();
+        }
     }
 }

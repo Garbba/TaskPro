@@ -23,6 +23,7 @@ namespace WPFTaskPro_WS
             InitializeComponent();
             this.list = l;
             this.user = u;
+            refresh();
         }
         O.list list;
         O.user user;
@@ -32,11 +33,29 @@ namespace WPFTaskPro_WS
         {
             lblLista.Content = $"Lista {this.list.listName}";
             txtActualizarNombreLista.Text = this.list.listName;
+            DGMiembros.ItemsSource = members();
+        }
+
+        public List<listaccess_user> members()
+        {
+            List<listaccess> la = new ConvertRow().listtolistaccess(sw.listAccessReadByListID(this.list.id));
+            List<listaccess_user> lau = new List<listaccess_user>();
+
+            foreach(listaccess a in la)
+            {
+                listaccess_user l = new listaccess_user();
+                l.user =new ConvertRow().user(sw.userReadById(a.user_id)).nickname;
+                l.useraccess = $"{a.accesstype} - {new ConvertRow().user(sw.userReadById(a.user_id)).nickname}";
+                lau.Add(l);
+            }
+
+            return lau;
         }
 
         private void btndelete_Click(object sender, RoutedEventArgs e)
         {
             sw.listDelete(this.list.id);
+            new Landing(this.user).Show();
             this.Close();
         }
 
@@ -49,6 +68,7 @@ namespace WPFTaskPro_WS
             MessageBox.Show(message);
             if ("Lista actualizada correctamente" == message)
             {
+                new Landing(this.user).Show();
                 this.Close();
             } else
             {
@@ -58,6 +78,8 @@ namespace WPFTaskPro_WS
 
         private void btnaddmember_Click(object sender, RoutedEventArgs e)
         {
+
+
             DataSet ds = sw.userReadByNickname(txtMiembro.Text);
            
 
@@ -70,19 +92,24 @@ namespace WPFTaskPro_WS
             {
                 O.user u = new ConvertRow().user(ds);
                 O.list l = this.list;
-                int i = cmbTipoAcceso.SelectedIndex = 0;
+                int i = cmbTipoAcceso.SelectedIndex;
                 string[] access = new string[] {"OWNER", "ADMIN", "MEMBER"};
                 string acc = access[i];
 
                 string mess = sw.listAccessCreateUpdate(u.id,l.id,acc);
                 MessageBox.Show(mess);
                 txtMiembro.Text = "";
-
+                cmbTipoAcceso.SelectedIndex = 2;
+                refresh();
 
             }
         }
         private void btn_deletemember_Click(object sender, RoutedEventArgs e)
         { 
+            var u = (string)((Button)sender).CommandParameter;
+            sw.listAccessDelete(new ConvertRow().user(sw.userReadByNickname(u)).id,this.list.id);
+            refresh();
+
         }
     }
 }

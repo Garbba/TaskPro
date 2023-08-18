@@ -103,8 +103,9 @@ namespace WPFTaskPro_WS
         }
         private void btn_editlist_Click(object sender, RoutedEventArgs e)
         {
-            var idUsuario = (int)((Button)sender).CommandParameter;
-
+            var id = (int)((Button)sender).CommandParameter;
+            new ListEdit(new ConvertRow().list(sw.listReadById(id)),this.user).Show();
+            this.Close();
         }
         private void btn_eliminarUsuario_Click(object sender, RoutedEventArgs e)
         {

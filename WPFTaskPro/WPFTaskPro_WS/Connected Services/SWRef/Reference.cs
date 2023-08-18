@@ -128,6 +128,13 @@ namespace WPFTaskPro_WS.SWRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/listAccessReadById", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> listAccessReadByIdAsync(int idUser, int idList);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/listAccessReadByListID", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet listAccessReadByListID(int idList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/listAccessReadByListID", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> listAccessReadByListIDAsync(int idList);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/listAccessReadAll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet listAccessReadAll();
@@ -583,6 +590,14 @@ namespace WPFTaskPro_WS.SWRef {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> listAccessReadByIdAsync(int idUser, int idList) {
             return base.Channel.listAccessReadByIdAsync(idUser, idList);
+        }
+        
+        public System.Data.DataSet listAccessReadByListID(int idList) {
+            return base.Channel.listAccessReadByListID(idList);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> listAccessReadByListIDAsync(int idList) {
+            return base.Channel.listAccessReadByListIDAsync(idList);
         }
         
         public System.Data.DataSet listAccessReadAll() {

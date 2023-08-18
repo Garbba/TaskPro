@@ -45,14 +45,14 @@
             </Button>
             <Label Content="Eliminar miembro"/>
             <StackPanel Margin="0,0,0,10">
-                <DataGrid Width="300" HorizontalAlignment="Center" Grid.Row="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid Width="300" HorizontalAlignment="Center" Grid.Row="1" Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="295">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                            <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                        <Button CommandParameter="{Binding user}" Click="btn_deletemember_Click" x:Name="btn_lista" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                            <TextBlock Text="{Binding useraccess}" TextAlignment="Left"/>
                                         </Button>
                                         
                                     </Grid>

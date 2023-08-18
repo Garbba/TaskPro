@@ -188,6 +188,7 @@ namespace WPFTaskPro_WS.O
                 {
                     DataRow row = ds.Tables[0].Rows[i];
                     listaccess la = new listaccess();
+                    la.accesstype = row["accesstype"].ToString();
                     la.user_id = int.Parse(row["user_id"].ToString());
                     la.list_id = int.Parse(row["list_id"].ToString());
 

@@ -20,7 +20,7 @@
             
             
             <Label x:Name="lblAgregarMiembro" Content="Agregar miembro por usuario" />
-            <TextBox x:Name="txtMiembro" />
+            <TextBox x:Name="txtActualizarNombreLista" />
 
             <Grid Grid.Row="2" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>

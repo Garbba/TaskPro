@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace WPFTaskPro_WS
 {
     /// <summary>
-    /// Interaction logic for Register.xaml
+    /// Lógica de interacción para Register.xaml
     /// </summary>
     public partial class Register : Window
     {

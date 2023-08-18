@@ -52,6 +52,7 @@ namespace WPFTaskPro_WS.O
             {
                 id = int.Parse(row["id"].ToString()),
                 title = row["title"].ToString(),
+                taskdescription = row["taskdescription"].ToString(),
                 taskStatus = row["taskStatus"].ToString(),
                 isfavorite = byte.Parse(row["isfavorite"].ToString()),
                 isonmyday = byte.Parse(row["isonmyday"].ToString()),

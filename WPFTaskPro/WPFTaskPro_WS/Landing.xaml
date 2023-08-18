@@ -25,7 +25,7 @@
                 <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EditUser_Click"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,30,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" SelectionChanged="DGListPreCharge_SelectionChanged">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="160">
                             <DataGridTemplateColumn.CellTemplate>
@@ -152,12 +152,12 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Tarea" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                        <TextBox Margin="5,0" />
+                        <TextBox Margin="5,0" x:Name="txtTaskTitle"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
                         <Label Content="Estado" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                        <ComboBox  Margin="5,0">
+                        <ComboBox  Margin="5,0" x:Name="cbTaskStatus">
                             <ComboBoxItem Content="NOT STARTED"/>
                             <ComboBoxItem Content="IN PROGRESS"/>
                             <ComboBoxItem Content="COMPLETED"/>
@@ -166,7 +166,7 @@
 
                     <StackPanel Grid.Column="3">
                         <Label Content="Prioridad" VerticalAlignment="Bottom"/>
-                        <ComboBox Margin="5,0">
+                        <ComboBox Margin="5,0" x:Name="cbTaskPriority">
                             <ComboBoxItem Content="LOW"/>
                             <ComboBoxItem Content="MEDIUM"/>
                             <ComboBoxItem Content="IMPORTANT"/>
@@ -186,7 +186,7 @@
 
                     <StackPanel Grid.Column="0">
                         <Label Content="Mi día" HorizontalAlignment="Center"/>
-                        <ComboBox x:Name="miDiaComboBox" Margin="5,0">
+                        <ComboBox Margin="5,0" x:Name="cbTaskOnMyDay">
                             <ComboBoxItem Content="No"/>
                             <ComboBoxItem Content="Sí"/>
                         </ComboBox>
@@ -194,8 +194,7 @@
 
                     <StackPanel Grid.Column="1">
                         <Label Content="Favorito" HorizontalAlignment="Center" />
-                        <ComboBox x:Name="esFavoritoComboBox"  Margin="5,0" >
-                            <ComboBoxItem Content="Es favorito"/>
+                        <ComboBox x:Name="cbTaskFavorite"  Margin="5,0" >
                             <ComboBoxItem Content="No"/>
                             <ComboBoxItem Content="Sí"/>
                         </ComboBox>
@@ -203,19 +202,19 @@
 
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="Fecha inicio" Margin="5" />
-                        <TextBox Margin="5,0" />
+                        <TextBox Margin="5,0" x:Name="txtTaskStartDate"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="3">
                         <TextBlock Text="Fecha final" Margin="5" />
-                        <TextBox Margin="5,0" />
+                        <TextBox Margin="5,0" x:Name="txtTaskEndDate"/>
                     </StackPanel>
 
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <TextBlock Text="Descripción" Margin="5"/>
-                <TextBox Margin="5,0" x:Name="txtDescription"/>
+                <TextBox Margin="5,0" x:Name="txtTaskDescription"/>
             </StackPanel>
             <StackPanel Grid.Row="4">
                 <Grid>
@@ -252,7 +251,7 @@
                         <Label Content="Tiempos"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
                             <TextBox x:Name="tb_newtTimeTrack" Width="100" />
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0"/>
                         </StackPanel>
 
                         <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
@@ -284,7 +283,7 @@
                         <Label Content="Archivos" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
                             <TextBox x:Name="tb_newAttachment" Width="100"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,0,0,0"/>
                         </StackPanel>
 
                         <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
@@ -330,7 +329,8 @@
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="7" VerticalAlignment="Bottom">
-                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,30,0,0"/>
+                <Button Content="Guardar tarea" Click="TaskUpdate_Click" Margin="0,10,0,0"/>
+                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,10,0,0"/>
             </StackPanel>
             
             

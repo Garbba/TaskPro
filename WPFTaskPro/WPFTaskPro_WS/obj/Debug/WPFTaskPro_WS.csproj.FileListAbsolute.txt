@@ -38,3 +38,5 @@ C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\Register.g.cs
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\ListEdit.baml
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\EditTask.baml
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\Register.baml
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\EditUser.g.cs
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\EditUser.baml

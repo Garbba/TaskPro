@@ -34,20 +34,14 @@ namespace WPFTaskPro_WS
         }
         user user;
         list listselected;
-
-
+        SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
         private void Refresh()
         {
-            
-
             try
             {
                 DGListas.ItemsSource = new ConvertRow().listtolist(sw.listReadByUserID(this.user.id));
             }
-            catch
-            {
-
-            }
+            catch{}
             if (listselected == null) {}
             else
             {
@@ -56,61 +50,11 @@ namespace WPFTaskPro_WS
             }
             
         }
-
-
-
-        SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
-        private void btn_newlist(object sender, RoutedEventArgs e)
+        private void EditUser_Click(object sender, RoutedEventArgs e)
         {
-            string newlist = tb_newlist.Text;
-            string commentlist = sw.listCreate(newlist);
-
-            MessageBox.Show(commentlist);
-
-            if (commentlist == "Lista agregada correctamente")
-            {
-                int idlastlist = sw.listReadAll().Tables[0].Rows.Count - 1;
-                DataRow lastlist = sw.listReadAll().Tables[0].Rows[idlastlist];
-                int listid = int.Parse(lastlist["id"].ToString());
-
-                sw.listAccessCreateUpdate(this.user.id, listid, "OWNER");
-            }
-
-            tb_newlist.Text = "";
-            Refresh();
-        }
-
-        private void btn_newtask(object sender, RoutedEventArgs e)
-        {
-            string newtarea = tb_newtask.Text;
-            string commenttask = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
-
-            MessageBox.Show(commenttask);
-
-            tb_newtask.Text = "";
-            Refresh();
-            btnewtask.IsEnabled = false;
-        }
-
-        private void btn_list_Click(object sender, RoutedEventArgs e)
-        {
-            var id = (int)((Button)sender).CommandParameter;
-            listselected = new ConvertRow().list(sw.listReadById(id));
-            Refresh();
-            tb_newtask.IsReadOnly = false;
-            btnewtask.IsEnabled = true;
-
-        }
-        private void btn_editlist_Click(object sender, RoutedEventArgs e)
-        {
-            var id = (int)((Button)sender).CommandParameter;
-            new ListEdit(new ConvertRow().list(sw.listReadById(id)),this.user).Show();
+            new EditUser(user).Show();
             this.Close();
         }
-        private void btn_eliminarUsuario_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void btn_listprecharged_Click(object sender, RoutedEventArgs e)
         {
             listselected = null;
@@ -135,24 +79,58 @@ namespace WPFTaskPro_WS
                     break;
 
             }
+            tb_newtask.IsReadOnly = true;
+            btnewtask.IsEnabled = false;
 
+        }
+        private void btn_list_Click(object sender, RoutedEventArgs e)
+        {
+            var id = (int)((Button)sender).CommandParameter;
+            listselected = new ConvertRow().list(sw.listReadById(id));
+            Refresh();
+            tb_newtask.IsReadOnly = false;
+            btnewtask.IsEnabled = true;
+        }
+        private void btn_editlist_Click(object sender, RoutedEventArgs e)
+        {
+            var id = (int)((Button)sender).CommandParameter;
+            new ListEdit(new ConvertRow().list(sw.listReadById(id)), this.user).Show();
+            this.Close();
+        }
+        private void btn_newlist(object sender, RoutedEventArgs e)
+        {
+            string newlist = tb_newlist.Text;
+            string commentlist = sw.listCreate(newlist);
+            MessageBox.Show(commentlist);
+            if (commentlist == "Lista agregada correctamente")
+            {
+                int idlastlist = sw.listReadAll().Tables[0].Rows.Count - 1;
+                DataRow lastlist = sw.listReadAll().Tables[0].Rows[idlastlist];
+                int listid = int.Parse(lastlist["id"].ToString());
 
+                sw.listAccessCreateUpdate(this.user.id, listid, "OWNER");
+            }
+            tb_newlist.Text = "";
+            Refresh();
         }
         private void btn_task_Click(object sender, RoutedEventArgs e)
         {
             contentGrid.Visibility = Visibility.Visible;
             contentGrid.Width = 200;
-
+        }
+        private void btn_newtask(object sender, RoutedEventArgs e)
+        {
+            string newtarea = tb_newtask.Text;
+            string commenttask = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
+            MessageBox.Show(commenttask);
+            tb_newtask.Text = "";
+            Refresh();
+            btnewtask.IsEnabled = false;
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             contentGrid.Visibility = Visibility.Collapsed;
             contentGrid.Width = 0;
         }
-        
-
-
-
-
     }
 }

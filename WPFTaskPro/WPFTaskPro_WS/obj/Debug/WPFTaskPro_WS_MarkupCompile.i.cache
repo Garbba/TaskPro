@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\App.xaml
-5379468854
+61601418421
 
-231174405533
+241345278242
 151069376965
-EditTask.xaml;Landing.xaml;ListEdit.xaml;MainWindow.xaml;Register.xaml;
+EditTask.xaml;EditUser.xaml;Landing.xaml;ListEdit.xaml;MainWindow.xaml;Register.xaml;
 
-False
+True
 

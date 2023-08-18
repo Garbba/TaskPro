@@ -23,17 +23,10 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
                 <TextBlock x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5" Width="130"/>
-                <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Button.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Editar usuario"/>
-                            <MenuItem Header="Cerrar sesión"/>
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                </Button>
+                <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EditUser_Click"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,30,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" SelectionChanged="DGListPreCharge_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="160">
                             <DataGridTemplateColumn.CellTemplate>

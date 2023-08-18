@@ -35,7 +35,7 @@
                 <Label Content="Password:" Width="100"/>
                 <PasswordBox x:Name="txtPassword" Width="200"/>
             </StackPanel>
-            <StackPanel Margin="100,10">
+            <StackPanel Margin="50,10">
                 <Button Height="30" x:Name="RegisterBtn" Content="Registrarse" Background="#B82487" Click="RegisterBtn_Click">
                     <Button.Style>
                         <Style TargetType="Button">

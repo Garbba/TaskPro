@@ -16,9 +16,6 @@ using WPFTaskPro_WS.O;
 
 namespace WPFTaskPro_WS
 {
-    /// <summary>
-    /// Lógica de interacción para ListEdit.xaml
-    /// </summary>
     public partial class ListEdit : Window
     {
         public ListEdit(O.list l, O.user u)

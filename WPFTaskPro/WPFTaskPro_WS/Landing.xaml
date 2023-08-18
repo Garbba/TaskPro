@@ -70,7 +70,6 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
-
             <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
                 <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0">
                     <Button.ContextMenu>
@@ -131,7 +130,7 @@
             </Grid>
             
         </Grid>
-        <Grid Grid.Column="3" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed" >
+        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -248,13 +247,13 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
-                        <Label Content="Tiempos"  />
+                        <Label Content="Comentarios"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
-                            <TextBox x:Name="tb_newtTimeTrack" Width="100" />
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newComment" Width="100" />
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
                         </StackPanel>
 
-                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -270,6 +269,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
+                    
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="5">
@@ -302,15 +302,14 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
-
                     <StackPanel Grid.Column="1">
-                        <Label Content="Comentarios"  />
+                        <Label Content="Tiempos"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
-                            <TextBox x:Name="tb_newComment" Width="100" />
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newtTimeTrack" Width="100" />
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0"/>
                         </StackPanel>
 
-                        <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>

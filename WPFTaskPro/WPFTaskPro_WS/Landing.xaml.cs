@@ -116,7 +116,6 @@ namespace WPFTaskPro_WS
         private void btn_task_Click(object sender, RoutedEventArgs e)
         {
             contentGrid.Visibility = Visibility.Visible;
-            contentGrid.Width = 200;
         }
         private void btn_newtask(object sender, RoutedEventArgs e)
         {
@@ -130,7 +129,6 @@ namespace WPFTaskPro_WS
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             contentGrid.Visibility = Visibility.Collapsed;
-            contentGrid.Width = 0;
         }
     }
 }

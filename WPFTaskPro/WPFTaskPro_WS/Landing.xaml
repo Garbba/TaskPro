@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
         Title="Landing" Height="450" Width="800">
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -71,7 +70,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
-            
+
             <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
                 <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0">
                     <Button.ContextMenu>
@@ -82,10 +81,9 @@
                     </Button.ContextMenu>
                 </Button>
                 <TextBox x:Name="tb_newlist" VerticalAlignment="Center" Margin="5" Width="130"/>
-                
+
             </StackPanel>
         </Grid>
-
         <Grid Grid.Column="1" x:Name="gridtarea" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -133,9 +131,209 @@
             </Grid>
             
         </Grid>
-        <Grid Grid.Column="3" x:Name="contentGrid" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed">
-            <TextBlock Text="¡Hola, mundo!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Content="Cerrar" Click="CloseButton_Click" Margin="0,30,0,0"/>
+        <Grid Grid.Column="3" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Content="Tarea" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <TextBox Margin="5,0" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <Label Content="Estado" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <ComboBox  Margin="5,0">
+                            <ComboBoxItem Content="NOT STARTED"/>
+                            <ComboBoxItem Content="IN PROGRESS"/>
+                            <ComboBoxItem Content="COMPLETED"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3">
+                        <Label Content="Prioridad" VerticalAlignment="Bottom"/>
+                        <ComboBox Margin="5,0">
+                            <ComboBoxItem Content="LOW"/>
+                            <ComboBoxItem Content="MEDIUM"/>
+                            <ComboBoxItem Content="IMPORTANT"/>
+                            <ComboBoxItem Content="URGENT"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Label Content="Mi día" HorizontalAlignment="Center"/>
+                        <ComboBox x:Name="miDiaComboBox" Margin="5,0">
+                            <ComboBoxItem Content="No"/>
+                            <ComboBoxItem Content="Sí"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Favorito" HorizontalAlignment="Center" />
+                        <ComboBox x:Name="esFavoritoComboBox"  Margin="5,0" >
+                            <ComboBoxItem Content="Es favorito"/>
+                            <ComboBoxItem Content="No"/>
+                            <ComboBoxItem Content="Sí"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Fecha inicio" Margin="5" />
+                        <TextBox Margin="5,0" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3">
+                        <TextBlock Text="Fecha final" Margin="5" />
+                        <TextBox Margin="5,0" />
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="3">
+                <TextBlock Text="Descripción" Margin="5"/>
+                <TextBox Margin="5,0" x:Name="txtDescription"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" >
+                        <Label Content="Miembros" HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <TextBox x:Name="tb_newMember" Width="100"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                        </StackPanel>
+
+                        <DataGrid Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Tiempos"  />
+                        <StackPanel Orientation="Horizontal" Margin="5,0" >
+                            <TextBox x:Name="tb_newtTimeTrack" Width="100" />
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                        </StackPanel>
+
+                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" >
+                        <Label Content="Archivos" HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <TextBox x:Name="tb_newAttachment" Width="100"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                        </StackPanel>
+
+                        <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Comentarios"  />
+                        <StackPanel Orientation="Horizontal" Margin="5,0" >
+                            <TextBox x:Name="tb_newComment" Width="100" />
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                        </StackPanel>
+
+                        <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="7" VerticalAlignment="Bottom">
+                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,30,0,0"/>
+            </StackPanel>
+            
+            
         </Grid>
 
     </Grid>

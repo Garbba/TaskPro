@@ -64,10 +64,6 @@
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Page Include="EditTask.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="EditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,9 +88,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="EditTask.xaml.cs">
-      <DependentUpon>EditTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="Landing.xaml.cs">
       <DependentUpon>Landing.xaml</DependentUpon>

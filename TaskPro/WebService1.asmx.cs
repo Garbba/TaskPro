@@ -495,6 +495,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet listAccessReadByListID(int idList)
+        {
+            DataSet ds = selectTP("listacess", "*", $"list_id = '{idList}'");
+            return ds;
+        }
+        [WebMethod]
         public DataSet listAccessReadAll()
         {
             DataSet ds = selectTP("listacess", "*", null);

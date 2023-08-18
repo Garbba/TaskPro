@@ -16,21 +16,31 @@
         <Label x:Name="lblLista" Content="Lista" Grid.Column="1" Margin="0,35,0,0" FontSize="25" FontWeight="Bold"/>
 
         <StackPanel Grid.Column="1" Margin="0,90,0,0">
-            <Label x:Name="lblActualizarNombre" Content="Actualizar nombre" />
-            <TextBox x:Name="txtActualizarNombreLista" />
-            <Button Margin="230,10,5,0" x:Name="btndelete" Click="btndelete_Click">
-                <TextBlock>
-                    Eliminar
-                </TextBlock>
-            </Button>
 
-            <Button Margin="230,10,5,0" x:Name="btnupdate" Click="btnupdate_Click" >
-                <TextBlock>
-                    Listo
-                </TextBlock>
-            </Button>
+            
+            
             <Label x:Name="lblAgregarMiembro" Content="Agregar miembro por usuario" />
             <TextBox x:Name="txtMiembro" />
+
+            <Grid Grid.Row="2" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" x:Name="btndelete" Click="btndelete_Click" Margin="5,10" Width="90">
+                    <TextBlock>
+                Eliminar Lista
+                    </TextBlock>
+                </Button>
+
+                <Button Grid.Column="1" x:Name="btnupdate" Click="btnupdate_Click" Margin="5,10" Width="90">
+                    <TextBlock>
+                Actualizar Lista
+                    </TextBlock>
+                </Button>
+            </Grid>
+
             <Label x:Name="lblTipoAcceso" Content="Tipo de acceso" />
             
             <ComboBox x:Name="cmbTipoAcceso" SelectedIndex="2" >

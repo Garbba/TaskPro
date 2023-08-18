@@ -80,10 +80,6 @@ namespace WPFTaskPro_WS
 
 
             }
-            
-
-            
-
         }
     }
 }

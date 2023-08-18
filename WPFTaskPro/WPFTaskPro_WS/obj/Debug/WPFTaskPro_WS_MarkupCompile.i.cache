@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\obj\Debug\
 WPFTaskPro_WS
 none
 false
 DEBUG;TRACE
-C:\GitHub\TaskPro\WPFTaskPro\WPFTaskPro_WS\App.xaml
-4-1804721481
+C:\Github\TaskPro\WPFTaskPro\WPFTaskPro_WS\App.xaml
+4-1832615345
 
-211144805815
+21-1597350097
 151069376965
-Landing.xaml;ListEdit.xaml;MainWindow.xaml;Register.xaml;
+EditTask.xaml;Landing.xaml;ListEdit.xaml;MainWindow.xaml;
 
-True
+False
 

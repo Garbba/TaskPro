@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
         Title="EditTask" Height="450" Width="800">
+
     <Grid>
-       
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -30,7 +31,7 @@
                     <Label Content="Tarea" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                     <TextBox Margin="5" />
                 </StackPanel>
-                
+
                 <StackPanel Grid.Column="2">
                     <Label Content="Estado" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                     <ComboBox  Margin="5">
@@ -106,9 +107,9 @@
 
             <!--time track y members-->
             <StackPanel Grid.Column="0">
-                
+
             </StackPanel>
-            
+
             <StackPanel Grid.Column="1">
 
             </StackPanel>
@@ -125,7 +126,7 @@
 
                 <!--attachments y comments-->
                 <StackPanel Grid.Column="0">
-                   
+
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
@@ -134,7 +135,9 @@
 
             </Grid>
         </StackPanel>
-  
-        
+
+
     </Grid>
+
+
 </Window>

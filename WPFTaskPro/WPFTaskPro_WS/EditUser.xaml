@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
-        Title="EditUser" Height="450" Width="800">
-    <Grid RenderTransformOrigin="0.806,0.495" Background="#FFEE9235">
+        Title="EditUser" Height="570" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    <Grid RenderTransformOrigin="0.806,0.495" Background="#FFC729">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,29 +14,29 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" >
-            <Label Content="Editar Usuario" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Background="Transparent" />
+            <Label Content="Editar Usuario" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Background="Transparent" FontWeight="Bold"/>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Nickname:" Width="100"/>
-                <TextBox x:Name="txtNickname" Width="200"/>
+                <TextBox x:Name="txtNickname" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Username:" Width="100"/>
-                <TextBox x:Name="txtUsername" Width="200"/>
+                <TextBox x:Name="txtUsername" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Lastname:" Width="100"/>
-                <TextBox x:Name="txtLastname" Width="200"/>
+                <TextBox x:Name="txtLastname" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Email:" Width="100"/>
-                <TextBox x:Name="txtEmail" Width="200"/>
+                <TextBox x:Name="txtEmail" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Password:" Width="100"/>
-                <PasswordBox x:Name="txtPassword" Width="200"/>
+                <PasswordBox x:Name="txtPassword" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="50,10">
-                <Button Height="30" x:Name="BtnUserUpdate" Content="Actualizar" Background="#B82487" Click="UserUpdate_Click">
+                <Button Height="30" x:Name="BtnUserUpdate" Content="Actualizar" Background="#B82487" Click="UserUpdate_Click"  Foreground="White">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
@@ -65,7 +65,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="10,10" Grid.Column="0">
-                    <Button Height="30" x:Name="BtnUserDelete" Content="Borrar Usuario" Background="#B82487" Click="UserDelete_Click">
+                    <Button Height="30" x:Name="BtnUserDelete" Content="Borrar Usuario" Background="#B82487" Click="UserDelete_Click"  Foreground="White">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -89,7 +89,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="10,10" Grid.Column="1">
-                    <Button Height="30" x:Name="BtnLogout" Content="Cerrar sesión" Background="#B82487" Click="Logout_Click">
+                    <Button Height="30" x:Name="BtnLogout" Content="Cerrar sesión" Background="#B82487" Click="Logout_Click"  Foreground="White">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">

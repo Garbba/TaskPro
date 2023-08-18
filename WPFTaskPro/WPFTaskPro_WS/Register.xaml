@@ -5,38 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
-        Title="Register" Height="450" Width="800">
-    <Grid RenderTransformOrigin="0.806,0.495" Background="#FFEE9235">
+        Title="Register" Height="570" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    
+    
+    
+    
+    <Grid RenderTransformOrigin="0.806,0.495" Background="#FFC729">
 
+        
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" >
-            <Label Content="Registro" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Background="Transparent" />
+            <Label Content="Registro" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Background="Transparent" FontWeight="Bold" Margin="0,0,0,10"/>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Nickname:" Width="100"/>
-                <TextBox x:Name="txtNickname" Width="200"/>
+                <TextBox x:Name="txtNickname" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Username:" Width="100"/>
-                <TextBox x:Name="txtUsername" Width="200"/>
+                <TextBox x:Name="txtUsername" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Lastname:" Width="100"/>
-                <TextBox x:Name="txtLastname" Width="200"/>
+                <TextBox x:Name="txtLastname" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Email:" Width="100"/>
-                <TextBox x:Name="txtEmail" Width="200"/>
+                <TextBox x:Name="txtEmail" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="0,3" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Content="Password:" Width="100"/>
-                <PasswordBox x:Name="txtPassword" Width="200"/>
+                <PasswordBox x:Name="txtPassword" Width="200" BorderBrush="Transparent"/>
             </StackPanel>
             <StackPanel Margin="50,10">
-                <Button Height="30" x:Name="RegisterBtn" Content="Registrarse" Background="#B82487" Click="RegisterBtn_Click">
+                <Button Height="30" x:Name="RegisterBtn" Content="Registrarse" Background="#B82487" Click="RegisterBtn_Click" Foreground="White">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
@@ -60,7 +66,7 @@
             </StackPanel>
 
             <Label Content="¿Ya tienes una cuenta?" HorizontalAlignment="Center" VerticalAlignment="Top" Height="29"/>
-            <Button Content="Inicia Sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFEE9235" BorderBrush="#FFEE9235" Click="Button_Click"/>
+            <Button Content="Inicia Sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFC729" BorderBrush="#FFC729" Click="Button_Click" Foreground="Blue"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
-        Title="Landing" Height="450" Width="800">
-    <Grid >
+        Title="Landing" Height="570" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="RoundGreenButtonStyle">
+            <Setter Property="Background" Value="#FF42C844"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Grid" x:Key="YellowBackgroundGridStyle">
+            <Setter Property="Background" Value="#FFC729"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="RoundedTextBoxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+
+    </Window.Resources>
+    
+    
+
+
+
+    <Grid Style="{StaticResource YellowBackgroundGridStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -21,11 +71,11 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
-                <TextBlock x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5" Width="130"/>
-                <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EditUser_Click"/>
+                <TextBlock x:Name="tbuser" Text="Usuario" VerticalAlignment="Center" Margin="5" Width="130" FontWeight="Bold"/>
+                <Button Content="···" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EditUser_Click" Style="{StaticResource RoundGreenButtonStyle}" Background="#B82487"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,30,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListPreCharge" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" BorderBrush="Transparent">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="160">
                             <DataGridTemplateColumn.CellTemplate>
@@ -47,7 +97,7 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="5,100,5,0">
-                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid Width="170" HorizontalAlignment="Center" Grid.Row="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" BorderBrush="Transparent">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="160">
                             <DataGridTemplateColumn.CellTemplate>
@@ -71,7 +121,7 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,5">
-                <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0">
+                <Button Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newlist" Margin="5,0,5,0" Style="{StaticResource RoundGreenButtonStyle}">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Editar usuario"/>
@@ -79,7 +129,7 @@
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
-                <TextBox x:Name="tb_newlist" VerticalAlignment="Center" Margin="5" Width="130"/>
+                <TextBox x:Name="tb_newlist" VerticalAlignment="Center" Margin="5" Width="130" Style="{StaticResource RoundedTextBoxStyle}"/>
 
             </StackPanel>
         </Grid>
@@ -90,11 +140,11 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
-                <TextBlock Text="Tareas" VerticalAlignment="Center" Margin="5" x:Name="titulo_tareas"/>
+                <TextBlock Text="Tareas" VerticalAlignment="Center" Margin="5" x:Name="titulo_tareas" FontWeight="Bold"/>
                 
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5,30,5,0" x:Name="mainGrid" >
-                <DataGrid Width="{Binding ElementName=mainGrid, Path=ActualWidth}" HorizontalAlignment="Center" Grid.Row="1" Name="DGTasks" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                <DataGrid Width="{Binding ElementName=mainGrid, Path=ActualWidth}" HorizontalAlignment="Center" Grid.Row="1" Name="DGTasks" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" BorderBrush="Transparent">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="{Binding ElementName=mainGrid, Path=Width}" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -118,8 +168,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="1" x:Name="tb_newtask" VerticalAlignment="Center" Margin="5" />
-                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newtask" Margin="5,0,5,0" x:Name="btnewtask">
+                <TextBox Grid.Column="1" x:Name="tb_newtask" VerticalAlignment="Center" Margin="5" Style="{StaticResource RoundedTextBoxStyle}" />
+                <Button Grid.Column="0" Content="+" Width="30" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" Click="btn_newtask" Margin="5,0,5,0" x:Name="btnewtask" Style="{StaticResource RoundGreenButtonStyle}">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Editar usuario"/>
@@ -130,7 +180,8 @@
             </Grid>
             
         </Grid>
-        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue" Visibility="Collapsed" >
+        <!--INICIO DEL COLLAPSED VENTANA-->
+        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Collapsed" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -151,12 +202,12 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Tarea" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                        <TextBox Margin="5,0" x:Name="txtTaskTitle"/>
+                        <TextBox Margin="5,0" x:Name="txtTaskTitle" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
                         <Label Content="Estado" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                        <ComboBox  Margin="5,0" x:Name="cbTaskStatus">
+                        <ComboBox  Margin="5,0" x:Name="cbTaskStatus" BorderBrush="Transparent">
                             <ComboBoxItem Content="NOT STARTED"/>
                             <ComboBoxItem Content="IN PROGRESS"/>
                             <ComboBoxItem Content="COMPLETED"/>
@@ -165,7 +216,7 @@
 
                     <StackPanel Grid.Column="3">
                         <Label Content="Prioridad" VerticalAlignment="Bottom"/>
-                        <ComboBox Margin="5,0" x:Name="cbTaskPriority">
+                        <ComboBox Margin="5,0" x:Name="cbTaskPriority" BorderBrush="Transparent">
                             <ComboBoxItem Content="LOW"/>
                             <ComboBoxItem Content="MEDIUM"/>
                             <ComboBoxItem Content="IMPORTANT"/>
@@ -185,15 +236,15 @@
 
                     <StackPanel Grid.Column="0">
                         <Label Content="Mi día" HorizontalAlignment="Center"/>
-                        <ComboBox Margin="5,0" x:Name="cbTaskOnMyDay">
-                            <ComboBoxItem Content="No"/>
-                            <ComboBoxItem Content="Sí"/>
+                        <ComboBox Margin="5,0" x:Name="cbTaskOnMyDay" BorderBrush="Transparent" >
+                            <ComboBoxItem Content="No" />
+                            <ComboBoxItem Content="Sí" />
                         </ComboBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
                         <Label Content="Favorito" HorizontalAlignment="Center" />
-                        <ComboBox x:Name="cbTaskFavorite"  Margin="5,0" >
+                        <ComboBox x:Name="cbTaskFavorite" BorderBrush="Transparent" Margin="5,0" >
                             <ComboBoxItem Content="No"/>
                             <ComboBoxItem Content="Sí"/>
                         </ComboBox>
@@ -201,19 +252,19 @@
 
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="Fecha inicio" Margin="5" />
-                        <TextBox Margin="5,0" x:Name="txtTaskStartDate"/>
+                        <TextBox Margin="5,0" x:Name="txtTaskStartDate" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="3">
                         <TextBlock Text="Fecha final" Margin="5" />
-                        <TextBox Margin="5,0" x:Name="txtTaskEndDate"/>
+                        <TextBox Margin="5,0" x:Name="txtTaskEndDate" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <TextBlock Text="Descripción" Margin="5"/>
-                <TextBox Margin="5,0" x:Name="txtTaskDescription"/>
+                <TextBox Margin="5,0" x:Name="txtTaskDescription" Style="{StaticResource RoundedTextBoxStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="4">
                 <Grid>
@@ -225,11 +276,11 @@
                     <StackPanel Grid.Column="0" >
                         <Label Content="Miembros" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
-                            <TextBox x:Name="tb_newMember" Width="100"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newMember" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Content="+" Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" />
                         </StackPanel>
 
-                        <DataGrid Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -249,11 +300,11 @@
                     <StackPanel Grid.Column="1">
                         <Label Content="Comentarios"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
-                            <TextBox x:Name="tb_newComment" Width="100" />
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newComment" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
                         </StackPanel>
 
-                        <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -282,11 +333,11 @@
                     <StackPanel Grid.Column="0" >
                         <Label Content="Archivos" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
-                            <TextBox x:Name="tb_newAttachment" Width="100"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newAttachment" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
                         </StackPanel>
 
-                        <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -305,11 +356,11 @@
                     <StackPanel Grid.Column="1">
                         <Label Content="Tiempos"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
-                            <TextBox x:Name="tb_newtTimeTrack" Width="100" />
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0"/>
+                            <TextBox x:Name="tb_newtTimeTrack" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
                         </StackPanel>
 
-                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -328,8 +379,8 @@
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="7" VerticalAlignment="Bottom">
-                <Button Content="Guardar tarea" Click="TaskUpdate_Click" Margin="0,10,0,0"/>
-                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,10,0,0"/>
+                <Button Content="Guardar tarea" Click="TaskUpdate_Click" Margin="0,10,0,0" Background="#B82487" Foreground="White" BorderBrush="Transparent"/>
+                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,10,0,0"  Background="#B82487" Foreground="White" BorderBrush="Transparent" />
             </StackPanel>
             
             

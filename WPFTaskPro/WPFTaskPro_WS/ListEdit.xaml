@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTaskPro_WS"
         mc:Ignorable="d"
-        Title="ListEdit" Height="450" Width="800">
-    <Grid>
+        Title="ListEdit" Height="570" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#B82487"/>
+            <Setter Property="BorderBrush" Value="#B82487"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid Background="#FFC729">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="300" />
@@ -20,7 +44,7 @@
             
             
             <Label x:Name="lblAgregarMiembro" Content="Agregar miembro por usuario" />
-            <TextBox x:Name="txtActualizarNombreLista" />
+            <TextBox x:Name="txtActualizarNombreLista" BorderBrush="Transparent"/>
 
             <Grid Grid.Row="2" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
@@ -41,7 +65,7 @@
                 </Button>
             </Grid>
             <Label Content="Usuario" />
-            <TextBox x:Name="txtMiembro" />
+            <TextBox x:Name="txtMiembro" BorderBrush="Transparent" />
             <Label Content="Tipo de acceso" />
             
             <ComboBox x:Name="cmbTipoAcceso" SelectedIndex="2" >

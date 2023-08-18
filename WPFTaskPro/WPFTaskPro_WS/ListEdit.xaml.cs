@@ -81,5 +81,8 @@ namespace WPFTaskPro_WS
 
             }
         }
+        private void btn_deletemember_Click(object sender, RoutedEventArgs e)
+        { 
+        }
     }
 }

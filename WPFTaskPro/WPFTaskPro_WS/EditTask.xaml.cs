@@ -23,5 +23,15 @@ namespace WPFTaskPro_WS
         {
             InitializeComponent();
         }
+
+        private void btn_newMember(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btn_deletemember_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
     }
 }

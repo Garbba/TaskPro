@@ -23,5 +23,10 @@ namespace WPFTaskPro_WS
         {
             InitializeComponent();
         }
+
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

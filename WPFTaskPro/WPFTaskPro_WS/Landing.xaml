@@ -47,8 +47,6 @@
                                         <Button CommandParameter="{Binding id}" Click="btn_listprecharged_Click" x:Name="btn_listprecharged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
                                             <TextBlock Text="{Binding listName}" TextAlignment="Left"/>
                                         </Button>
-
-                                        <Button CommandParameter="{Binding id}" Click="btn_editlist_Click" x:Name="btn_editlist" Content="···" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black"/>
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

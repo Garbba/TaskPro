@@ -1,0 +1,79 @@
+﻿<Window x:Class="WPFTaskPro_WS.ListEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTaskPro_WS"
+        mc:Ignorable="d"
+        Title="ListEdit" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="lblLista" Content="Lista" Grid.Column="1" Margin="0,35,0,0" FontSize="25" FontWeight="Bold"/>
+
+        <StackPanel Grid.Column="1" Margin="0,90,0,0">
+            <Label x:Name="lblActualizarNombre" Content="Actualizar nombre" />
+            <TextBox x:Name="txtActualizarNombreLista" />
+            <Button Margin="230,10,5,0" x:Name="btndelete" Click="btndelete_Click">
+                <TextBlock>
+                    Eliminar
+                </TextBlock>
+            </Button>
+
+            <Button Margin="230,10,5,0" x:Name="btnupdate" Click="btnupdate_Click" >
+                <TextBlock>
+                    Listo
+                </TextBlock>
+            </Button>
+            <Label x:Name="lblAgregarMiembro" Content="Agregar miembro por usuario" />
+            <TextBox x:Name="txtMiembro" />
+            <Label x:Name="lblTipoAcceso" Content="Tipo de acceso" />
+            
+            <ComboBox x:Name="cmbTipoAcceso" SelectedIndex="2" >
+                <ComboBoxItem>OWNER</ComboBoxItem>
+                <ComboBoxItem>ADMIN</ComboBoxItem>
+                <ComboBoxItem>MEMBER</ComboBoxItem>
+            </ComboBox>
+            <Button Margin="230,10,5,0" x:Name="btnaddmember" Click="btnaddmember_Click" >
+                <TextBlock>
+                    Agregar
+                </TextBlock>
+            </Button>
+            <Label Content="Eliminar miembro"/>
+            <StackPanel Margin="0,0,0,10">
+                <DataGrid Width="300" HorizontalAlignment="Center" Grid.Row="1" Name="DGListas" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="295">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                            <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                        </Button>
+                                        
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+            
+            
+
+            <Button Margin="230,10,5,0" x:Name="btncancel">
+                <TextBlock>
+                   Cancelar
+                </TextBlock>
+            </Button>
+
+        </StackPanel>
+
+        
+    </Grid>
+</Window>

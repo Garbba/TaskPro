@@ -93,7 +93,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3">
-            <TextBlock   Text="Descripción" Margin="5"/>
+            <TextBlock Text="Descripción" Margin="5"/>
             <TextBox Margin="5" x:Name="txtDescription"/>
         </StackPanel>
 
@@ -103,19 +103,57 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" >
+                    <Label Content="Miembros" HorizontalAlignment="Left" />
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <TextBox x:Name="tb_newMember" Width="200"/>
+                        <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <DataGrid Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="Tiempos"  />
+                    <StackPanel Orientation="Horizontal" Margin="5,0" >
+                        <TextBox x:Name="tb_newtTimeTrack" Width="200" />
+                        <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </Grid>
-
-            <!--time track y members-->
-            <StackPanel Grid.Column="0">
-
-            </StackPanel>
-
-            <StackPanel Grid.Column="1">
-
-            </StackPanel>
-
-
         </StackPanel>
+
 
         <StackPanel Grid.Row="5">
             <Grid>
@@ -124,18 +162,55 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--attachments y comments-->
-                <StackPanel Grid.Column="0">
+                <StackPanel Grid.Column="0" >
+                    <Label Content="Archivos" HorizontalAlignment="Left" />
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <TextBox x:Name="tb_newAttachment" Width="200"/>
+                        <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                    </StackPanel>
 
+                    <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
+                    <Label Content="Comentarios"  />
+                    <StackPanel Orientation="Horizontal" Margin="5,0" >
+                        <TextBox x:Name="tb_newComment" Width="200" />
+                        <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0"/>
+                    </StackPanel>
 
+                    <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
-
             </Grid>
         </StackPanel>
-
 
     </Grid>
 

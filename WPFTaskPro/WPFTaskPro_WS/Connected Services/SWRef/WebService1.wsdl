@@ -295,6 +295,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="listAccessReadByListID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idList" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="listAccessReadByListIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listAccessReadByListIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="listAccessReadAll">
         <s:complexType />
       </s:element>
@@ -1186,6 +1207,12 @@
   <wsdl:message name="listAccessReadByIdSoapOut">
     <wsdl:part name="parameters" element="tns:listAccessReadByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="listAccessReadByListIDSoapIn">
+    <wsdl:part name="parameters" element="tns:listAccessReadByListID" />
+  </wsdl:message>
+  <wsdl:message name="listAccessReadByListIDSoapOut">
+    <wsdl:part name="parameters" element="tns:listAccessReadByListIDResponse" />
+  </wsdl:message>
   <wsdl:message name="listAccessReadAllSoapIn">
     <wsdl:part name="parameters" element="tns:listAccessReadAll" />
   </wsdl:message>
@@ -1509,6 +1536,10 @@
       <wsdl:input message="tns:listAccessReadByIdSoapIn" />
       <wsdl:output message="tns:listAccessReadByIdSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="listAccessReadByListID">
+      <wsdl:input message="tns:listAccessReadByListIDSoapIn" />
+      <wsdl:output message="tns:listAccessReadByListIDSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="listAccessReadAll">
       <wsdl:input message="tns:listAccessReadAllSoapIn" />
       <wsdl:output message="tns:listAccessReadAllSoapOut" />
@@ -1821,6 +1852,15 @@
     </wsdl:operation>
     <wsdl:operation name="listAccessReadById">
       <soap:operation soapAction="http://tempuri.org/listAccessReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadByListID">
+      <soap:operation soapAction="http://tempuri.org/listAccessReadByListID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2355,6 +2395,15 @@
     </wsdl:operation>
     <wsdl:operation name="listAccessReadById">
       <soap12:operation soapAction="http://tempuri.org/listAccessReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAccessReadByListID">
+      <soap12:operation soapAction="http://tempuri.org/listAccessReadByListID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

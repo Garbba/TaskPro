@@ -275,6 +275,13 @@ namespace WPFTaskPro_WS.SWRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskTagReadById", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> taskTagReadByIdAsync(int tag_id, int task_id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskTagReadByTaskId", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet taskTagReadByTaskId(int task_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskTagReadByTaskId", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> taskTagReadByTaskIdAsync(int task_id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/taskTagReadAll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet taskTagReadAll();
@@ -758,6 +765,14 @@ namespace WPFTaskPro_WS.SWRef {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> taskTagReadByIdAsync(int tag_id, int task_id) {
             return base.Channel.taskTagReadByIdAsync(tag_id, task_id);
+        }
+        
+        public System.Data.DataSet taskTagReadByTaskId(int task_id) {
+            return base.Channel.taskTagReadByTaskId(task_id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> taskTagReadByTaskIdAsync(int task_id) {
+            return base.Channel.taskTagReadByTaskIdAsync(task_id);
         }
         
         public System.Data.DataSet taskTagReadAll() {

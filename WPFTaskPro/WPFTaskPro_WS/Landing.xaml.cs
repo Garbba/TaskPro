@@ -33,10 +33,13 @@ namespace WPFTaskPro_WS
             btnewtask.IsEnabled = false;
             Refresh();
         }
+
+        string currentDate = DateTime.Today.ToString("dd/mm/yyyy");
         user user;
         list listselected;
         task taskselected;
         SWRef.WebService1SoapClient sw = new SWRef.WebService1SoapClient();
+
         private void Refresh()
         {
             try
@@ -161,8 +164,6 @@ namespace WPFTaskPro_WS
         private void btn_newtask(object sender, RoutedEventArgs e)
         {
             string newtarea = tb_newtask.Text;
-            
-            
             string mess = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
             MessageBox.Show(mess);
             tb_newtask.Text = "";
@@ -196,6 +197,13 @@ namespace WPFTaskPro_WS
             Refresh();
             this.taskselected = new ConvertRow().task(sw.taskReadById(this.taskselected.id));
         }
+        public void RefreshTagList()
+        {
+            List<tag> taglist = new ConvertRow().listtotag(sw.tagReadByListId(this.taskselected.list_id));
+
+
+            DGTagsList.ItemsSource = taglist;
+        }
         private void btn_newMember(object sender, RoutedEventArgs e)
         {
         }
@@ -204,11 +212,15 @@ namespace WPFTaskPro_WS
         }
         private void btn_newtimetrack(object sender, RoutedEventArgs e)
         {
-        }
+            string startDate = tb_newTimeTrackStartTime.Text;
+            string endDate = tb_newTimeTrackEndTime.Text;
 
+            string mess = sw.timeTrackCreate(startDate, endDate,"Y",this.user.id,taskselected.id);
+            MessageBox.Show(mess);
+            //refresh()
+        }
         private void btn_newAttachment(object sender, RoutedEventArgs e)
         {
-            string currentDate = DateTime.Today.ToString("dd/mm/yyyy");
             string newAttachment = tb_newAttachmentFilename.Text;
             string newAFilenameLink = tb_newAttachmentLink.Text;
             string mess = sw.attachmentCreate(currentDate, newAttachment, newAFilenameLink, this.user.id, taskselected.id);
@@ -217,20 +229,36 @@ namespace WPFTaskPro_WS
             tb_newAttachmentLink.Text = "";
             //Refresh();
         }
-
         private void btn_newComment(object sender, RoutedEventArgs e)
         {
-
+            string comment = tb_newComment.Text;
+            string mess = sw.commentCreate(currentDate, comment, this.user.id, taskselected.id);
+            MessageBox.Show(mess);
+            tb_newComment.Text = "";
+            //refresh()
         }
-
         private void btn_newTagList(object sender, RoutedEventArgs e)
         {
-
+            string newTag = tb_newTagList.Text;
+            string mess = sw.tagCreate(newTag, listselected.id);
+            MessageBox.Show(mess);
+            tb_newTagList.Text = "";
+            //refresh();
         }
-
         private void btn_newTagTask(object sender, RoutedEventArgs e)
         {
-
+            int i = tb_newCBTagTask.SelectedIndex;
+            if (i == -1)
+            {
+                MessageBox.Show("Seleccione un tag");
+            }
+            else
+            {
+                List<tasktag> tasktags = new ConvertRow().listtotasktag(sw.taskTagReadByTaskId(taskselected.id));
+                string mess = sw.taskTagCreate(tasktags[i].tag_id, tasktags[i].task_id);
+                MessageBox.Show(mess);
+                //refresh()
+            }
         }
     }
 }

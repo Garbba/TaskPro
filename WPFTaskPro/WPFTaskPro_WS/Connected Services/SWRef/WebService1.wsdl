@@ -691,6 +691,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="taskTagReadByTaskId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="task_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="taskTagReadByTaskIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskTagReadByTaskIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="taskTagReadAll">
         <s:complexType />
       </s:element>
@@ -1333,6 +1354,12 @@
   <wsdl:message name="taskTagReadByIdSoapOut">
     <wsdl:part name="parameters" element="tns:taskTagReadByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="taskTagReadByTaskIdSoapIn">
+    <wsdl:part name="parameters" element="tns:taskTagReadByTaskId" />
+  </wsdl:message>
+  <wsdl:message name="taskTagReadByTaskIdSoapOut">
+    <wsdl:part name="parameters" element="tns:taskTagReadByTaskIdResponse" />
+  </wsdl:message>
   <wsdl:message name="taskTagReadAllSoapIn">
     <wsdl:part name="parameters" element="tns:taskTagReadAll" />
   </wsdl:message>
@@ -1619,6 +1646,10 @@
     <wsdl:operation name="taskTagReadById">
       <wsdl:input message="tns:taskTagReadByIdSoapIn" />
       <wsdl:output message="tns:taskTagReadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadByTaskId">
+      <wsdl:input message="tns:taskTagReadByTaskIdSoapIn" />
+      <wsdl:output message="tns:taskTagReadByTaskIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="taskTagReadAll">
       <wsdl:input message="tns:taskTagReadAllSoapIn" />
@@ -2041,6 +2072,15 @@
     </wsdl:operation>
     <wsdl:operation name="taskTagReadById">
       <soap:operation soapAction="http://tempuri.org/taskTagReadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadByTaskId">
+      <soap:operation soapAction="http://tempuri.org/taskTagReadByTaskId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2584,6 +2624,15 @@
     </wsdl:operation>
     <wsdl:operation name="taskTagReadById">
       <soap12:operation soapAction="http://tempuri.org/taskTagReadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="taskTagReadByTaskId">
+      <soap12:operation soapAction="http://tempuri.org/taskTagReadByTaskId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

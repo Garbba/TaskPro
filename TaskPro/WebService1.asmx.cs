@@ -901,6 +901,12 @@ namespace TaskPro
             return ds;
         }
         [WebMethod]
+        public DataSet taskTagReadByTaskId(int task_id)
+        {
+            DataSet ds = selectTP("tasktag", "*", $"task_id = '{task_id}'");
+            return ds;
+        }
+        [WebMethod]
         public DataSet taskTagReadAll()
         {
             DataSet ds = selectTP("tasktag", "*", null);

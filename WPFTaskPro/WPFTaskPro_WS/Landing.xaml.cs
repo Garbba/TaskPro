@@ -223,5 +223,14 @@ namespace WPFTaskPro_WS
 
         }
 
+        private void btn_newTagList(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_newTagTask(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

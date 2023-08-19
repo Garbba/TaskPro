@@ -188,6 +188,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" >
@@ -266,27 +267,54 @@
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="3">
+                <StackPanel>
+                    <TextBlock Text="Descripción" Margin="5"/>
+                    <TextBox Margin="5,0" x:Name="txtTaskDescription" Style="{StaticResource RoundedTextBoxStyle}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="4">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
+                    
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="Descripción" Margin="5"/>
-                        <TextBox Margin="5,0" x:Name="txtTaskDescription" Style="{StaticResource RoundedTextBoxStyle}"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1">
-                        <Label Content="Tags" HorizontalAlignment="Left" />
+                        <Label Content="Tags de la Lista" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
-                            <TextBox x:Name="tb_newMeamber" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
+                            <TextBox x:Name="tb_newTagList" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Width="30" Height="Auto"  Click="btn_newTagList" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
                                 <TextBlock Margin="5" FontSize="8" Text="Add"/>
                             </Button>
                         </StackPanel>
 
-                        <DataGrid Name="DGTags" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
+                        <DataGrid Name="DGTagsList" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Tags de la Tarea" HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <ComboBox x:Name="tb_newCBTagTask" Width="100" />
+                            <Button Width="30" Height="Auto"  Click="btn_newTagTask" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
+                                <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                            </Button>
+                        </StackPanel>
+
+                        <DataGrid Name="DGTagTask" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
@@ -308,7 +336,7 @@
             
             
             
-            <StackPanel Grid.Row="4">
+            <StackPanel Grid.Row="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -345,7 +373,7 @@
                         <Label Content="Comentarios"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
                             <TextBox x:Name="tb_newComment" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button  Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}">
+                            <Button  Width="30" Height="Auto" Click="btn_newComment" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}">
                                 <TextBlock Margin="5" FontSize="8" Text="Add"/>
                             </Button>
                         </StackPanel>
@@ -369,7 +397,7 @@
                     
                 </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="5">
+            <StackPanel Grid.Row="6">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -408,7 +436,7 @@
                         <TextBox x:Name="tb_newTimeTrackStartTime"  Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}" />
                         <Label Content="Fin" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
                         <TextBox x:Name="tb_newTimeTrackEndTime" Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}"/>
-                        <Button  Height="Auto" Click="btn_newTimeTrack" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
+                        <Button  Height="Auto" Click="btn_newtimetrack" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
                             <TextBlock Margin="5" FontSize="8" Text="Add"/>
                         </Button>
                         <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">

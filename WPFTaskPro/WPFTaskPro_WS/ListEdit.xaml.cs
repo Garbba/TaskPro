@@ -111,5 +111,11 @@ namespace WPFTaskPro_WS
             refresh();
 
         }
+
+        private void btncancel_Click(object sender, RoutedEventArgs e)
+        {
+            new Landing(this.user).Show();
+            this.Close();
+        }
     }
 }

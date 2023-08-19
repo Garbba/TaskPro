@@ -97,7 +97,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
-            <Button Margin="230,10,5,0" x:Name="btncancel">
+            <Button Margin="230,10,5,0" x:Name="btncancel" Click="btncancel_Click">
                 <TextBlock>
                    Cancelar
                 </TextBlock>

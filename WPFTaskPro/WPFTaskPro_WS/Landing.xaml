@@ -179,7 +179,7 @@
             
         </Grid>
         <!--INICIO DEL COLLAPSED VENTANA-->
-        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Collapsed" Height="{Binding ElementName=mainGrid2, Path=ActualHeight}">
+        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Visible" Height="{Binding ElementName=mainGrid2, Path=ActualHeight}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -371,11 +371,12 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" >
-                        <Label Content="Archivos" HorizontalAlignment="Left" />
-                        <StackPanel Orientation="Horizontal" Margin="5,0">
-                            <TextBox x:Name="tb_newAttachment" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
-                        </StackPanel>
+                        <Label Content="Archivos" HorizontalAlignment="Left"/>
+                        <Label Content="Nombre" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
+                        <TextBox x:Name="tb_newAttachmentFilename"  Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}" />
+                        <Label Content="Link" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
+                        <TextBox x:Name="tb_newAttachmentLink" Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}"/>
+                         <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}"/>
 
                         <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>

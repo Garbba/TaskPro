@@ -51,12 +51,10 @@
         </Style>
 
     </Window.Resources>
-    
-    
 
 
 
-    <Grid Style="{StaticResource YellowBackgroundGridStyle}">
+    <Grid Style="{StaticResource YellowBackgroundGridStyle}" x:Name="mainGrid2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -181,7 +179,7 @@
             
         </Grid>
         <!--INICIO DEL COLLAPSED VENTANA-->
-        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Collapsed" >
+        <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Collapsed" Height="{Binding ElementName=mainGrid2, Path=ActualHeight}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -192,6 +190,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" >
+                <Button Content="X" Click="CloseButton_Click" Margin="0,5,5,5"  Background="#B82487" Width="20" Foreground="#EE9235" BorderBrush="#B82487" HorizontalAlignment="Right" FontWeight="Bold" Style="{StaticResource RoundGreenButtonStyle}"/>
+            </StackPanel>
+            
             <StackPanel Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -200,6 +202,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
                         <Label Content="Tarea" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                         <TextBox Margin="5,0" x:Name="txtTaskTitle" Style="{StaticResource RoundedTextBoxStyle}"/>
@@ -263,9 +266,46 @@
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="3">
-                <TextBlock Text="Descripción" Margin="5"/>
-                <TextBox Margin="5,0" x:Name="txtTaskDescription" Style="{StaticResource RoundedTextBoxStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Descripción" Margin="5"/>
+                        <TextBox Margin="5,0" x:Name="txtTaskDescription" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Tags" HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <TextBox x:Name="tb_newMeamber" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
+                            <Button Content="+" Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" />
+                        </StackPanel>
+
+                        <DataGrid Name="DGTags" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </StackPanel>
+                </Grid>
             </StackPanel>
+            
+            
+            
             <StackPanel Grid.Row="4">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -377,10 +417,9 @@
                         </DataGrid>
                     </StackPanel>
                 </Grid>
-            </StackPanel>
-            <StackPanel Grid.Row="7" VerticalAlignment="Bottom">
-                <Button Content="Guardar tarea" Click="TaskUpdate_Click" Margin="0,10,0,0" Background="#B82487" Foreground="White" BorderBrush="Transparent"/>
-                <Button Content="Cerrar tarea" Click="CloseButton_Click" Margin="0,10,0,0"  Background="#B82487" Foreground="White" BorderBrush="Transparent" />
+            </StackPanel >
+            <StackPanel Grid.Row="7" VerticalAlignment="Bottom" Margin="0,10" x:Name="mainGrid3">
+                <Button Content="Guardar tarea" Click="TaskUpdate_Click" Margin="0,10,0,0" Background="#B82487" Foreground="White" BorderBrush="Transparent" Width="{Binding ElementName=mainGrid3, Path=ActualWidth}" Height="30" Style="{StaticResource RoundGreenButtonStyle}"/>
             </StackPanel>
             
             

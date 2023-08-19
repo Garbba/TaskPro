@@ -314,10 +314,10 @@ namespace WPFTaskPro_WS.O
                     DataRow row = ds.Tables[0].Rows[i];
                     comment c = new comment();
                     c.id = int.Parse(row["id"].ToString());
-                    c.datecomment = DateTime.ParseExact(row["datecomment"].ToString(), "dd/MM/yyyy", null);
+                    c.datecomment = Convert.ToDateTime(row["datecomment"]);
                     c.commentUser1 = row["commentUser"].ToString();
                     c.user_id = int.Parse(row["user_id"].ToString());
-                    c.task_id = int.Parse(row["list_id"].ToString());
+                    c.task_id = int.Parse(row["task_id"].ToString());
 
                     listtocomment.Add(c);
                 }

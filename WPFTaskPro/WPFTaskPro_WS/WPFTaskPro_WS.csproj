@@ -64,6 +64,9 @@
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="O\listaccess_user.cs" />
+    <Compile Include="O\member_name.cs" />
+    <Compile Include="O\tasktag_name.cs" />
+    <Compile Include="O\timetrack_duration.cs" />
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>

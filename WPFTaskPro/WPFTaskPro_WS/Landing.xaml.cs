@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,9 +34,10 @@ namespace WPFTaskPro_WS
             tb_newtask.IsReadOnly = true;
             btnewtask.IsEnabled = false;
             Refresh();
+            contentGrid.Visibility = Visibility.Collapsed;
         }
 
-        string currentDate = DateTime.Today.ToString("dd/mm/yyyy");
+        string currentDate = DateTime.Today.ToString("dd/MM/yyyy");
         user user;
         list listselected;
         task taskselected;
@@ -90,6 +93,7 @@ namespace WPFTaskPro_WS
                 case "COMPLETED": idStat = 2; break;
             }
             cbTaskStatus.SelectedIndex = idStat;
+            RefreshTagList();
         }
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {
@@ -122,7 +126,7 @@ namespace WPFTaskPro_WS
             }
             tb_newtask.IsReadOnly = true;
             btnewtask.IsEnabled = false;
-
+            contentGrid.Visibility = Visibility.Collapsed;
         }
         private void btn_list_Click(object sender, RoutedEventArgs e)
         {
@@ -131,6 +135,7 @@ namespace WPFTaskPro_WS
             Refresh();
             tb_newtask.IsReadOnly = false;
             btnewtask.IsEnabled = true;
+            contentGrid.Visibility = Visibility.Collapsed;
         }
         private void btn_editlist_Click(object sender, RoutedEventArgs e)
         {
@@ -154,13 +159,24 @@ namespace WPFTaskPro_WS
             tb_newlist.Text = "";
             Refresh();
         }
+
         private void btn_task_Click(object sender, RoutedEventArgs e)
         {
             var id = (int)((Button)sender).CommandParameter;
             contentGrid.Visibility = Visibility.Visible;
             this.taskselected = new ConvertRow().task(sw.taskReadById(id));
             RefreshTask();
+            RefreshTagTask();
+            RefreshTagList();
+            RefreshMembers();
+            RefreshComments();
+            RefreshAttachment();
+            RefreshTimeTrack();
+            taglistselected = null;
+            List<tag> taglist = new ConvertRow().listtotag(sw.tagReadByListId(this.taskselected.list_id));
+            tb_newCBTagTask.ItemsSource = taglist;
         }
+
         private void btn_newtask(object sender, RoutedEventArgs e)
         {
             string newtarea = tb_newtask.Text;
@@ -168,7 +184,6 @@ namespace WPFTaskPro_WS
             MessageBox.Show(mess);
             tb_newtask.Text = "";
             Refresh();
-            btnewtask.IsEnabled = false;
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -197,68 +212,301 @@ namespace WPFTaskPro_WS
             Refresh();
             this.taskselected = new ConvertRow().task(sw.taskReadById(this.taskselected.id));
         }
+
+        tag taglistselected = null;
         public void RefreshTagList()
         {
             List<tag> taglist = new ConvertRow().listtotag(sw.tagReadByListId(this.taskselected.list_id));
-
-
             DGTagsList.ItemsSource = taglist;
+        }
+        private void btn_newTagList(object sender, RoutedEventArgs e)
+        {
+            string newTag = tb_newTagList.Text;
+            if (taglistselected == null) {
+                string mess = sw.tagCreate(newTag, listselected.id);
+                MessageBox.Show(mess);
+                tb_newTagList.Text = "";
+                
+            } else
+            {
+                string mess = sw.tagUpdate(taglistselected.id, newTag, listselected.id);
+                MessageBox.Show(mess);
+                tb_newTagList.Text = "";
+                taglistselected = null;
+                btnAddTagList.Text = "Add";
+            }
+            RefreshTagList();
+            RefreshTagTask();
+        }
+        private void btn_taglist_Click(object sender, RoutedEventArgs e)
+        {
+            var tagselected = (tag)((Button)sender).CommandParameter;
+            btnAddTagList.Text= "Update";
+            taglistselected = tagselected;
+            tb_newTagList.Text = tagselected.tagName;
+            RefreshTagTask();
+        }
+        private void btn_deletetaglist_Click(object sender, RoutedEventArgs e)
+        {
+            var tagselected = (tag)((Button)sender).CommandParameter;
+            string mess = sw.tagDelete(tagselected.id);
+            MessageBox.Show(mess);
+            RefreshTagList();
+            tb_newTagList.Text = "";
+            taglistselected = null;
+            btnAddTagList.Text = "Add";
+            RefreshTagTask();
+        }
+
+        public void RefreshTagTask()
+        {
+            DataSet ds = sw.taskTagReadByTaskId(this.taskselected.id);
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<tasktag> tagtasks = new ConvertRow().listtotasktag(ds);
+                List<tasktag_name> tagtasksname = new List<tasktag_name>();
+                foreach(tasktag tt in tagtasks)
+                {
+                    tasktag_name t = new tasktag_name();
+                    t.tasktag = tt;
+                    t.name = new ConvertRow().tag(sw.tagReadById(tt.tag_id)).tagName.ToString();
+                    
+                    tagtasksname.Add(t);
+                }
+                DGTagTask.ItemsSource = tagtasksname;
+
+            }
+            else
+            {
+                DGTagTask.ItemsSource = null;
+
+            }
+            List<tag> taglist = new ConvertRow().listtotag(sw.tagReadByListId(this.taskselected.list_id));
+            tb_newCBTagTask.ItemsSource = taglist;
+        }
+        private void btn_newTagTask(object sender, RoutedEventArgs e)
+        {
+            int i = tb_newCBTagTask.SelectedIndex;
+            List<tag> taglist = new List<tag>();
+
+
+            if (i == -1)
+                {
+                    MessageBox.Show("Seleccione un tag");
+                }
+                else
+                {
+                taglist = new ConvertRow().listtotag(sw.tagReadByListId(this.taskselected.list_id));
+                string mess = sw.taskTagCreate(taglist[i].id, this.taskselected.id);
+                    MessageBox.Show(mess);
+                    //refresh()
+                }
+            
+            RefreshTagTask();
+
+        }
+        private void btn_deletetagtask_Click(object sender, RoutedEventArgs e)
+        {
+            var tagselected = (tasktag)((Button)sender).CommandParameter;
+            string mess = sw.taskTagDelete(tagselected.tag_id, tagselected.task_id);
+            
+            RefreshTagTask();
+            tb_newCBTagTask.SelectedIndex = -1;
+            MessageBox.Show(mess);
+        }
+
+        public void RefreshMembers()
+        {
+            DataSet ds = sw.memberReadByTaskId(this.taskselected.id);
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<member> memb = new ConvertRow().listtomember(ds);
+                List<member_name> membname = new List<member_name>();
+                foreach(member mm in memb)
+                {
+                    member_name m = new member_name();
+                    m.member = mm;
+                    m.name = new ConvertRow().user(sw.userReadById(mm.user_id)).nickname;
+
+                    membname.Add(m);
+                }
+                DGMiembros.ItemsSource = membname;
+
+            }
+            else
+            {
+                DGMiembros.ItemsSource = null;
+            }
         }
         private void btn_newMember(object sender, RoutedEventArgs e)
         {
+            DataSet ds = sw.userReadByNickname(tb_newMember.Text);
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                MessageBox.Show("El usuario no existe");
+                tb_newMember.Text = "";
+            }
+            else
+            {
+                int u = new ConvertRow().user(ds).id;
+                string mess = sw.memberCreate(u, this.taskselected.id);
+                MessageBox.Show(mess);
+                tb_newMember.Text = "";
+                RefreshMembers();
+            }
         }
         private void btn_deletemember_Click(object sender, RoutedEventArgs e)
         {
-        }
-        private void btn_newtimetrack(object sender, RoutedEventArgs e)
-        {
-            string startDate = tb_newTimeTrackStartTime.Text;
-            string endDate = tb_newTimeTrackEndTime.Text;
-
-            string mess = sw.timeTrackCreate(startDate, endDate,"Y",this.user.id,taskselected.id);
+            var m = (member)((Button)sender).CommandParameter;
+            string mess = sw.memberDelete(m.user_id, m.task_id);
+            RefreshMembers();
+            tb_newMember.Text = "";
             MessageBox.Show(mess);
-            //refresh()
+        }
+
+        public void RefreshComments()
+        {
+            List<comment> taglist = new ConvertRow().listtocomment(sw.commentReadByTaskId(this.taskselected.id));
+            DGComment.ItemsSource = taglist;
+        }
+        private void btn_newComment(object sender, RoutedEventArgs e)
+        {
+            string comment = tb_newComment.Text;
+            string date = this.currentDate;
+            string mess = sw.commentCreate(date, comment, this.user.id, taskselected.id);
+            MessageBox.Show(mess);
+            tb_newComment.Text = "";
+            RefreshComments();
+        }
+        
+
+        attachment attachmentselected = null;
+        public void RefreshAttachment()
+        {
+            List<attachment> a = new ConvertRow().listtoattachment(sw.attachmentReadByTaskId(this.taskselected.id));
+            DGAttachment.ItemsSource = a;
         }
         private void btn_newAttachment(object sender, RoutedEventArgs e)
         {
             string newAttachment = tb_newAttachmentFilename.Text;
             string newAFilenameLink = tb_newAttachmentLink.Text;
-            string mess = sw.attachmentCreate(currentDate, newAttachment, newAFilenameLink, this.user.id, taskselected.id);
-            MessageBox.Show(mess);
-            tb_newAttachmentFilename.Text = "";
-            tb_newAttachmentLink.Text = "";
-            //Refresh();
-        }
-        private void btn_newComment(object sender, RoutedEventArgs e)
-        {
-            string comment = tb_newComment.Text;
-            string mess = sw.commentCreate(currentDate, comment, this.user.id, taskselected.id);
-            MessageBox.Show(mess);
-            tb_newComment.Text = "";
-            //refresh()
-        }
-        private void btn_newTagList(object sender, RoutedEventArgs e)
-        {
-            string newTag = tb_newTagList.Text;
-            string mess = sw.tagCreate(newTag, listselected.id);
-            MessageBox.Show(mess);
-            tb_newTagList.Text = "";
-            //refresh();
-        }
-        private void btn_newTagTask(object sender, RoutedEventArgs e)
-        {
-            int i = tb_newCBTagTask.SelectedIndex;
-            if (i == -1)
+            if (attachmentselected == null)
             {
-                MessageBox.Show("Seleccione un tag");
+                string mess = sw.attachmentCreate(currentDate, newAttachment, newAFilenameLink, this.user.id, taskselected.id);
+                MessageBox.Show(mess);
+                tb_newAttachmentFilename.Text = "";
+                tb_newAttachmentLink.Text = "";
+                attachmentselected = null;
             }
             else
             {
-                List<tasktag> tasktags = new ConvertRow().listtotasktag(sw.taskTagReadByTaskId(taskselected.id));
-                string mess = sw.taskTagCreate(tasktags[i].tag_id, tasktags[i].task_id);
+                string mess = sw.attachmentUpdate(attachmentselected.id, currentDate, newAttachment, newAFilenameLink, this.user.id, taskselected.id);
                 MessageBox.Show(mess);
-                //refresh()
+                attachmentselected = null;
+                tb_newAttachmentFilename.Text = "";
+                tb_newAttachmentLink.Text = "";
+                btnattachment.Text = "Add";
             }
+            RefreshAttachment();
+        }
+        private void btn_attachment_Click(object sender, RoutedEventArgs e)
+        {
+            var a = (attachment)((Button)sender).CommandParameter;
+            btnattachment.Text = "Update";
+            tb_newAttachmentFilename.Text = a.attachmentFilename;
+            tb_newAttachmentLink.Text = a.attachmentLink;
+            attachmentselected = a;
+            RefreshAttachment();
+        }
+        private void btn_deleteattachment_Click(object sender, RoutedEventArgs e)
+        {
+            var a = (attachment)((Button)sender).CommandParameter;
+            string mess = sw.attachmentDelete(a.id);
+            MessageBox.Show(mess);
+            RefreshAttachment();
+            attachmentselected = null;
+            tb_newAttachmentFilename.Text = "";
+            tb_newAttachmentLink.Text = "";
+            btnattachment.Text = "Add";
+        }
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        timetrack timetrackselected = null;
+        public void RefreshTimeTrack()
+        {
+            DataSet ds = sw.timeTrackReadByTaskId(this.taskselected.id);
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                List<timetrack> timetracks = new ConvertRow().listtotimetrack(ds);
+                List<timetrack_duration> timetrackduration = new List<timetrack_duration>();
+                foreach (timetrack tt in timetracks)
+                {
+                    timetrack_duration t = new timetrack_duration();
+                    t.timetrack = tt;
+                    t.duration = Duration(tt.starttime,tt.endtime);
+
+                    timetrackduration.Add(t);
+                }
+                DGTimeTrack.ItemsSource = timetrackduration;
+            }
+            else
+            {
+                DGTimeTrack.ItemsSource = null;
+
+            }
+        }
+        private void btn_newtimetrack(object sender, RoutedEventArgs e)
+        {
+            string startDate = tb_newTimeTrackStartTime.Text;
+            string endDate = tb_newTimeTrackEndTime.Text;
+            tb_newTimeTrackStartTime.Text = "";
+            tb_newTimeTrackEndTime.Text = "";
+            btnattachment.Text = "Add";
+            string mess = "";
+            if (attachmentselected == null)
+            {
+                mess = sw.timeTrackCreate(startDate, endDate, "Y", this.user.id, taskselected.id);
+            }
+            else
+            {
+                mess = sw.timeTrackUpdate(timetrackselected.id, startDate, endDate, "Y", this.user.id, taskselected.id);
+            }
+            MessageBox.Show(mess);
+            timetrackselected = null;
+            RefreshTimeTrack();
+        }
+        private string Duration(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan timeSpan = endTime - startTime;
+
+            int days = timeSpan.Days;
+            int hours = timeSpan.Hours;
+            int minutes = timeSpan.Minutes;
+
+            return $"{days} días, {hours} horas y {minutes} minutos";
+        }
+
+        private void btn_timetrack_Click(object sender, RoutedEventArgs e)
+            {
+            var tt = (timetrack)((Button)sender).CommandParameter;
+            tb_newTimeTrackStartTime.Text = tt.starttime.ToString("dd/MM/yyyy HH:mm:ss");
+            tb_newTimeTrackEndTime.Text = tt.endtime.ToString("dd/MM/yyyy HH:mm:ss");
+            btnattachment.Text = "Update";
+            timetrackselected = tt;
+            RefreshTimeTrack();
+        }
+        private void btn_deletetimetrack_Click(object sender, RoutedEventArgs e)
+        {
+            var tt = (timetrack)((Button)sender).CommandParameter;
+            string mess = sw.timeTrackDelete(tt.id);
+            MessageBox.Show(mess);
+            RefreshTimeTrack();
+            tb_newTimeTrackStartTime.Text = "";
+            tb_newTimeTrackEndTime.Text = "";
+            btnattachment.Text = "Add";
+            timetrackselected = null;
         }
     }
 }

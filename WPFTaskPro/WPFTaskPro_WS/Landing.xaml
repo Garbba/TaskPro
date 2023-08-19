@@ -29,11 +29,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style TargetType="Grid" x:Key="YellowBackgroundGridStyle">
             <Setter Property="Background" Value="#FFC729"/>
         </Style>
-
         <Style TargetType="TextBox" x:Key="RoundedTextBoxStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -49,11 +47,7 @@
             </Setter>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
-
     </Window.Resources>
-
-
-
     <Grid Style="{StaticResource YellowBackgroundGridStyle}" x:Name="mainGrid2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -180,7 +174,6 @@
         </Grid>
         <!--INICIO DEL COLLAPSED VENTANA-->
         <Grid Grid.Column="2" x:Name="contentGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EE9235" Visibility="Visible" Height="{Binding ElementName=mainGrid2, Path=ActualHeight}">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -284,7 +277,7 @@
                         <StackPanel Orientation="Horizontal" Margin="5,0">
                             <TextBox x:Name="tb_newTagList" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
                             <Button Width="30" Height="Auto"  Click="btn_newTagList" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
-                                <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                                <TextBlock Margin="5" FontSize="8" Text="Add" x:Name="btnAddTagList"/>
                             </Button>
                         </StackPanel>
 
@@ -293,11 +286,14 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding}" Click="btn_deletetaglist_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="Red" Foreground="White" BorderThickness="0" >
+                                                    <TextBlock Text=" - " TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                                <Button CommandParameter="{Binding}" Click="btn_taglist_Click" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding tagName}" TextAlignment="Left"/>
+                                                </Button>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -308,7 +304,7 @@
                     <StackPanel Grid.Column="1">
                         <Label Content="Tags de la Tarea" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
-                            <ComboBox x:Name="tb_newCBTagTask" Width="100" />
+                            <ComboBox x:Name="tb_newCBTagTask" Width="100" DisplayMemberPath="tagName"/>
                             <Button Width="30" Height="Auto"  Click="btn_newTagTask" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
                                 <TextBlock Margin="5" FontSize="8" Text="Add"/>
                             </Button>
@@ -319,16 +315,26 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding tasktag}" Click="btn_deletetagtask_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="Red" Foreground="White" BorderThickness="0" >
+                                                    <TextBlock Text=" - " TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                                <Button CommandParameter="{Binding tasktag}" IsEnabled="False" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding name}" TextAlignment="Left"/>
+                                                </Button>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+                        <!--<DataGrid Name="DGTagTask" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding name}" />
+                                --><!-- Agrega más columnas según sea necesario --><!--
+                            </DataGrid.Columns>
+                        </DataGrid>-->
+
 
                     </StackPanel>
                 </Grid>
@@ -357,11 +363,14 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding member}" Click="btn_deletemember_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="Red" Foreground="White" BorderThickness="0" >
+                                                    <TextBlock Text=" - " TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                                <Button CommandParameter="{Binding member}" IsEnabled="False" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding name}" TextAlignment="Left"/>
+                                                </Button>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -383,11 +392,11 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding}" IsEnabled="False" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding commentUser1}" TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -410,8 +419,8 @@
                         <TextBox x:Name="tb_newAttachmentFilename"  Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}" />
                         <Label Content="Link" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
                         <TextBox x:Name="tb_newAttachmentLink" Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}"/>
-                        <Button  Height="Auto" Click="btn_newAttachment" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
-                            <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                        <Button  Height="Auto"  Click="btn_newAttachment" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
+                            <TextBlock Margin="5" FontSize="8" Text="Add" x:Name="btnattachment"/>
                         </Button>
 
                         <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
@@ -419,11 +428,14 @@
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding}" Click="btn_deleteattachment_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="Red" Foreground="White" BorderThickness="0" >
+                                                    <TextBlock Text=" - " TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                                <Button CommandParameter="{Binding}" Click="btn_attachment_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding attachmentFilename}" TextAlignment="Left"/>
+                                                </Button>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -439,16 +451,19 @@
                         <Button  Height="Auto" Click="btn_newtimetrack" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
                             <TextBlock Margin="5" FontSize="8" Text="Add"/>
                         </Button>
-                        <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
+                        <DataGrid Name="DGTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid>
-                                                <Button CommandParameter="{Binding id}" Click="btn_deletemember_Click" x:Name="btn_lista"  Width="140" FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
-                                                    <TextBlock Text="{Binding username}" TextAlignment="Left"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button CommandParameter="{Binding timetrack}" Click="btn_deletetimetrack_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="Red" Foreground="White" BorderThickness="0" >
+                                                    <TextBlock Text=" - " TextAlignment="Left"/>
                                                 </Button>
-                                            </Grid>
+                                                <Button CommandParameter="{Binding timetrack}" Click="btn_timetrack_Click"  FontFamily="Quicksand" Height="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="10" Background="White" BorderThickness="0" Foreground="Black">
+                                                    <TextBlock Text="{Binding duration}" TextAlignment="Left"/>
+                                                </Button>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

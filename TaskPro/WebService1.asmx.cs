@@ -138,10 +138,11 @@ namespace TaskPro
         }
         public bool linkValidation(string input)
         {
-            // Expresión regular para validar el formato de un enlace (URL)
-            string pattern = @"^(http|https|ftp)://[a-zA-Z0-9-.]+.[a-zA-Z]{2,3}(/[^/]*)*$";
-
-            return Regex.IsMatch(input, pattern);
+            if (Uri.TryCreate(input, UriKind.Absolute, out Uri uriResult))
+            {
+                return (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            }
+            return false;
         }
         #endregion Validations
         #region User
@@ -971,7 +972,7 @@ namespace TaskPro
             {
                 return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
             }
-            else if (linkValidation(attachmentLink))
+            else if (!linkValidation(attachmentLink))
             {
                 return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
             }
@@ -1034,7 +1035,7 @@ namespace TaskPro
             {
                 return "La tarea no fue encontrada para agregar el archivo, revisa que la tarea exista.";
             }
-            else if (linkValidation(attachmentLink))
+            else if (!linkValidation(attachmentLink))
             {
                 return "El link no tiene un formato correcto, intente con otro formato de nuevo.";
             }

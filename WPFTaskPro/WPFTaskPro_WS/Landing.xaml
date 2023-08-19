@@ -281,7 +281,9 @@
                         <Label Content="Tags" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
                             <TextBox x:Name="tb_newMeamber" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Content="+" Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" />
+                            <Button Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
+                                <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                            </Button>
                         </StackPanel>
 
                         <DataGrid Name="DGTags" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
@@ -317,7 +319,9 @@
                         <Label Content="Miembros" HorizontalAlignment="Left" />
                         <StackPanel Orientation="Horizontal" Margin="5,0">
                             <TextBox x:Name="tb_newMember" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Content="+" Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" />
+                            <Button Width="30" Height="Auto"  Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}" >
+                                <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                            </Button>
                         </StackPanel>
 
                         <DataGrid Name="DGMiembros" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
@@ -341,7 +345,9 @@
                         <Label Content="Comentarios"  />
                         <StackPanel Orientation="Horizontal" Margin="5,0" >
                             <TextBox x:Name="tb_newComment" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
+                            <Button  Width="30" Height="Auto" Click="btn_newMember" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}">
+                                <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                            </Button>
                         </StackPanel>
 
                         <DataGrid Name="DGComment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
@@ -376,7 +382,9 @@
                         <TextBox x:Name="tb_newAttachmentFilename"  Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}" />
                         <Label Content="Link" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
                         <TextBox x:Name="tb_newAttachmentLink" Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}"/>
-                         <Button Content="+" Width="30" Height="Auto" Click="btn_newAttachment" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}"/>
+                        <Button  Height="Auto" Click="btn_newAttachment" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
+                            <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                        </Button>
 
                         <DataGrid Name="DGAttachment" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
@@ -396,11 +404,13 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <Label Content="Tiempos"  />
-                        <StackPanel Orientation="Horizontal" Margin="5,0" >
-                            <TextBox x:Name="tb_newtTimeTrack" Width="100" Style="{StaticResource RoundedTextBoxStyle}"/>
-                            <Button Content="+" Width="30" Height="Auto" Click="btn_newtimetrack" Margin="5,0,0,0" Style="{StaticResource RoundGreenButtonStyle}"/>
-                        </StackPanel>
-
+                        <Label Content="Inicio" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
+                        <TextBox x:Name="tb_newTimeTrackStartTime"  Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}" />
+                        <Label Content="Fin" HorizontalAlignment="Left" FontSize="7" Padding="0" Margin="7,0,0,0"/>
+                        <TextBox x:Name="tb_newTimeTrackEndTime" Margin="5,0" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <Button  Height="Auto" Click="btn_newTimeTrack" Margin="5,3" HorizontalAlignment="Right" Style="{StaticResource RoundGreenButtonStyle}">
+                            <TextBlock Margin="5" FontSize="8" Text="Add"/>
+                        </Button>
                         <DataGrid Name="DGMTimeTrack" AutoGenerateColumns="False" IsReadOnly="True" FontFamily="Quicksand" GridLinesVisibility="None" Margin="5" BorderBrush="Transparent">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>

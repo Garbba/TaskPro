@@ -161,8 +161,10 @@ namespace WPFTaskPro_WS
         private void btn_newtask(object sender, RoutedEventArgs e)
         {
             string newtarea = tb_newtask.Text;
-            string commenttask = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
-            MessageBox.Show(commenttask);
+            
+            
+            string mess = sw.taskCreate(newtarea, "","NOT STARTED", "N","N","","","MEDIUM", listselected.id);
+            MessageBox.Show(mess);
             tb_newtask.Text = "";
             Refresh();
             btnewtask.IsEnabled = false;
@@ -206,8 +208,15 @@ namespace WPFTaskPro_WS
 
         private void btn_newAttachment(object sender, RoutedEventArgs e)
         {
-
-        }
+            string currentDate = DateTime.Today.ToString("dd/mm/yyyy");
+            string newAttachment = tb_newAttachmentFilename.Text;
+            string newAFilenameLink = tb_newAttachmentLink.Text;
+            string mess = sw.attachmentCreate(currentDate, newAttachment, newAFilenameLink, this.user.id, taskselected.id);
+            MessageBox.Show(mess);
+            tb_newAttachmentFilename.Text = "";
+            tb_newAttachmentLink.Text = "";
+            //Refresh();
+        }
 
         private void btn_newComment(object sender, RoutedEventArgs e)
         {
